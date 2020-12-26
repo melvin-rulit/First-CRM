@@ -1,6 +1,6 @@
 @extends('layouts.Mapp')
 
-@section('content')
+@section('contentAfterlogin')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -13,7 +13,7 @@
                             {{ session('status') }}
                         </div>
                     @endif
-
+<h1>FUCK</h1>
                     {{ __('You are logged in!') }}
                 </div>
             </div>
