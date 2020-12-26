@@ -1,0 +1,15 @@
+.bg{
+	background:   url(/images/intro-bg.jpg) no-repeat center;
+}
+
+.personal h2{
+   color: whitesmoke;
+}
+
+.checkbox{
+	color: #6cb2eb;
+}
+
+.container{
+ margin-top: 5%; 
+}
