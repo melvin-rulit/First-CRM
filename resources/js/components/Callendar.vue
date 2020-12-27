@@ -16,7 +16,7 @@
 
 <script>
 import DatePick from 'vue-date-pick';
-import fecha from 'fecha';
+// import fecha from 'fecha';
 import 'vue-date-pick/dist/vueDatePick.css';
 
 export default {
