@@ -7,6 +7,6 @@
     <router-view></router-view>
 </transition>
 
-
+  
 
 @endsection

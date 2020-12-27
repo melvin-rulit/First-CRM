@@ -4,11 +4,10 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
 
-// import Region from "./components/ExampleComponent"
-import Region from "./components/header/head.vue"
+import Head from "./components/header/head.vue"
 
 const routes = [
-    { path: '/home', component: Region },
+    { path: '/home', component: Head },
 
 ];
 

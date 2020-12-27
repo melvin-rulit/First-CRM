@@ -25,6 +25,8 @@
     },
     "dependencies": {
         "bootstrap-vue": "^2.21.1",
+        "fecha": "^4.2.0",
+        "v-calendar": "^2.1.4",
         "vue-date-pick": "^1.4.1",
         "vue-router": "^3.4.9"
     }

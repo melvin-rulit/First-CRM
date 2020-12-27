@@ -39,17 +39,51 @@
     </style>
 
 </head>
+
+<div id="app">
+
+
+
+    <head-component></head-component>
+
+        <div class="main-content">
+          <div class="header">
+            <div class="container-fluid">
+{{--              <div class="header-body">--}}
+{{--                <div class="row align-items-end">--}}
+{{--                  <div class="col">--}}
+{{--                  </div>--}}
+{{--                </div>--}}
+{{--              </div>--}}
+            </div>
+          </div>
+
+          <div class="container-fluid">
+                @if(session('message'))
+                    <div class="row mb-2">
+                        <div class="col-lg-12">
+                            <div class="alert alert-success" role="alert">{{ session('message') }}</div>
+                        </div>
+                    </div>
+                @endif
+                @if($errors->count() > 0)
+                    <div class="alert alert-danger">
+                        <ul class="list-unstyled">
+                            @foreach($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+            @yield('contentAfterlogin')
+          </div>
+        </div>
+
+        </div>
 <body>
-    <div id="app">
 
-        <main>
-      
-        @yield('contentAfterlogin')
 
-        </main>
-    </div>
-
-        <!-- Scripts -->
-        <script src="{{ asset('js/app.js') }}"></script>
+      <!-- Scripts -->
+      <script src="{{ asset('js/app.js') }}"></script>
 </body>
 </html>
