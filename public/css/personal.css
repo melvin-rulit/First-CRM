@@ -12,6 +12,24 @@
 }
 
 .container{
- margin-top: 5%; 
+ margin-top: 5%;
+}
+
+li:hover img{
+    /*text-shadow: 1px 1px 1px ;*/
+    /*text-shadow: 1px 1px 3px lightgray, 0 0 1px black;*/
+
+/*border-top: 1px solid red;*/
+
+    width: 42px;
+    height: 42px;
+}
+
+img{
+    width: 34px;
+    height: 34px;
+}
+nav{
+    height: 70px;
 }
 

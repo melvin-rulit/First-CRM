@@ -6,12 +6,18 @@ import Users from './components/UsersComponent.vue'
 import Callendar from './components/Callendar.vue'
 import Vcallendar from './components/Vcallendar.vue'
 import Base from './components/base/BaseController.vue'
+// import Upheader from './components/header/Upheader.vue'
+
 
 const routes = [
     { path: '/home', component: Base},
     { path: '/users', component: Users },
     { path: '/callendar', component: Callendar },
     { path: '/vcallendar', component: Vcallendar },
+    // { path: '/upheader', component: Upheader },
+
+
+
 ]
 
 
@@ -45,11 +51,13 @@ Vue.use(VueRouter)
 //-- Import Global Components
 // Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('head-component', require('./components/header/head.vue').default);
+Vue.component('list-component', require('./components/header/List.vue').default);
+// Vue.component('left-side', require('./components/header/left-side.vue').default);
 
 
 
 const app = new Vue({
-    
+
     el: '#app',
     router
 });
