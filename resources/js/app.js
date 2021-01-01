@@ -3,18 +3,19 @@ window.Vue = require('vue');
 
 //-- Import Components
 import Users from './components/UsersComponent.vue'
-import Callendar from './components/Callendar.vue'
-import Vcallendar from './components/Vcallendar.vue'
+import Callendar from './components/Callendar/Callendar.vue'
+import Vcallendar from './components/Callendar/Vcallendar.vue'
 import Base from './components/base/BaseController.vue'
-// import Upheader from './components/header/Upheader.vue'
+import Personal from './components/Personal/PersonalComponent.vue'
 
 
 const routes = [
+
     { path: '/home', component: Base},
-    { path: '/users', component: Users },
+    { path: '/user', component: Users },
     { path: '/callendar', component: Callendar },
     { path: '/vcallendar', component: Vcallendar },
-    // { path: '/upheader', component: Upheader },
+    { path: '/personal', component: Personal },
 
 
 
@@ -49,10 +50,9 @@ Vue.use(VueRouter)
 
 
 //-- Import Global Components
-// Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('head-component', require('./components/header/head.vue').default);
-Vue.component('list-component', require('./components/header/List.vue').default);
-// Vue.component('left-side', require('./components/header/left-side.vue').default);
+Vue.component('list-left-component', require('./components/header/List-left-side.vue').default);
+Vue.component('list-up-component', require('./components/header/List-up-side.vue').default);
 
 
 

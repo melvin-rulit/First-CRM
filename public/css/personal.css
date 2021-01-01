@@ -2,6 +2,11 @@
 	background:   url(/images/intro-bg.jpg) no-repeat center;
 }
 
+header{
+    /*background: url("/images/avatar/0016.jpg");*/
+    height: 170px;
+}
+
 .personal h2{
    color: whitesmoke;
 
@@ -19,17 +24,30 @@ li:hover img{
     /*text-shadow: 1px 1px 1px ;*/
     /*text-shadow: 1px 1px 3px lightgray, 0 0 1px black;*/
 
-/*border-top: 1px solid red;*/
 
+/*margin-left: 15px;*/
     width: 42px;
     height: 42px;
 }
+
 
 img{
     width: 34px;
     height: 34px;
 }
-nav{
-    height: 70px;
+
+.menu {
+    margin: 0 0 40px;
+    padding: 0;
+    list-style: none;
+}
+
+.menu_link {
+    color: #555;
+}
+
+.menu_link.active {
+    font-weight: bold;
+    color: #900;
 }
 

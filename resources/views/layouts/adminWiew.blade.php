@@ -45,10 +45,7 @@
 
 <div id="app">
 
-
-
     <head-component></head-component>
-{{--    <left-side></left-side>--}}
 
         <div class="main-content">
           <div class="header">
@@ -89,5 +86,6 @@
 
       <!-- Scripts -->
       <script src="{{ asset('js/app.js') }}"></script>
+
 </body>
 </html>
