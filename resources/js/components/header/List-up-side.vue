@@ -4,16 +4,15 @@
 
         <!-- Left Side Of Navbar -->
         <ul class="navbar-nav mr-auto tracking-widest">
-            <li><router-link to="/home" class="nav-link text-lg "><img src="/images/avatar/house.png" alt="Home"> </router-link></li>
+            <div><li><router-link to="/home" class="nav-link text-lg "><img src="/images/avatar/house.png" alt="Home"> </router-link></li>
 
-            <li><router-link to="/users" class="nav-link text-lg "><img src="/images/avatar/book.png" alt="Logout"></router-link></li>
+                <li><router-link to="/users" class="nav-link text-lg "><img src="/images/avatar/book.png" alt="Logout"></router-link></li>
 
-            <li><router-link to="/callendar" class="nav-link text-lg "><img src="/images/avatar/messages.png" alt="Logout"></router-link></li>
+                <li><router-link to="/callendar" class="nav-link text-lg "><img src="/images/avatar/messages.png" alt="Logout"></router-link></li>
 
-            <li><router-link to="/vcallendar" class="nav-link text-lg "><img src="/images/avatar/database.png" alt="Base"></router-link></li>
+                <li><router-link to="/vcallendar" class="nav-link text-lg "><img src="/images/avatar/database.png" alt="Base"></router-link></li>
 
-            <li><router-link to="/vcallendar" class="nav-link text-lg "><b-icon icon="la la-github" aria-hidden="true"></b-icon> Calendar </router-link></li>
-
+            </div>
         </ul>
 
         <!-- Right Side Of Navbar -->
