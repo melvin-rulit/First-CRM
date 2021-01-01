@@ -2,7 +2,7 @@ require('./bootstrap');
 window.Vue = require('vue');
 
 //-- Import Components
-import Users from './components/UsersComponent.vue'
+import User from './components/UserComponent.vue'
 import Callendar from './components/Callendar/Callendar.vue'
 import Vcallendar from './components/Callendar/Vcallendar.vue'
 import Base from './components/base/BaseController.vue'
@@ -12,7 +12,7 @@ import Personal from './components/Personal/PersonalComponent.vue'
 const routes = [
 
     { path: '/home', component: Base},
-    { path: '/user', component: Users },
+    { path: '/user', component: User },
     { path: '/callendar', component: Callendar },
     { path: '/vcallendar', component: Vcallendar },
     { path: '/personal', component: Personal },

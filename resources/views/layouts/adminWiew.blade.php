@@ -20,6 +20,9 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/personal.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/style-for-user-card.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/fancybox.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/reset.css') }}" rel="stylesheet">
 
 
 
@@ -43,45 +46,17 @@
 
 </head>
 
+
+<body class="bg-after-login">
 <div id="app">
 
     <head-component></head-component>
 
-        <div class="main-content">
-          <div class="header">
-            <div class="container-fluid">
-{{--              <div class="header-body">--}}
-{{--                <div class="row align-items-end">--}}
-{{--                  <div class="col">--}}
-{{--                  </div>--}}
-{{--                </div>--}}
-{{--              </div>--}}
-            </div>
-          </div>
 
-          <div class="container-fluid">
-                @if(session('message'))
-                    <div class="row mb-2">
-                        <div class="col-lg-12">
-                            <div class="alert alert-success" role="alert">{{ session('message') }}</div>
-                        </div>
-                    </div>
-                @endif
-                @if($errors->count() > 0)
-                    <div class="alert alert-danger">
-                        <ul class="list-unstyled">
-                            @foreach($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
-            @yield('contentAfterlogin')
-          </div>
-        </div>
+        @yield('contentAfterlogin')
 
-        </div>
-<body>
+</div>
+
 
 
       <!-- Scripts -->

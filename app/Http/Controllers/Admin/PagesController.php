@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class PagesController extends Controller
 {
@@ -18,8 +19,8 @@ class PagesController extends Controller
       }
 
 public function index(){
-
-        // return view('Pages.index', compact('regions'));
+//     $user = User::all();
+//        return view('Pages.index', compact('user'));
         return view('Pages.index');
 }
 

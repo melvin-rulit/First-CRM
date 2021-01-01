@@ -15,11 +15,9 @@ class UsersController extends Controller
 public function get(){
 
 
-    $regions = User::all();
-    dd($regions);
-    Debugbar::info($regions);
-    return view('Pages.index', compact('regions'));
-    
+
+    return view('Pages.index');
+
 
 
 }

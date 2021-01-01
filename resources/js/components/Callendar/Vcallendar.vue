@@ -3,22 +3,13 @@
 
 
     <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                
 
-                    <div class="card-body">
-                      
-                                <vc-calendar  :value="null"
-                                color="green"
-                                is-dark
-                                is-range
-                                :attributes='attributes' 
-                                @dayclick="onDayClick" />
-                    </div>
-                    <h3>{{days}}</h3>
-                </div>
-            </div>
+        <vc-calendar  :value="null"
+                      color="green"
+                      is-dark
+                      is-range
+                      :attributes='attributes'
+                      @dayclick="onDayClick" />
         </div>
 
 </template>
