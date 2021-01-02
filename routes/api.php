@@ -1,5 +1,5 @@
 <?php
-use App\Http\Controllers\Api\V1\UserController;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -10,10 +10,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 
-Route::group(['prefix' => 'v1', 'namespace' => 'Api\V1'], function () {
+Route::group(['prefix' => 'v1',  'namespace' => 'Api\V1'], function () {
 
     // Users
-//    Route::apiResource('user', 'UserController');
-    Route::get('getUserName', [UserController::class, 'getUserNameForMenu']);
 
+    Route::get('getUserName', 'UserController@getUserNameForMenu');
+//    Route::apiResource('user', 'UserController');
     });
