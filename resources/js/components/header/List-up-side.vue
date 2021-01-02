@@ -5,18 +5,20 @@
         <!-- Left Side Of Navbar -->
         <ul class="navbar-nav mr-auto tracking-widest">
 
-                <li><router-link to="/home" class="nav-link text-lg "><img src="/images/icon-header/house.png" alt="Home"> </router-link></li>
+                <li><router-link to="/home" class="nav-link text-lg "><img src="/images/icon-header/house.png"></router-link></li>
 
-                <li><router-link to="/users" class="nav-link text-lg "><img src="/images/icon-header/book.png" alt="Logout"></router-link></li>
+                <li><router-link to="/vcallendar" class="nav-link text-lg "><img src="/images/icon-header/book.png"></router-link></li>
 
-                <li><router-link to="/callendar" class="nav-link text-lg "><img src="/images/icon-header/messages.png" alt="Logout"></router-link></li>
+                <li><router-link to="/callendar" class="nav-link text-lg "><img src="/images/icon-header/messages.png"></router-link></li>
 
-                <li><router-link to="/vcallendar" class="nav-link text-lg "><img src="/images/icon-header/database.png" alt="Base"></router-link></li>
+                <li><router-link to="/personal" class="nav-link text-lg "><img src="/images/icon-header/database.png"></router-link></li>
 
 
         </ul>
 
-        <!-- Right Side Of Navbar -->
+
+
+            <!-- Right Side Of Navbar -->
         <ul class="navbar-nav ml-auto">
 
             <li><router-link to="/user" class="nav-link text-lg "><img src="/images/icon-header/users.png" alt="Personal"></router-link></li>

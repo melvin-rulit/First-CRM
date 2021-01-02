@@ -1,5 +1,5 @@
 .bg{
-	background:   url(/images/intro-bg.jpg) no-repeat center;
+	background:   url(../images/intro-bg.jpg) no-repeat center;
 }
 
 header{
@@ -37,7 +37,7 @@ li:hover img{
 }
 
 .bg-after-login{
-    background:   url(/images/bg-after-login.jpg) no-repeat;
+    background:   url(../images/bg-after-login.jpg) no-repeat;
     height: 100%;
 }
 

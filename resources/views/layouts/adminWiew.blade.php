@@ -21,8 +21,8 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/personal.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style-for-user-card.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/fancybox.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/reset.css') }}" rel="stylesheet">
+{{--    <link href="{{ asset('css/fancybox.css') }}" rel="stylesheet">--}}
+{{--    <link href="{{ asset('css/reset.css') }}" rel="stylesheet">--}}
 
 
 
@@ -55,12 +55,14 @@
 
         @yield('contentAfterlogin')
 
+
 </div>
 
 
 
       <!-- Scripts -->
       <script src="{{ asset('js/app.js') }}"></script>
+      <script src="{{ asset('js/custom.js') }}"></script>
 
 </body>
 </html>
