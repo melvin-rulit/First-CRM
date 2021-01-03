@@ -13,9 +13,10 @@
 
                 <li><router-link to="/personal" class="nav-link text-lg "><img src="/images/icon-header/database.png"></router-link></li>
 
+                <li><router-link to="/test" class="nav-link text-lg "><img src="/images/icon-header/glasses.png"></router-link></li>
+
 
         </ul>
-
 
 
             <!-- Right Side Of Navbar -->

@@ -1,5 +1,11 @@
 require('./bootstrap');
+import Vue from 'vue'
 window.Vue = require('vue');
+
+
+//-- Import vue-router
+import VueRouter from 'vue-router'
+Vue.use(VueRouter)
 
 //-- Import Components
 import User from './components/User/UserComponent.vue'
@@ -7,7 +13,8 @@ import User from './components/User/UserComponent.vue'
 import Callendar from './components/Callendar/Callendar.vue'
 import Vcallendar from './components/Callendar/Vcallendar.vue'
 import Base from './components/base/BaseController.vue'
-// import Personal from './components/Personal/PersonalComponent.vue'
+import Personal from './components/Personal/PersonalComponent.vue'
+import Test from './components/TestComponent.vue'
 
 
 const routes = [
@@ -16,7 +23,8 @@ const routes = [
     { path: '/user', component: User },
     { path: '/callendar', component: Callendar },
     { path: '/vcallendar', component: Vcallendar },
-    // { path: '/personal', component: Personal },
+    { path: '/personal', component: Personal },
+    { path: '/test', component: Test },
 
 
 
@@ -29,16 +37,16 @@ const router = new VueRouter({
 })
 
 //-- VCalendar
-import VCalendar from 'v-calendar';
-// Use v-calendar & v-date-picker components
-Vue.use(VCalendar, {
-  componentPrefix: 'vc',  // Use <vc-calendar /> instead of <v-calendar />
-              // ...other defaults
-});
+// import VCalendar from 'v-calendar';
+// // Use v-calendar & v-date-picker components
+// Vue.use(VCalendar, {
+//   componentPrefix: 'vc',  // Use <vc-calendar /> instead of <v-calendar />
+//               // ...other defaults
+// });
 
 //-- Buefy
 import Buefy from 'buefy'
-import 'buefy/dist/buefy.css'
+// import 'buefy/dist/buefy.css'
 Vue.use(Buefy)
 
 //-- BootstrapVue  &  BootstrapVueIcons
@@ -48,10 +56,6 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 Vue.use(BootstrapVue)
 Vue.use(BootstrapVueIcons)
 
-//-- Import vue-router
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-Vue.use(VueRouter)
 
 
 //-- Import Global Components

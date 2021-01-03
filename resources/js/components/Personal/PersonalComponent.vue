@@ -1,22 +1,13 @@
 <template>
 
-    <div class="card">
-        <div class="card-body pb-0">
-            <b-table
-                hover
-                sticky-header="750px"
-                :items="users"
-                :fields="fields"
-                :sort-by.sync="sortBy"
-                :sort-desc.sync="sortDesc"
-
-                head-variant="light">
-                <template v-slot:cell(network)="row">
-
-                </template>
-            </b-table>
+<div class="container">
+    <nav class="navbar">
+        <div class="navbar-brand">
+            <a class="navbar-item"><b-icon pack="fab" icon="github"></b-icon></a>
+            <a class="navbar-item"><b-icon pack="fab" icon="twitter"></b-icon></a>
         </div>
-    </div>
+    </nav>
+</div>
 </template>
 
 <script>
