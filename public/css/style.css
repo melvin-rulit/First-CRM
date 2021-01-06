@@ -226,14 +226,19 @@
 	.tabs {
 		height:116px;
 		position: absolute;
-		margin-top:-14px;
+		margin-top:-40px;
 		padding-left:140px;
 
 	}
 	.tabs li {
 		float:left;
 		height:116px;
+
 	}
+    .tabs li img{
+        width: 44px;
+        height: 44px;
+    }
 	.tabs li > a {
 		padding-top:80px;
 		width:115px;
@@ -245,14 +250,13 @@
 		text-align:center;
 	}
 	.tabs li.active {
-		background:url('../images/tab-hover.png') no-repeat;
+
 	}
 	.tabs li.active a {
 		color:#fdc62a;
 	}
 	.tabs li .tab-profile {
-		background-image:url(../images/profile-icon.png);
-		background-position:center 40px;
+		/*background-position:center 40px;*/
 	}
 	.tabs li .tab-resume {
 		background-image:url(../images/resume-icon.png);

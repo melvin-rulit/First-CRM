@@ -8,13 +8,13 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
 //-- Import Components
-import User from './components/User/UserComponent.vue'
-// import Users from './components/Users/UsersComponent.vue'
+import User from './components/User/MainComponent.vue'
 import Callendar from './components/Callendar/Callendar.vue'
 import Vcallendar from './components/Callendar/Vcallendar.vue'
 import Base from './components/base/BaseController.vue'
 import Personal from './components/Personal/PersonalComponent.vue'
 import Test from './components/TestComponent.vue'
+// import FUCK from './components/User/MainComponent.vue'
 
 
 const routes = [
@@ -25,6 +25,7 @@ const routes = [
     { path: '/vcallendar', component: Vcallendar },
     { path: '/personal', component: Personal },
     { path: '/test', component: Test },
+    // { path: '/fuck', component: FUCK },
 
 
 
@@ -55,12 +56,14 @@ import { BootstrapVue, IconsPlugin, BootstrapVueIcons } from 'bootstrap-vue'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 Vue.use(BootstrapVue)
 Vue.use(BootstrapVueIcons)
-
+Vue.use(IconsPlugin)
 
 
 //-- Import Global Components
 Vue.component('head-component', require('./components/header/head.vue').default);
 Vue.component('list-up-component', require('./components/header/List-up-side.vue').default);
+Vue.component('update-user', require('./components/User/UpdateUser.vue').default);
+
 
 
 

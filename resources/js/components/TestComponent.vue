@@ -1,15 +1,55 @@
 <template>
-<div>
-    <button class="button is-warning">
-        <b-icon
-            pack="fas"
-            icon="sync-alt"
-            custom-class="fa-spin">
-        </b-icon>
-        <span>Refresh</span>
-    </button>
+    <div class="up">
+        <div class="row">
 
-</div>
+        </div>
+            <div class="card-body">
+                <b-table
+                    striped
+                    hover
+                    :items="user"
+                    :fields="fields"
+                ></b-table>
+            </div>
+
+    </div>
 </template>
 
+<script>
+export default {
+    data() {
+        return {
+            user: [],
+            fields: [
+                {
+                    key: 'id',
+                    label: 'ID',
+                },
+                {
+                    key: 'network',
+                    label: 'В сети',
+                },
+                {
+                    key: 'name',
+                    label: 'Имя',
+                },
+                {
+                    key: 'surname',
+                    label: 'Фамилия',
+                },
+                {
+                    key: 'email',
+                    label: 'Логин (почта)',
+                }
+            ],
+        }
+    }
+}
+</script>
 
+<style>
+.up{
+    margin-top: 10px;
+    /*padding-left: 10px;*/
+}
+</style>
