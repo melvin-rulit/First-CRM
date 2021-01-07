@@ -63,6 +63,7 @@ Vue.use(IconsPlugin)
 Vue.component('head-component', require('./components/header/head.vue').default);
 Vue.component('list-up-component', require('./components/header/List-up-side.vue').default);
 Vue.component('update-user', require('./components/User/UpdateUser.vue').default);
+Vue.component('input-component', require('./components/User/InputComponent.vue').default);
 
 
 

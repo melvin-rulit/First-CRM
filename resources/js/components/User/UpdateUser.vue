@@ -1,21 +1,40 @@
 <template>
     <div>
 
-        <!-- Модальное окно с добавлением нового клиента -->
-        <b-modal id="addNewUser" ref="my-modal" title="Добавление нового клиента"  centered ok-only ok-title="Добавить">
-            <div class="card-body py-0">
+        <!-- Модальное окно -->
+        <b-modal id="addNewUser" ref="my-modal" title="Отредактируйте нужные поля"  centered  hide-footer >
 
 
-                <div class="form-group row">
-                    <label class="col-sm-3 col-form-label">Отчество</label>
-                    <div class="col-sm-9">
-                        <input v-model.trim="new_child_middle_name" class="form-control">
-                    </div>
-                </div>
+            <div class="card-body py-2">
 
+                <table class="pointer table table-bordered">
+                    <tbody>
+                    <tr>
+                        <td>Имя</td>
+                        <td><input-component
+                            v-model="user.name"
+                            name="name"
 
+                           >
+                        </input-component>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Фамилия</td>
+                        <td>
+                            <input-component
+                                v-model="user.deleted_at"
+                                name="deleted_at">
 
+                            </input-component>
+
+                        </td>
+                    </tr>
+
+                    </tbody>
+                </table>
             </div>
+
         </b-modal>
     </div>
 
@@ -23,41 +42,46 @@
 
 <script>
 
-// import DynamicSelect from 'vue-dynamic-select'
-// Vue.use(DynamicSelect)
-//
-// import Multiselect from 'vue-multiselect'
-//
-// Vue.use(Multiselect);
-// import 'vue-multiselect/dist/vue-multiselect.min.css';
-//
-// import { required, minLength } from 'vuelidate/lib/validators';
 
 export default {
-    // components: { Multiselect },
+
+
+
     data() {
         return {
-            new_child_surname: '',
-            new_child_name: '',
-            new_child_middle_name: '',
-            branch: '',
-            manager: '',
-            instructor: '',
-            sourceGroup: '',
-            source: '',
-            submitStatus: null,
-            showErrors: false,
-            branches: [],
-            users: [],
-            new_user: [],
-            sourceGroupArray: [],
-            sourceArray: [],
+            update_surname: '',
+            update_name: '',
+            update_lastname: '',
+            user:{},
+
         }
-    },
-
-    updateUserModal(){
-        this.$bvModal.show('addNewUser')
 
     },
+
+    mounted() {
+        this.getUserName()
+    },
+
+    methods: {
+        updateUserModal(){
+            this.$bvModal.show('addNewUser')
+
+        },
+
+        getUserName() {
+            axios.get('api/v1/getUserName')
+                .then(response => this.user = response.data)
+        },
+    }
+
+
 }
 </script>
+
+<style>
+
+.pointer:hover {
+    cursor: pointer;
+}
+
+</style>
