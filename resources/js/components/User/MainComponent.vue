@@ -5,7 +5,7 @@
         <div class="top">
 
                  <!-- Modal -->
-            <update-user @get-method="newMethod" ref="showmodal"></update-user>
+            <update-user @get-method="UpdateDataMethod" ref="showmodal"></update-user>
 
 
             <!-- Logo -->
@@ -82,12 +82,12 @@
 <script>
 export default {
 
-    beforeRouteEnter (to, from, next) {
-        axios.get('api/v1/getUserName')
-            .then(response => {
-                next(vm => (vm.articles = response.data) )
-            })
-    },
+    // beforeRouteEnter (to, from, next) {
+    //     axios.get('api/v1/getUserName')
+    //         .then(response => {
+    //             next(vm => (vm.user = response.data) )
+    //         })
+    // },
 
     data() {
         return {
@@ -97,25 +97,37 @@ export default {
     },
 
     mounted() {
+        // Запускаем метод при монтировании
         this.getUserName()
     },
 
     methods: {
-        getUserName() {
+        getUserName(){
+            // Получаем данные о пользователе
             axios.get('api/v1/getUserName')
                 .then(response => this.user = response.data)
         },
 
         ShowUserCard(){
+            // Запускаем модальное окно карточки клиента
             this.$bvModal.show('addNewUser')
 
         },
+
+        UpdateDataMethod(){
+            // Этот метод запускается при закрытии модального окна для обновления данных
+            axios.get('api/v1/getUserName')
+                .then(response => this.user = response.data)
+        }
+
+
     }
 }
 
 </script>
 
 <style>
+
 /*-------------------------------------------------------*/
 /* Menu Footer*/
 /*-------------------------------------------------------*/

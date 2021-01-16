@@ -10,10 +10,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 
-Route::group(['prefix' => 'v1',  'namespace' => 'Api\V1'], function () {
+Route::group(['prefix' => 'v1',  'as' => 'api.', 'namespace' => 'Api\V1'], function () {
 
     // Users
-
+    Route::apiResource('users', 'UserController');
     Route::get('getUserName', 'UserController@getUserNameForMenu');
-//    Route::apiResource('user', 'UserController');
+    Route::post('userCardSave', 'UserController@savecard');
+
     });

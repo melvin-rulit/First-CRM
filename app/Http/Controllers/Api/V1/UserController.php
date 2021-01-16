@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Api\V1;
 
+use Illuminate\Database\Eloquent\Model;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
-use Illuminate\Support\Facades\Auth;
+use Debugbar;
+
 
 
 
@@ -69,16 +71,17 @@ class UserController extends Controller
      * Update the specified resource in storage.
      *
      * @param \Illuminate\Http\Request $request
-     * @param int $id
-     * @return \Illuminate\Http\Response
+     * @param User $user
+     * @return string
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, User $user): string
     {
-        //
+
+
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specifiuser_id: this.user.id,ed resource from storage.
      *
      * @param int $id
      * @return \Illuminate\Http\Response
@@ -99,5 +102,16 @@ class UserController extends Controller
 
 
         }
+    }
+
+    public function savecard(Request $request): string
+    {
+
+        $field_name = $request['field_name'];
+        $user = User::find($request['user_id']);
+        $user->$field_name = $request['field_value'];
+        $user->save();
+
+        return "ok";
     }
 }

@@ -2,25 +2,27 @@
 
         <span>
         <span>
-            <a class="text-success" href="#" v-if="value === '' || value == null && !keyInputForm" @click.prevent="focus">Добавить</a>
+            <a class="text-success" href="#" v-if="value === '' || value == null && !keyInputForm" v-on:click.prevent="focus">Добавить</a>
         </span>
-          <span v-if="!keyInputForm" class="card-title" @click="focus">{{ value }}</span>
+          <span v-if="!keyInputForm" class="card-title" v-on:click="focus">{{ value }}</span>
 
 
-        <input
-            v-if="keyInputForm"
-            ref="edit"
-            class="form-control"
-            size="1"
-            type="text"
-            :placeholder="placeholder"
-            :id="id"
-            :name="name"
-            v-model="value"
 
-            @input="$emit('input', value)"
-            @keyup.enter="keyInputForm = false;$emit('edit-field', $event)"
-            @blur="keyInputForm = false; $emit('edit-field', $event)">
+<input
+    v-if="keyInputForm"
+    ref="edit"
+    class="form-control"
+    size="4"
+    type="text"
+    :placeholder="placeholder"
+    :id="id"
+    :name="name"
+    v-model="value"
+
+    @input="$emit('input', value)"
+    @keyup.enter="keyInputForm = false;$emit('edit-field', $event)"
+    @blur="keyInputForm = false; $emit('edit-field', $event)">
+
 
 
     </span>
@@ -37,6 +39,7 @@ export default {
         return {
             keyInputForm: null,
             thisValue: this.value,
+
         }
     },
 
