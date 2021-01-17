@@ -5,7 +5,8 @@
         <div class="top">
 
                  <!-- Modal -->
-            <update-user @get-method="UpdateDataMethod" ref="showmodal"></update-user>
+            <edit-profile @get-method="updateDataWhenExitModal" ref="showmodal"></edit-profile>
+            <edit-personal @get-method="updateDataWhenExitModal" ref="showmodal"></edit-personal>
 
 
             <!-- Logo -->
@@ -34,9 +35,11 @@
                 <div class="about">
                     <div class="photo-inner"><img src="http://62.109.26.106//images/photo_LI.jpg" height="186" width="153" /></div>
 
-                    <h1>{{ user.name }}</h1>
-                    <h3>GRAPHIC & WEB DESIGNER</h3>
+                    <h1>{{ userdata.surname }}</h1>
+                    <h3>{{ userdata.name }} {{ userdata.lastname }}</h3>
+
                     <p>I like to make cool and creative designs. My design stash is always full of refreshing ideas. Feel free to take a look around my Vcard.</p>
+<!--                    <p>{{ comment.date }} - {{ comment.user }} - {{ comment.comment }}</p>-->
                     <p>I like to make cool and creative designs. My design stash is always full of refreshing ideas. Feel free to take a look around my Vcard.</p>
 
                 </div>
@@ -45,12 +48,12 @@
                 <!-- Personal info section -->
                 <ul class="personal-info">
 
-                    <li><label>Фамилия </label><span>{{ user.name }}</span></li>
+                    <li><label>Должность </label><span>{{ userdata.business }}</span></li>
                     <li><label>Д.рождения </label><span>March 13, 1988</span></li>
                     <li><label>Адресс </label><span>Melbourne Victoria 3000 Australia</span></li>
-                    <li><label>Почта </label><span>{{ user.email }}</span></li>
-                    <li><label>Телефон </label><span>{{ user.tel }}</span></li>
-                    <li><label>Вэб сайт </label><span>www.asmith.com</span></li>
+                    <li><label>Почта </label><span>{{ userdata.email }}</span></li>
+                    <li><label>Телефон </label><span>{{ userdata.tel }}</span></li>
+                    <li><label>Вэб сайт </label><span></span></li>
 
                 </ul>
 
@@ -62,14 +65,9 @@
             <div class="menu">
                 <ul class="tabs ">
 
-                    <li><a href="#" class="tab-profile nav-link">Изменить фото</a></li>
-                    <li><a href="#" class="tab-resume nav-link" @click="ShowUserCard">Редактировать профиль</a></li>
-<!--                    <li><a href="#" class="tab-portfolio nav-link"><b-icon-card-checklist scale="2"></b-icon-card-checklist></a></li>-->
-                    <li><a href="#" class="tab-contact nav-link">Личные качества</a></li>
-                    <li><a href="#" class="tab-contact nav-link">О себе </a></li>
-
-
-
+                    <li><a href="#" class="tab-photo nav-link">Изменить фото</a></li>
+                    <li><a href="#" class="tab-profile nav-link" @click="showModalUserCardEditProfile">Редактировать профиль</a></li>
+                    <li><a href="#" class="tab-personal nav-link" @click="showModalUserCardEditPersonal">Личные качества</a></li>
 
 
                 </ul>
@@ -77,48 +75,43 @@
 
         </div>
     </div>
+
 </template>
 
 <script>
 export default {
 
-    // beforeRouteEnter (to, from, next) {
-    //     axios.get('api/v1/getUserName')
-    //         .then(response => {
-    //             next(vm => (vm.user = response.data) )
-    //         })
-    // },
-
     data() {
         return {
-            user: '',
-            articles: '',
+            userdata: '',
         }
     },
 
     mounted() {
-        // Запускаем метод при монтировании
-        this.getUserName()
+        this.getUserCardData()
     },
 
     methods: {
-        getUserName(){
-            // Получаем данные о пользователе
+        getUserCardData(){
             axios.get('api/v1/getUserName')
-                .then(response => this.user = response.data)
+                .then(response => this.userdata = response.data)
         },
 
-        ShowUserCard(){
-            // Запускаем модальное окно карточки клиента
-            this.$bvModal.show('addNewUser')
+        showModalUserCardEditProfile(){
+            this.$bvModal.show('UserCardEditProfile')
 
         },
 
-        UpdateDataMethod(){
-            // Этот метод запускается при закрытии модального окна для обновления данных
+        showModalUserCardEditPersonal(){
+            this.$bvModal.show('UserCardEditPersonal')
+        },
+
+        updateDataWhenExitModal(){
             axios.get('api/v1/getUserName')
-                .then(response => this.user = response.data)
-        }
+                .then(response => this.userdata = response.data)
+        },
+
+
 
 
     }
@@ -140,7 +133,7 @@ export default {
     /*height:116px;*/
     position: absolute;
     margin-top:-45px;
-    padding-left:130px;
+    padding-left:150px;
 
 }
 .tabs li {

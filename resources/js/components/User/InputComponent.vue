@@ -8,22 +8,35 @@
 
 
 
-<input
-    v-if="keyInputForm"
-    ref="edit"
-    class="form-control"
-    size="4"
-    type="text"
-    :placeholder="placeholder"
-    :id="id"
-    :name="name"
-    v-model="value"
+<label>
+    <input
+        v-if="keyInputForm && !textarea"
+        ref="edit"
+        class="form-control"
+        size="4"
+        type="text"
+        :placeholder="placeholder"
+        :id="id"
+        :name="name"
+        v-model="value"
 
-    @input="$emit('input', value)"
-    @keyup.enter="keyInputForm = false;$emit('edit-field', $event)"
-    @blur="keyInputForm = false; $emit('edit-field', $event)">
+        @input="$emit('input', value)"
+        @keyup.enter="keyInputForm = false;$emit('edit-field', $event)"
+        @blur="keyInputForm = false; $emit('edit-field', $event)">
+</label>
 
-
+<label>
+    <textarea
+        v-if="textarea && keyInputForm"
+        ref="edit"
+        class="form-control"
+        :id="id"
+        :name="name"
+        v-model="value"
+        @input="$emit('input', value)"
+        @blur="keyInputForm = false; $emit('edit-field', $event)">
+    </textarea>
+</label>
 
     </span>
 

@@ -104,10 +104,15 @@ class UserController extends Controller
         }
     }
 
+    /**
+     * @param Request $request
+     * @return string
+     */
     public function savecard(Request $request): string
     {
 
         $field_name = $request['field_name'];
+
         $user = User::find($request['user_id']);
         $user->$field_name = $request['field_value'];
         $user->save();
