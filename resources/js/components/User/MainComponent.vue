@@ -38,9 +38,9 @@
                     <h1>{{ userdata.surname }}</h1>
                     <h3>{{ userdata.name }} {{ userdata.lastname }}</h3>
 
-                    <p>I like to make cool and creative designs. My design stash is always full of refreshing ideas. Feel free to take a look around my Vcard.</p>
-<!--                    <p>{{ comment.date }} - {{ comment.user }} - {{ comment.comment }}</p>-->
-                    <p>I like to make cool and creative designs. My design stash is always full of refreshing ideas. Feel free to take a look around my Vcard.</p>
+
+                    <p>{{ userdata.comment }}</p>
+
 
                 </div>
 
@@ -79,12 +79,15 @@
 </template>
 
 <script>
+
+
 export default {
 
     data() {
         return {
             userdata: '',
         }
+
     },
 
     mounted() {

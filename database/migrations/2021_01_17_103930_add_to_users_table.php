@@ -20,6 +20,7 @@ class AddToUsersTable extends Migration
             $table->string('avatar')->after('phone');
             $table->string('business')->after('avatar');
             $table->string('qualities')->after('business');
+            $table->string('birthday')->after('business');
         });
     }
 

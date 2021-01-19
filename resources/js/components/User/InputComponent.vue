@@ -6,14 +6,24 @@
         </span>
           <span v-if="!keyInputForm" class="card-title" v-on:click="focus">{{ value }}</span>
 
-
+<label>
+    <textarea
+        v-if="textarea && keyInputForm"
+        ref="edit"
+        :id="id"
+        :name="name"
+        v-model="value"
+        @input="$emit('input', value)"
+        @blur="keyInputForm = false; $emit('edit-field', $event)">
+    </textarea>
+</label>
 
 <label>
     <input
-        v-if="keyInputForm && !textarea"
+        v-if="keyInputForm && !textarea && !datePicker"
         ref="edit"
         class="form-control"
-        size="4"
+        size="9"
         type="text"
         :placeholder="placeholder"
         :id="id"
@@ -25,36 +35,30 @@
         @blur="keyInputForm = false; $emit('edit-field', $event)">
 </label>
 
-<label>
-    <textarea
-        v-if="textarea && keyInputForm"
-        ref="edit"
-        class="form-control"
-        :id="id"
-        :name="name"
-        v-model="value"
-        @input="$emit('input', value)"
-        @blur="keyInputForm = false; $emit('edit-field', $event)">
-    </textarea>
-</label>
+        <date-picker
+            v-if="keyInputForm && datePicker"
+            :lang="lang"
+            ref="edit"
+            :id="id"
+            v-model="value"
+            :editable="false"
+            value-type="DD.MM.YYYY"
+            format="DD.MM.YYYY"
+            @close="keyInputForm = false; $emit('edit-field', name ,datePicker, id)">
+        </date-picker>
 
     </span>
-
-
-
 
 </template>
 
 <script>
+
+import DatePicker from 'vue2-datepicker';
+Vue.use(DatePicker);
+import 'vue2-datepicker/index.css';
+import Vue from "vue";
+
 export default {
-
-    data() {
-        return {
-            keyInputForm: null,
-            thisValue: this.value,
-
-        }
-    },
 
     props: {
         value: [String, Number],
@@ -62,13 +66,36 @@ export default {
             type: String,
             required: true
         },
+
         id: {
             type: Number,
         },
         placeholder: {
             type: String,
         },
+        textarea: {
 
+            type: String,
+        },
+        datePicker: {
+            type: String,
+        }
+
+    },
+
+    data() {
+        return {
+
+            lang: {
+                formatLocale: {
+                    firstDayOfWeek: 1,
+                    weekdaysMin: ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'],
+                    monthsShort: ['Янв', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
+                },
+            },
+            keyInputForm: null,
+            thisValue: this.value,
+        }
     },
 
     methods: {
@@ -82,6 +109,3 @@ export default {
 }
 </script>
 
-<style scoped>
-
-</style>

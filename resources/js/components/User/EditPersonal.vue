@@ -2,16 +2,18 @@
     <div>
 
         <!-- Модальное окно UserCard -->
-        <b-modal id="UserCardEditPersonal" title="Опишите ваши качества"  v-on:hide="closeUserCardModal" centered ok-only ok-title="Применить">
+        <b-modal id="UserCardEditPersonal" title="Опишите себя и ваши качества"  v-on:hide="closeUserCardModal" centered ok-only title-class="red" ok-variant="button-style" ok-title="Готово">
 
 
-            <form ref="form" @submit.stop.prevent="handleSubmit">
-                <b-form-group label-for="name-input">
-                    <b-form-textarea id="textarea" v-model="comment"></b-form-textarea>
-                </b-form-group>
-            </form>
-
-
+            <label>
+                <textarea
+                class="form-comment"
+                v-model="user.comment"
+                @blur="event => editField(event, 'comment')"
+                rows="3"
+                name="comment">
+                </textarea>
+            </label>
 
         </b-modal>
     </div>
@@ -26,21 +28,6 @@ export default {
     data() {
         return {
 
-            fields: [
-                {
-                    key: 'id',
-                    label: 'ID',
-                },
-                {
-                    key: 'message',
-                    label: 'Действие',
-                },
-                {
-                    key: 'created_at',
-                    label: 'Дата',
-                },
-            ],
-
             user: {},
             comment: '',
 
@@ -53,10 +40,6 @@ export default {
     },
 
     methods: {
-        updateUserModal() {
-            this.$bvModal.show('addNewUser')
-
-        },
 
         getUserName() {
             axios.get('api/v1/getUserName')
@@ -86,8 +69,13 @@ export default {
 
 <style>
 
-.pointer:hover {
-    cursor: pointer;
+.form-comment{
+   width: 460px;
 }
-
+.red{
+    color:#a87f09;
+}
+.button-style{
+    text-decoration-color: green;
+}
 </style>

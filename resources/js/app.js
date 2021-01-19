@@ -45,6 +45,8 @@ const router = new VueRouter({
 //               // ...other defaults
 // });
 
+
+
 //-- Buefy
 import Buefy from 'buefy'
 // import 'buefy/dist/buefy.css'
@@ -65,6 +67,7 @@ Vue.component('list-up-component', require('./components/header/List-up-side.vue
 Vue.component('edit-profile', require('./components/User/EditProfile.vue').default);
 Vue.component('edit-personal', require('./components/User/EditPersonal.vue').default);
 Vue.component('input-component', require('./components/User/InputComponent.vue').default);
+Vue.component('callendar-component', require('./components/User/Callendar.vue').default);
 
 
 

@@ -5,7 +5,7 @@
         <b-modal id="UserCardEditProfile" ref="my-modal" title="Отредактируйте нужные поля"  v-on:hide="closeUserCardModal" centered ok-only ok-title="Готово">
 
 
-            <div class="card-body py-use Illuminate\Database\Eloquent\Model;2">
+            <div class="card-body py-2">
 
                 <table class="pointer table table-bordered">
                     <tbody>
@@ -44,6 +44,19 @@
                         </td>
                     </tr>
                     <tr>
+                        <td>День рождения</td>
+                        <td>
+                            <input-component
+                            v-model="user.birthday"
+                            name="birthday"
+                            datePicker="true"
+                            @edit-field="editField">
+
+                        </input-component>
+
+                        </td>
+                    </tr>
+                    <tr>
                         <td>Должность</td>
                         <td>
                             <input-component
@@ -67,27 +80,11 @@
 
 <script>
 
-
 export default {
 
 
     data() {
         return {
-
-            fields: [
-                {
-                    key: 'id',
-                    label: 'ID',
-                },
-                {
-                    key: 'message',
-                    label: 'Действие',
-                },
-                {
-                    key: 'created_at',
-                    label: 'Дата',
-                },
-            ],
 
             user: {},
 
@@ -96,16 +93,12 @@ export default {
     },
 
     mounted() {
-        this.getUserName()
+        this.getUserCardData()
     },
 
     methods: {
-        updateUserModal() {
-            this.$bvModal.show('addNewUser')
 
-        },
-
-        getUserName() {
+        getUserCardData() {
             axios.get('api/v1/getUserName')
                 .then(response => this.user = response.data)
         },
