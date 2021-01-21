@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers\Api\V1;
 
-use Illuminate\Database\Eloquent\Model;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
-use Illuminate\Http\Response;
 
 
 
@@ -86,7 +84,7 @@ class UserController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id): \Illuminate\Http\Response
     {
         //
     }
@@ -112,7 +110,6 @@ class UserController extends Controller
     {
 
         $field_name = $request['field_name'];
-
         $user = User::find($request['user_id']);
         $user->$field_name = $request['field_value'];
         $user->save();

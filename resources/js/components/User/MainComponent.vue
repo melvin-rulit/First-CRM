@@ -37,8 +37,6 @@
 
                     <h1>{{ userdata.surname }}</h1>
                     <h3>{{ userdata.name }} {{ userdata.lastname }}</h3>
-
-
                     <p>{{ userdata.comment }}</p>
 
 
@@ -49,10 +47,10 @@
                 <ul class="personal-info">
 
                     <li><label>Должность </label><span>{{ userdata.business }}</span></li>
-                    <li><label>Д.рождения </label><span>March 13, 1988</span></li>
+                    <li><label>Д.рождения </label><span>{{ userdata.birthday}}</span></li>
                     <li><label>Адресс </label><span>Melbourne Victoria 3000 Australia</span></li>
                     <li><label>Почта </label><span>{{ userdata.email }}</span></li>
-                    <li><label>Телефон </label><span>{{ userdata.tel }}</span></li>
+                    <li><label>Телефон </label><span>{{ userdata.phone }}</span></li>
                     <li><label>Вэб сайт </label><span></span></li>
 
                 </ul>

@@ -23,13 +23,13 @@
         v-if="keyInputForm && !textarea && !datePicker"
         ref="edit"
         class="form-control"
-        size="9"
+        size="14"
         type="text"
         :placeholder="placeholder"
         :id="id"
         :name="name"
         v-model="value"
-
+        v-mask="mask"
         @input="$emit('input', value)"
         @keyup.enter="keyInputForm = false;$emit('edit-field', $event)"
         @blur="keyInputForm = false; $emit('edit-field', $event)">
@@ -44,7 +44,7 @@
             :editable="false"
             value-type="DD.MM.YYYY"
             format="DD.MM.YYYY"
-            @close="keyInputForm = false; $emit('edit-field', name ,datePicker, id)">
+            @close="keyInputForm = false; $emit('edit-field', value, name ,datePicker, id)">
         </date-picker>
 
     </span>
@@ -52,11 +52,6 @@
 </template>
 
 <script>
-
-import DatePicker from 'vue2-datepicker';
-Vue.use(DatePicker);
-import 'vue2-datepicker/index.css';
-import Vue from "vue";
 
 export default {
 
@@ -66,7 +61,7 @@ export default {
             type: String,
             required: true
         },
-
+        mask: {},
         id: {
             type: Number,
         },

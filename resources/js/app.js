@@ -1,3 +1,5 @@
+import * as constants from "constants";
+
 require('./bootstrap');
 import Vue from 'vue'
 window.Vue = require('vue');
@@ -14,7 +16,7 @@ import Vcallendar from './components/Callendar/Vcallendar.vue'
 import Base from './components/base/BaseController.vue'
 import Personal from './components/Personal/PersonalComponent.vue'
 import Test from './components/TestComponent.vue'
-// import FUCK from './components/User/MainComponent.vue'
+import Setings from './components/Setings/SetingsComponent.vue'
 
 
 const routes = [
@@ -25,9 +27,7 @@ const routes = [
     { path: '/vcallendar', component: Vcallendar },
     { path: '/personal', component: Personal },
     { path: '/test', component: Test },
-    // { path: '/fuck', component: FUCK },
-
-
+    { path: '/setings', component: Setings },
 
 ]
 
@@ -37,6 +37,8 @@ const router = new VueRouter({
     routes
 })
 
+
+
 //-- VCalendar
 // import VCalendar from 'v-calendar';
 // // Use v-calendar & v-date-picker components
@@ -45,7 +47,10 @@ const router = new VueRouter({
 //               // ...other defaults
 // });
 
-
+//-- vue2-datepicker
+import DatePicker from 'vue2-datepicker'
+Vue.use(DatePicker)
+import 'vue2-datepicker/index.css'
 
 //-- Buefy
 import Buefy from 'buefy'
@@ -59,6 +64,14 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 Vue.use(BootstrapVue)
 Vue.use(BootstrapVueIcons)
 Vue.use(IconsPlugin)
+
+//-- vue-the-mask
+import VueTheMask from 'vue-the-mask'
+Vue.use(VueTheMask)
+
+//-- multiselect
+import Multiselect from 'vue-multiselect'
+Vue.component('multiselect', Multiselect)
 
 
 //-- Import Global Components
@@ -77,3 +90,4 @@ const app = new Vue({
     el: '#app',
     router
 });
+

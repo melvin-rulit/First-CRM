@@ -15,6 +15,8 @@
 
                 <li><router-link to="/test" class="nav-link text-lg "><img src="/images/icon-header/glasses.png"></router-link></li>
 
+                <li><router-link to="/setings" class="nav-link  "><img src="/images/icon-header/settings.png"></router-link></li>
+
                 <li><router-link to="/fuck" class="nav-link "><b-icon-chat-right-text scale="2"></b-icon-chat-right-text></router-link>Chat</li>
 
 

@@ -68,6 +68,34 @@
 
                         </td>
                     </tr>
+                    <tr>
+                        <td>Телефон</td>
+                        <td>
+                            <input-component
+                                v-model="user.phone"
+                                mask="+## (###) ###-##-##"
+                                name="phone"
+                                @edit-field="editField">
+
+                            </input-component>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Single select</td>
+                        <td>
+                          <multiselect
+                              v-model="value"
+                              :options="options"
+                              :searchable="false"
+                              :close-on-select="false"
+                              :show-labels="false"
+                             >
+
+                          </multiselect>
+
+                        </td>
+                    </tr>
 
                     </tbody>
                 </table>
@@ -82,12 +110,12 @@
 
 export default {
 
-
     data() {
         return {
 
             user: {},
-
+            value: '',
+            options: ['Дизайнер', 'Менеджер', 'Веб разработчик', 'Сео оптимизатор', 'It специалист', 'Бухгалтер', 'Оператор']
         }
 
     },
@@ -106,7 +134,7 @@ export default {
         editField(e, name, type) {
 
             if (type) {
-                axios.post('api/v1/userCardSave', { field_name: name, field_value: e})
+                axios.post('api/v1/userCardSave', {user_id: this.user.id, field_name: name, field_value: e})
             }
             else{
                 const value = e.target.value;
