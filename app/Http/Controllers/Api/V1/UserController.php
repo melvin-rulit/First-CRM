@@ -12,14 +12,21 @@ use App\Models\User;
 
 class UserController extends Controller
 {
+
     /**
-     * Display a listing of the resource.
+     * Выводим все данные о пользователе
      *
-     * @return \Illuminate\Http\Response
+     *
      */
     public function index()
     {
-        //
+        $users = User::where('id', 1)->get();
+//      $user = User::find(auth()->user()->id);
+//return ['user' => $user->name];
+        foreach ($users as $user) {
+            return $user;
+        }
+
     }
 
     /**
@@ -49,9 +56,9 @@ class UserController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
-        //
+
     }
 
     /**
@@ -89,24 +96,15 @@ class UserController extends Controller
         //
     }
 
-    public function getUserNameForMenu()
-    {
 
-        $users = User::where('id', 1)->get();
-//      $user = User::find(auth()->user()->id);
-//return ['user' => $user->name];
-        foreach ($users as $user) {
-            return $user;
-
-
-        }
-    }
 
     /**
+     * Сохраняем данные из карточки пользователя
+     *
      * @param Request $request
      * @return string
      */
-    public function savecard(Request $request): string
+    public function saveCard(Request $request): string
     {
 
         $field_name = $request['field_name'];
@@ -116,4 +114,12 @@ class UserController extends Controller
 
         return "ok";
     }
+
+    public function saveRole(Request $request){
+
+        $user = User::find($request->user_id);
+
+        $user->roles()->sync($request->roles);
+    }
 }
+

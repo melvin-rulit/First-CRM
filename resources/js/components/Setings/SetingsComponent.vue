@@ -4,9 +4,9 @@
             <div class="col-md-10">
                 <div>
 
-                    <b-tabs content-class="mt-1">
+                    <b-tabs >
                         <b-tab title="Должность сотрудников" active> <one /> </b-tab>
-                        <b-tab title="Second"> <two /> </b-tab>
+                        <b-tab title="Second"> <two @get-method="getAllRoles"></two> </b-tab>
                         <b-tab title="First" ></b-tab>
                         <b-tab title="Second"><p>I'm the second tab</p></b-tab>
 

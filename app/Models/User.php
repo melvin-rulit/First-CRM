@@ -12,6 +12,10 @@ use Illuminate\Support\Facades\Auth;
 //use Carbon\Carbon;
 
 
+/**
+ * @method static where(string $string, int $int)
+ * @method static find(mixed $user_id)
+ */
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;
@@ -45,4 +49,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function roles(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->belongsToMany(Role::class);
+    }
 }

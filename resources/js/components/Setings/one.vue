@@ -3,87 +3,100 @@
         <div class="row">
             <div class="col-md-10">
 
-                    <b-field label="" type="is-success" >
-                        <b-input
-                            placeholder="Добавьте новую должность"
-                            size="is-large"
-                            icon-right="close-circle"
-                        ></b-input>
-                    </b-field>
 
-                <div>
-                    <b-table :items="items" ></b-table>
-                </div>
+                <b-form-input
+                    v-model="value"
+                    placeholder="Добавить новую должность"
 
+                    v-on:keydown.enter ="addNewRole">
+
+                </b-form-input>
+
+            </div>
+            <div class="col-md-10 mt ">
+               <div class="">
+                   <b-table
+                       :items="roles"
+                       :fields="fields"
+
+                   ></b-table>
+               </div>
             </div>
         </div>
     </div>
 </template>
 
 <script>
+
 export default {
+
     data() {
         return {
-            fields: [
+
+            roles: {},
+            value: '',
+            user: {},
+            fields:[
                 {
                     key: 'id',
-                    label: 'ID',
+                    label: 'Индекс',
                 },
-                {
-                    key: 'network',
-                    label: 'В сети',
-                },
-                {
-                    key: 'name',
-                    label: 'Имя',
-                },
-                {
-                    key: 'surname',
-                    label: 'Фамилия',
-                },
-                {
-                    key: 'email',
-                    label: 'Логин (почта)',
-                }
-            ],
 
-            items: [
-                { age: 40, first_name: 'Dickerson', last_name: 'Macdonald' },
-                { age: 21, first_name: 'Larsen', last_name: 'Shaw' },
-                { age: 89, first_name: 'Geneva', last_name: 'Wilson' },
-                { age: 38, first_name: 'Jami', last_name: 'Carney' }
-            ],
+                {
+                    key: 'title',
+                    label: 'Должность',
+                },
 
-            columns: [
                 {
-                    field: 'id',
-                    label: 'ID',
-                    width: '40',
-                    numeric: true
-                },
-                {
-                    field: 'first_name',
-                    label: 'First Name',
-                },
-                {
-                    field: 'last_name',
-                    label: 'Last Name',
-                },
-                {
-                    field: 'date',
-                    label: 'Date',
-                    centered: true
-                },
-                {
-                    field: 'gender',
-                    label: 'Gender',
+                    key: 'korn',
+                    label: 'Доступ',
                 }
             ]
+
+
+        }
+
+    },
+
+    mounted() {
+        this.getRoles()
+        this.getUserData()
+    },
+
+    methods:{
+
+        getRoles(){
+
+            axios.get('api/v1/getRoles')
+
+                .then(response => {this.roles = response.data.data;})
+
+        },
+
+        getUserData() {
+            axios.get('api/v1/user')
+                .then(response => this.user = response.data)
+        },
+
+
+        addNewRole(){
+
+            axios.post('api/v1/roles', {title: this.value})
+
+            this.value = ''
+            this.getRoles()
         }
     }
+
+
 }
+
 </script>
 
 <style>
 
+.mt{
+    margin-top: 20px;
+    /*width: 600px;*/
+}
 </style>

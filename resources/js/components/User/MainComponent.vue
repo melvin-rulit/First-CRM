@@ -94,7 +94,7 @@ export default {
 
     methods: {
         getUserCardData(){
-            axios.get('api/v1/getUserName')
+            axios.get('api/v1/user')
                 .then(response => this.userdata = response.data)
         },
 

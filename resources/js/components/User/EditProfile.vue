@@ -19,6 +19,7 @@
                         </input-component>
                         </td>
                     </tr>
+
                     <tr>
                         <td>Фамилия</td>
                         <td>
@@ -31,6 +32,7 @@
 
                         </td>
                     </tr>
+
                     <tr>
                         <td>Отчество</td>
                         <td>
@@ -43,6 +45,7 @@
 
                         </td>
                     </tr>
+
                     <tr>
                         <td>День рождения</td>
                         <td>
@@ -56,18 +59,7 @@
 
                         </td>
                     </tr>
-                    <tr>
-                        <td>Должность</td>
-                        <td>
-                            <input-component
-                                v-model="user.business"
-                                name="business"
-                                @edit-field="editField">
 
-                            </input-component>
-
-                        </td>
-                    </tr>
                     <tr>
                         <td>Телефон</td>
                         <td>
@@ -81,19 +73,37 @@
 
                         </td>
                     </tr>
+
                     <tr>
-                        <td>Single select</td>
+                        <td>Должность</td>
                         <td>
+                                 <span v-if="!showEditRole" v-for="item in user.role" class="badge badge-info mr-2">
+                                        {{item.title}}
+                                    </span>
                           <multiselect
-                              v-model="value"
-                              :options="options"
-                              :searchable="false"
-                              :close-on-select="false"
-                              :show-labels="false"
+                              v-if="showEditRole"
+                              v-model="user.role"
+                              label="title"
+                              track-by="id"
+                              :options="roles"
+                              :multiple="true"
+                              :taggable="true"
+                              deselectLabel="Удалить"
+                              selectedLabel="Выбран"
                              >
 
                           </multiselect>
-
+                            <hr class="navbar-divider my-3">
+                            <div class="mt-3">
+                                <button
+                                    @click="editRole"
+                                    :disabled="showEditRole"
+                                    class="btn btn-sm btn-primary">Редактировать</button>
+                                <button
+                                    @click="saveRole"
+                                    :disabled="!showEditRole"
+                                    class="btn btn-sm btn-success">Сохранить</button>
+                            </div>
                         </td>
                     </tr>
 
@@ -114,20 +124,37 @@ export default {
         return {
 
             user: {},
+            roles: [],
             value: '',
-            options: ['Дизайнер', 'Менеджер', 'Веб разработчик', 'Сео оптимизатор', 'It специалист', 'Бухгалтер', 'Оператор']
+            showEditRole: false,
+
         }
 
     },
 
+    computed: {
+
+        newRoleArray(){
+            return this.user.role.slice().map(item => item.id.toString());
+        }
+    },
+
     mounted() {
+
         this.getUserCardData()
     },
 
     methods: {
 
+        getRoles(){
+
+            axios.get('api/v1/getRoles')
+
+                .then(response => {this.roles = response.data.data;})
+        },
+
         getUserCardData() {
-            axios.get('api/v1/getUserName')
+            axios.get('api/v1/user')
                 .then(response => this.user = response.data)
         },
 
@@ -141,6 +168,11 @@ export default {
                 const key = e.currentTarget.getAttribute('name');
                 axios.post('api/v1/userCardSave', {user_id: this.user.id, field_name: key, field_value: value })
             }
+        },
+
+        editRole(){
+           this.showEditRole = !this.showEditRole
+          this.getRoles()
         },
 
         closeUserCardModal(){
