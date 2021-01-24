@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers\Api\V1;
 
+use App\Http\Resources\UserAllResource;
+use App\Http\Resources\GetUserResource;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Role;
+use Debugbar;
 
 
 
@@ -22,81 +26,49 @@ class UserController extends Controller
     {
         $users = User::where('id', 1)->get();
 //      $user = User::find(auth()->user()->id);
-//return ['user' => $user->name];
+// return ['user' => $user->name];
         foreach ($users as $user) {
             return $user;
         }
 
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show()
-    {
 
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
 
     /**
-     * Update the specified resource in storage.
+     * Выводим все данные о пользователе для UserCardEditProfile
      *
-     * @param \Illuminate\Http\Request $request
      * @param User $user
-     * @return string
+     * @return GetUserResource
      */
-    public function update(Request $request, User $user): string
+    public function show(User $user): GetUserResource
     {
 
+        return new GetUserResource($user);
 
     }
+
+
 
     /**
-     * Remove the specifiuser_id: this.user.id,ed resource from storage.
      *
-     * @param int $id
-     * @return \Illuminate\Http\Response
+     *
+     * @param Request $request
+     *
      */
-    public function destroy($id): \Illuminate\Http\Response
+    public function dataProfile()
     {
-        //
+     $users = User::where('id', 1)->get();
+
+     foreach ($users as $user) {
+        return $user;
     }
+    //  return UserAllResource::collection($users);
 
 
+
+
+    }
 
     /**
      * Сохраняем данные из карточки пользователя
@@ -118,7 +90,7 @@ class UserController extends Controller
     public function saveRole(Request $request){
 
         $user = User::find($request->user_id);
-
+        Debugbar::info($user);
         $user->roles()->sync($request->roles);
     }
 }

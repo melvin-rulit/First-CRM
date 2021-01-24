@@ -14,7 +14,7 @@ Route::group(['prefix' => 'v1',  'as' => 'api.', 'namespace' => 'Api\V1'], funct
 
     // User
     Route::apiResource('user', 'UserController');
-//    Route::get('getUserName', 'UserController@getUserNameForMenu');
+   Route::get('getDataForUserCardProfile', 'UserController@dataProfile');
     Route::post('userCardSave', 'UserController@saveCard');
     Route::post('saveRolesForUser', 'UserController@saveRole');
 

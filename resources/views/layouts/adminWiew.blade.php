@@ -25,6 +25,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('css/personal.css') }}" rel="stylesheet">
+    
 
 <!--  анимированные переходы между компонентами */ -->
     <style type="text/css">
@@ -60,9 +61,8 @@
 
 
 
-      <!-- Scripts -->
-      <script src="{{ asset('js/app.js') }}"></script>
-{{--      <script src="{{ asset('js/custom.js') }}"></script>--}}
+
+
 
 </body>
 </html>

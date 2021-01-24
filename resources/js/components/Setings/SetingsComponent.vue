@@ -6,11 +6,12 @@
 
                     <b-tabs >
                         <b-tab title="Должность сотрудников" active> <one /> </b-tab>
-                        <b-tab title="Second"> <two @get-method="getAllRoles"></two> </b-tab>
-                        <b-tab title="First" ></b-tab>
-                        <b-tab title="Second"><p>I'm the second tab</p></b-tab>
+                        <b-tab title="Филиалы"> <two @get-method="getAllRoles"></two> </b-tab>
+                        <b-tab title="Доступы" ></b-tab>
+                        <b-tab title="Назначения"><p>I'm the second tab</p></b-tab>
+                        <b-tab title="Показания"><p>I'm the second tab</p></b-tab>
 
-                        <b-tab title="Second"><p>I'm the second tab</p></b-tab>
+                        <b-tab title="Общие настройки"><p>I'm the second tab</p></b-tab>
 
                     </b-tabs>
 
@@ -34,8 +35,11 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 .tabs{
-    padding-left: 10px;
+    padding-left: 120px;
+}
+.tabs li > a{
+    margin-top: -10px;
 }
 </style>

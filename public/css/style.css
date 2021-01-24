@@ -7,7 +7,7 @@ body {
     margin: 0px;
     padding: 0px;
     font-family:'Open Sans', Arial;
-    font-size: 12px;
+    font-size: 14px;
 }
 /*-------------------------------------------------------*/
 /* Wrap */
@@ -214,4 +214,6 @@ div.top {
     width:170px;
     color:#a87f09;
 }
+
+
 

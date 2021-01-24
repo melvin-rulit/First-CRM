@@ -45,6 +45,10 @@ npm run watch
 | Login page | 
 | ------------ | 
 |<img src="https://github.com/melvin-rulit/First-Crm/blob/master/public/images/screenshot/logo.png">|
+| ------------ | 
+|<img src="https://github.com/melvin-rulit/First-Crm/blob/master/public/images/screenshot/usercard.png">|
+| ------------ | 
+|<img src="https://github.com/melvin-rulit/First-Crm/blob/master/public/images/screenshot/settings.png">|
 
 ### 📝 License
 

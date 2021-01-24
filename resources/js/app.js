@@ -1,5 +1,3 @@
-import * as constants from "constants";
-
 require('./bootstrap');
 import Vue from 'vue'
 window.Vue = require('vue');
@@ -33,8 +31,9 @@ const routes = [
 
 
 const router = new VueRouter({
-    mode: 'history',
-    routes
+
+    routes,
+    // mode: 'history',
 })
 
 
@@ -88,6 +87,7 @@ Vue.component('callendar-component', require('./components/User/Callendar.vue').
 const app = new Vue({
 
     el: '#app',
-    router
+    router,
+    
 });
 

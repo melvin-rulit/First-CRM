@@ -19,8 +19,7 @@ class PagesController extends Controller
       }
 
 public function index(){
-//     $user = User::all();
-//        return view('Pages.index', compact('user'));
+
         return view('Pages.index');
 }
 

@@ -42,7 +42,7 @@ export default {
     methods: {
 
         getUserName() {
-            axios.get('api/v1/getUserName')
+            axios.get('api/v1/user')
                 .then(response => this.user = response.data)
         },
 
@@ -73,7 +73,8 @@ export default {
    width: 460px;
 }
 .red{
-    color:#a87f09;
+
+    text-shadow: 1px 1px 2px black;
 }
 .button-style{
     text-decoration-color: green;

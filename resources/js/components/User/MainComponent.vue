@@ -5,8 +5,8 @@
         <div class="top">
 
                  <!-- Modal -->
-            <edit-profile @get-method="updateDataWhenExitModal" ref="showmodal"></edit-profile>
-            <edit-personal @get-method="updateDataWhenExitModal" ref="showmodal"></edit-personal>
+            <edit-profile @get-method="updateDataWhenExitModal" ref="getmodal"></edit-profile>
+            <edit-personal @get-method="updateDataWhenExitModal" ></edit-personal>
 
 
             <!-- Logo -->
@@ -48,7 +48,7 @@
 
                     <li><label>Должность </label><span>{{ userdata.business }}</span></li>
                     <li><label>Д.рождения </label><span>{{ userdata.birthday}}</span></li>
-                    <li><label>Адресс </label><span>Melbourne Victoria 3000 Australia</span></li>
+                    <li><label>Адресс </label><span>{{ userdata.adress }}</span></li>
                     <li><label>Почта </label><span>{{ userdata.email }}</span></li>
                     <li><label>Телефон </label><span>{{ userdata.phone }}</span></li>
                     <li><label>Вэб сайт </label><span></span></li>
@@ -61,14 +61,17 @@
 
             <!-- Menu -->
             <div class="menu">
-                <ul class="tabs ">
+                <div class="tab">
+                <ul>
 
                     <li><a href="#" class="tab-photo nav-link">Изменить фото</a></li>
-                    <li><a href="#" class="tab-profile nav-link" @click="showModalUserCardEditProfile">Редактировать профиль</a></li>
-                    <li><a href="#" class="tab-personal nav-link" @click="showModalUserCardEditPersonal">Личные качества</a></li>
+                    <li><a href="#" class="tab-profile nav-link" @click="showModalUserCardEditProfile(userdata)">Редактировать профиль</a></li>
+                    <li><a href="#" class="tab-personal nav-link" @click="showModalUserCardEditPersonal()">Личные качества</a></li>
 
 
                 </ul>
+                </div>
+
             </div>
 
         </div>
@@ -83,7 +86,7 @@ export default {
 
     data() {
         return {
-            userdata: '',
+            userdata: [],
         }
 
     },
@@ -93,25 +96,25 @@ export default {
     },
 
     methods: {
+
         getUserCardData(){
             axios.get('api/v1/user')
                 .then(response => this.userdata = response.data)
         },
 
-        showModalUserCardEditProfile(){
-            this.$bvModal.show('UserCardEditProfile')
+        showModalUserCardEditProfile(userdata){
 
-        },
+                this.$refs.getmodal.addNewUserModal(userdata.id)
+            },
 
         showModalUserCardEditPersonal(){
             this.$bvModal.show('UserCardEditPersonal')
         },
 
         updateDataWhenExitModal(){
-            axios.get('api/v1/getUserName')
+            axios.get('api/v1/user')
                 .then(response => this.userdata = response.data)
         },
-
 
 
 
@@ -130,20 +133,20 @@ export default {
     background-color:#ededed;
     position:relative;
 }
-.tabs {
+.tab {
     /*height:116px;*/
     position: absolute;
     margin-top:-45px;
     padding-left:150px;
 
 }
-.tabs li {
+.tab li {
     float:left;
     /*height:116px;*/
 
 }
 
-.tabs li > a {
+.tab ul li > a {
     margin-top:80px;
 
     display:block;

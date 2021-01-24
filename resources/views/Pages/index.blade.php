@@ -7,6 +7,7 @@
     <router-view></router-view>
 </transition>
 
-{{--  {{ $users }}--}}
-
+      <!-- Scripts -->
+      <script src="{{ asset('js/app.js') }}"></script>
+      
 @endsection

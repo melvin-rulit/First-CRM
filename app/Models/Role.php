@@ -2,16 +2,14 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+
 
 /**
  * @method static create(array $all)
  */
 class Role extends Model
 {
-    use HasFactory;
-
     public $table = 'roles';
 
     protected $fillable = [
@@ -20,10 +18,12 @@ class Role extends Model
         'updated_at',
     ];
 
-    /**
-     * @var mixed
-     */
-    private $title;
+    protected $dates = [
+        'created_at',
+        'updated_at',
+        'deleted_at',
+    ];
+
 
     public function rolesUsers(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {

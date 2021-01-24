@@ -2,7 +2,7 @@
     <div>
 
         <!-- Модальное окно UserCard -->
-        <b-modal id="UserCardEditProfile" ref="my-modal" title="Отредактируйте нужные поля"  v-on:hide="closeUserCardModal" centered ok-only ok-title="Готово">
+        <b-modal id="UserCardEditProfile"  title="Отредактируйте нужные поля"  v-on:hide="closeUserCardModal" centered ok-only ok-title="Готово">
 
 
             <div class="card-body py-2">
@@ -61,11 +61,24 @@
                     </tr>
 
                     <tr>
+                        <td>Адресс проживания</td>
+                        <td>
+                            <input-component
+                            v-model="user.adress"
+                            name="adress"
+                            @edit-field="editField">
+
+                        </input-component>
+
+                        </td>
+                    </tr>
+
+                    <tr>
                         <td>Телефон</td>
                         <td>
                             <input-component
                                 v-model="user.phone"
-                                mask="+## (###) ###-##-##"
+                                mask="+# (###) ###-##-##"
                                 name="phone"
                                 @edit-field="editField">
 
@@ -77,9 +90,10 @@
                     <tr>
                         <td>Должность</td>
                         <td>
-                                 <span v-if="!showEditRole" v-for="item in user.role" class="badge badge-info mr-2">
+                                 <button type="button" v-if="!showEditRole" v-for="item in user.role" class="btn btn-outline-success mr-2 mt-2">
                                         {{item.title}}
-                                    </span>
+                                  </button>
+
                           <multiselect
                               v-if="showEditRole"
                               v-model="user.role"
@@ -88,6 +102,9 @@
                               :options="roles"
                               :multiple="true"
                               :taggable="true"
+                              placeholder="Выберите должность"
+                              :close-on-select="true"
+                              :option-height="104"
                               deselectLabel="Удалить"
                               selectedLabel="Выбран"
                              >
@@ -128,6 +145,7 @@ export default {
             value: '',
             showEditRole: false,
 
+
         }
 
     },
@@ -139,10 +157,6 @@ export default {
         }
     },
 
-    mounted() {
-
-        this.getUserCardData()
-    },
 
     methods: {
 
@@ -153,9 +167,13 @@ export default {
                 .then(response => {this.roles = response.data.data;})
         },
 
+
         getUserCardData() {
-            axios.get('api/v1/user')
+
+
+            axios.get('api/v1/getDataForUserCardProfile')
                 .then(response => this.user = response.data)
+
         },
 
         editField(e, name, type) {
@@ -175,14 +193,28 @@ export default {
           this.getRoles()
         },
 
+        saveRole(){
+            axios.post('api/v1/saveRolesForUser', {user_id: this.user.id, roles: this.newRoleArray})
+
+        },
+
+
         closeUserCardModal(){
             this.$emit('get-method')
-        }
+        },
 
+            addNewUserModal(id){
+                axios.get('api/v1/user/' + id)
+                .then(response => {this.user = response.data.data})
+                this.$bvModal.show('UserCardEditProfile')
+            },
 
     },
 }
 </script>
+
+<!--vue-multiselect-->
+<style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
 
 <style>
 
