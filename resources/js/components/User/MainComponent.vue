@@ -5,6 +5,7 @@
         <div class="top">
 
                  <!-- Modal -->
+            <add-foto @get-method="hj"></add-foto>
             <edit-profile @get-method="updateDataWhenExitModal" ref="getmodal"></edit-profile>
             <edit-personal @get-method="updateDataWhenExitModal" ></edit-personal>
 
@@ -46,7 +47,7 @@
                 <!-- Personal info section -->
                 <ul class="personal-info">
 
-                    <li><label>Должность </label><span>{{ userdata.business }}</span></li>
+                    <li><label>Должность </label><span>{{ userdata.roles }}</span></li>
                     <li><label>Д.рождения </label><span>{{ userdata.birthday}}</span></li>
                     <li><label>Адресс </label><span>{{ userdata.adress }}</span></li>
                     <li><label>Почта </label><span>{{ userdata.email }}</span></li>
@@ -64,7 +65,7 @@
                 <div class="tab">
                 <ul>
 
-                    <li><a href="#" class="tab-photo nav-link">Изменить фото</a></li>
+                    <li><a href="#" class="tab-photo nav-link" @click="showModalUserCardAddFoto">Добавить / Изменить фото</a></li>
                     <li><a href="#" class="tab-profile nav-link" @click="showModalUserCardEditProfile(userdata)">Редактировать профиль</a></li>
                     <li><a href="#" class="tab-personal nav-link" @click="showModalUserCardEditPersonal()">Личные качества</a></li>
 
@@ -99,13 +100,18 @@ export default {
 
         getUserCardData(){
             axios.get('api/v1/user')
-                .then(response => this.userdata = response.data)
+                .then(response => {
+                    this.userdata = response.data;
+                })
         },
 
-        showModalUserCardEditProfile(userdata){
+        showModalUserCardAddFoto(){
+            this.$bvModal.show('UserCardAddFoto')
+         },
 
-                this.$refs.getmodal.addNewUserModal(userdata.id)
-            },
+        showModalUserCardEditProfile(userdata){
+            this.$refs.getmodal.addNewUserModal(userdata.id)
+         },
 
         showModalUserCardEditPersonal(){
             this.$bvModal.show('UserCardEditPersonal')
@@ -137,7 +143,7 @@ export default {
     /*height:116px;*/
     position: absolute;
     margin-top:-45px;
-    padding-left:150px;
+    padding-left:130px;
 
 }
 .tab li {

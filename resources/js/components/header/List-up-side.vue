@@ -21,6 +21,12 @@
 
 
         </ul>
+  <div>
+
+
+           <!-- <b-alert class=""  variant="success" show>Success Alert</b-alert> -->
+
+  </div>
 
 
             <!-- Right Side Of Navbar -->
@@ -37,19 +43,55 @@
 </template>
 
 <script>
+import {mapGetters} from 'vuex'
+
+
 export default {
 
-    methods: {
+    computed:{
+        ...mapGetters([
+            'SHOW_ADD'
+        ])
+    },
+
+     methods: {
+
         loGout() {
             axios.post("/logout").then(response => {
                 window.location.replace("/");
 
             });
-        }
+        },
+
+       
+                
+
     }
 }
 </script>
 
 <style scoped>
 
+.style-b-sidebar{
+
+    position: fixed; /* Фиксированное положение */
+    left: 71%; /* Расстояние от правого края окна браузера */
+    bottom:115px; /* Расстояние сверху */
+    /*bottom: 715px; !* Расстояние сверху *!*/
+    padding: 10%; /* Поля вокруг текста */
+    z-index: 199;
+}
+
 </style>
+
+
+       <!-- <b-button  v-b-toggle.sidebar-right>Добавить пользрвателя</b-button> -->
+    <!-- <b-sidebar  id="sidebar-right" title="Sidebar" right shadow> -->
+      <!-- <div class="px-3 py-2">
+        <p>
+          Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis
+          in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
+        </p>
+        <b-img src="https://picsum.photos/500/500/?image=54" fluid thumbnail></b-img>
+      </div>
+    </b-sidebar> -->

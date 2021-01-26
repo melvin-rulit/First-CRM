@@ -12,8 +12,6 @@ use Debugbar;
 
 
 
-
-
 class UserController extends Controller
 {
 
@@ -24,14 +22,18 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::where('id', 1)->get();
+        $user = User::where('id', 1)->get();
+//        $user = User::all()->first();
 //      $user = User::find(auth()->user()->id);
 // return ['user' => $user->name];
-        foreach ($users as $user) {
-            return $user;
+
+        foreach ($user as $users) {
+
+           return $users;
+
         }
 
-
+//        return UserAllResource::collection($user);
     }
 
 
@@ -63,7 +65,7 @@ class UserController extends Controller
      foreach ($users as $user) {
         return $user;
     }
-    //  return UserAllResource::collection($users);
+
 
 
 

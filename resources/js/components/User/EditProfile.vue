@@ -101,12 +101,12 @@
                               track-by="id"
                               :options="roles"
                               :multiple="true"
-                              :taggable="true"
+                              :taggable="false"
                               placeholder="Выберите должность"
-                              :close-on-select="true"
                               :option-height="104"
                               deselectLabel="Удалить"
                               selectedLabel="Выбран"
+                              select-label="Выберите"
                              >
 
                           </multiselect>
@@ -139,7 +139,6 @@ export default {
 
     data() {
         return {
-
             user: {},
             roles: [],
             value: '',
@@ -151,7 +150,6 @@ export default {
     },
 
     computed: {
-
         newRoleArray(){
             return this.user.role.slice().map(item => item.id.toString());
         }
@@ -161,16 +159,13 @@ export default {
     methods: {
 
         getRoles(){
-
             axios.get('api/v1/getRoles')
 
-                .then(response => {this.roles = response.data.data;})
+                .then(response => {this.roles = response.data.data})
         },
 
 
         getUserCardData() {
-
-
             axios.get('api/v1/getDataForUserCardProfile')
                 .then(response => this.user = response.data)
 

@@ -15,7 +15,7 @@
             </div>
 
             <div class="row">
-                <div class="col-md-7 mt">
+                <div class="col-md-8 mt">
 
                     <b-table
                         :items="roles"
@@ -27,10 +27,18 @@
                         :small="small"
                         :hover="hover"
                         :dark="dark"
-                        :fixed="fixed"
-                        :foot-clone="footClone"
-                        :no-border-collapse="noCollapse">
+                        :fixed="true"
+                        :no-border-collapse="noCollapse"
+                        @row-selected="rowSelected">
 
+                     <template v-slot:cell(selected)="row">
+                <b-form-group>
+                    <!-- <input type="checkbox" v-model="row.item.selected" /> -->
+                    <button> <b-icon icon="pencil-square" @click="rowSelected"></b-icon> </button>
+                     <button> <b-icon  icon="trash"></b-icon>  </button>
+                </b-form-group>
+                </template>
+  
                     </b-table>
 
                 </div>
@@ -44,25 +52,11 @@
                         <b-form-checkbox v-model="small" :aria-describedby="ariaDescribedby" inline>Small</b-form-checkbox>
                         <b-form-checkbox v-model="hover" :aria-describedby="ariaDescribedby" inline>Hover</b-form-checkbox>
                         <b-form-checkbox v-model="dark" :aria-describedby="ariaDescribedby" inline>Dark</b-form-checkbox>
-                        <b-form-checkbox v-model="fixed" :aria-describedby="ariaDescribedby" inline>Fixed</b-form-checkbox>
-                        <b-form-checkbox v-model="footClone" :aria-describedby="ariaDescribedby" inline>Foot Clone</b-form-checkbox>
-                        <b-form-checkbox v-model="noCollapse" :aria-describedby="ariaDescribedby" inline>No border</b-form-checkbox>
+                        <b-form-checkbox v-model="noCollapse" :aria-describedby="ariaDescribedby" inline>Border</b-form-checkbox>
                     </b-form-group>
                 </div>
 
-                <div class="col-md-1 mti">
-                    <b-form-group label-cols-lg="2" v-slot="{ ariaDescribedby }">
-                        <b-form-radio-group
-                            v-model="headVariant"
-                            :aria-describedby="ariaDescribedby"
-                            class="mt-lg-2"
-                        >
-                            <b-form-radio :value="null" inline>None</b-form-radio>
-                            <b-form-radio value="light" inline>Light</b-form-radio>
-                            <b-form-radio value="dark" inline>Dark</b-form-radio>
-                        </b-form-radio-group>
-                    </b-form-group>
-                </div>
+
             </div>
 
         </div>
@@ -94,8 +88,8 @@ export default {
                 },
 
                 {
-                    key: 'korn',
-                    label: 'Доступ',
+                    key: 'selected',
+                    label: 'Редактировать',
                 }
             ],
 
@@ -106,8 +100,6 @@ export default {
             small: false,
             hover: false,
             dark: false,
-            fixed: false,
-            footClone: false,
             headVariant: null,
             tableVariant: '',
             noCollapse: false,
@@ -126,10 +118,8 @@ export default {
     methods:{
 
         getRoles(){
-
             axios.get('api/v1/getRoles')
-
-                .then(response => {this.roles = response.data.data;})
+            .then(response => {this.roles = response.data.data;})
 
         },
 
@@ -140,11 +130,13 @@ export default {
 
 
         addNewRole(){
-
             axios.post('api/v1/roles', {title: this.value})
-
             this.value = ''
             this.getRoles()
+        },
+
+        rowSelected(){
+            alert("Да это модальное окно работает");
         }
     }
 
@@ -162,5 +154,11 @@ export default {
 .mti{
     margin-top: 5%;
     margin-left: 5%;
+}
+
+/* Значки редактирования */
+.form-group{
+    margin-left: 40%;
+    margin-bottom: 0;
 }
 </style>

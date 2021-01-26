@@ -72,11 +72,11 @@ export default {
 .form-comment{
    width: 460px;
 }
-.red{
+/* .red{
 
     text-shadow: 1px 1px 2px black;
 }
 .button-style{
     text-decoration-color: green;
-}
+} */
 </style>
