@@ -11,6 +11,7 @@
 
     <!-- tailwindCss -->
    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css">
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
@@ -31,6 +32,6 @@
             @yield('login')
         </main>
     </div>
-    
+
 </body>
 </html>

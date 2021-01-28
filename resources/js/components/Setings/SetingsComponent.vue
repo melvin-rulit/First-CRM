@@ -9,8 +9,6 @@
                         <b-tab title="Филиалы"> <two @get-method="getAllRoles"></two> </b-tab>
                         <b-tab title="Доступы" ></b-tab>
                         <b-tab title="Назначения"><p>I'm the second tab</p></b-tab>
-                        <b-tab title="Показания"><p>I'm the second tab</p></b-tab>
-
                         <b-tab title="Общие настройки"><p>I'm the second tab</p></b-tab>
 
                     </b-tabs>
@@ -40,6 +38,7 @@ export default {
     padding-left: 120px;
 }
 .tabs li > a{
-    margin-top: -10px;
+    margin-top: -5px;
 }
+
 </style>

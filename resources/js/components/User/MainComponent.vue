@@ -18,10 +18,12 @@
 
             <!-- Social Icons -->
             <ul class="socialicons">
-
-                <li><a href="#" class="social-facebook"></a></li>
-                <li><a href="#" class="social-twitter"></a></li>
-                <li><a href="#" class="social-googleplus"></a></li>
+<li> <b-icon icon="gear-fill" ></b-icon> </li>
+                  <li v-for="(item, key) in social_links">
+                    <a :href="item" target="_blank">
+                      <i class="fas" :class="key"></i>
+                    </a>
+                  </li>
 
             </ul>
 
@@ -88,6 +90,13 @@ export default {
     data() {
         return {
             userdata: [],
+
+            social_links: {
+              'fa-camera': 'https://www.facebook.com/fructcodecom/',
+              'battle-net': 'https://www.facebook.com/fructcodecom/',
+            
+            }
+            
         }
 
     },
@@ -143,7 +152,7 @@ export default {
     /*height:116px;*/
     position: absolute;
     margin-top:-45px;
-    padding-left:130px;
+    padding-left:100px;
 
 }
 .tab li {

@@ -2,7 +2,20 @@
     <div class="container">
         <div class="row">
             <div class="col-md-10">
-                <div>
+
+                <md-card>
+      <md-card-header>
+        <md-card-header-text>
+          <div class="md-title">Media card</div>
+          <div class="md-subhead">Medium size</div>
+        </md-card-header-text>
+
+        <md-card-media md-medium>
+          <img src="/assets/examples/card-weather.png" alt="People">
+        </md-card-media>
+      </md-card-header>
+      </md-card>
+                <!-- <div>
                     <b-card no-body class="overflow-hidden" style="max-width: 540px;">
                         <b-row no-gutters>
                             <b-col md="6">
@@ -20,14 +33,30 @@
                     </b-card>
                 </div>
         </div>
+        <div class="row">
+            <div class="col-md-4"> -->
+               
+
+
+            </div>
+        </div>
     </div>
-    </div>
+    
 </template>
 
 <script>
     export default {
-        mounted() {
-            console.log('Component mounted.')
-        }
+
+
+
     }
 </script>
+
+<style lang="scss" scoped>
+  .md-card {
+    width: 320px;
+    margin: 4px;
+    display: inline-block;
+    vertical-align: top;
+  }
+</style>

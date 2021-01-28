@@ -3,12 +3,14 @@
         <div class="row">
             <div class="col-md-5">
 
+                  <!-- Modal -->
+                    <edit-roles @get-method="clearTableWhenExitModal" ref="getmodal"></edit-roles>
 
                 <b-form-input
+
                     v-model="value"
                     placeholder="Добавить новую должность"
-
-                    v-on:keydown.enter ="addNewRole">
+                     v-on:keydown.enter ="addNewRole">
 
                 </b-form-input>
 
@@ -20,6 +22,11 @@
                     <b-table
                         :items="roles"
                         :fields="fields"
+                         selectable
+                        :select-mode="range"
+                        @row-selected="onRowSelected"
+                        
+                        :no-border-collapse="noCollapse"
                         :striped="striped"
                         :bordered="bordered"
                         :borderless="borderless"
@@ -28,18 +35,48 @@
                         :hover="hover"
                         :dark="dark"
                         :fixed="true"
-                        :no-border-collapse="noCollapse"
-                        @row-selected="rowSelected">
+                    >
 
-                     <template v-slot:cell(selected)="row">
-                <b-form-group>
-                    <!-- <input type="checkbox" v-model="row.item.selected" /> -->
-                    <button> <b-icon icon="pencil-square" @click="rowSelected"></b-icon> </button>
-                     <button> <b-icon  icon="trash"></b-icon>  </button>
-                </b-form-group>
-                </template>
-  
+                        <!-- <at-popover placement="top" v-model="show" @toggle="toggleShow">
+                            <at-button size="small">Delete</at-button>
+                            <template slot="content">
+                                <p>This is part of the content, sure to delete it?</p>
+                                <div style="text-align: right; margin-top: 8px;">
+                                    <at-button size="smaller" @click="show = false">Cancel</at-button>
+                                    <at-button type="primary" size="smaller" @click="show = false">Sure</at-button>
+                                </div>
+                            </template>
+                        </at-popover> -->
+
+
+              <!-- <template v-slot:cell(selected)="{rowSelected}">
+                   <b-form-group>
+                    
+                        <button> <b-icon icon="pencil-square"  ></b-icon> </button>
+                         <button> <b-icon  icon="trash" @click="rowSelected"></b-icon>  </button>
+                    </b-form-group>
+               </template> -->
+
+    <!-- <template v-slot:cell(selected)="{rowSelected}">
+            
+                    <b-form-group> 
+                       <button> <b-icon  icon="pencil-square" ></b-icon> </button>
+                         <button> <b-icon  icon="trash" @click="rowSelected"></b-icon>  </button>
+                    </b-form-group>
+    </template> -->
+    <!-- <template v-slot:cell(checkbox)="row" style="border-left='5px dotted blue'">                      
+       <input type="checkbox" v-model="row.rowSelected" @input="toggleSelectRow(row)"/>             
+    </template> -->
+
+      <template v-slot:cell(index)="data">
+        {{ data.index + 1 }}
+      </template>
+
+
+
+
                     </b-table>
+
 
                 </div>
 
@@ -62,7 +99,6 @@
         </div>
 
 
-
     </div>
 </template>
 
@@ -76,11 +112,15 @@ export default {
             roles: {},
             value: '',
             user: {},
+            selected: [],
             fields:[
-                {
-                    key: 'id',
-                    label: 'Индекс',
-                },
+
+                'index',
+
+                // {
+                //     key: 'id',
+                //     label: 'Индекс',
+                // },
 
                 {
                     key: 'title',
@@ -90,6 +130,11 @@ export default {
                 {
                     key: 'selected',
                     label: 'Редактировать',
+                },
+                 
+                {
+                    key: 'rt',
+                    label: 'ryry'
                 }
             ],
 
@@ -112,7 +157,7 @@ export default {
 
     mounted() {
         this.getRoles()
-        this.getUserData()
+     
     },
 
     methods:{
@@ -123,11 +168,6 @@ export default {
 
         },
 
-        getUserData() {
-            axios.get('api/v1/user')
-                .then(response => this.user = response.data)
-        },
-
 
         addNewRole(){
             axios.post('api/v1/roles', {title: this.value})
@@ -135,9 +175,19 @@ export default {
             this.getRoles()
         },
 
-        rowSelected(){
-            alert("Да это модальное окно работает");
-        }
+
+          clearTableWhenExitModal() {
+            this.$refs.selectableTable.clearSelected()
+   
+       
+      },
+
+         onRowSelected(items) {
+             this.$refs.getmodal.ShowModalEditRoles(items)
+           
+             
+               
+      },
     }
 
 

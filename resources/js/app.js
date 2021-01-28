@@ -61,7 +61,7 @@ const routes = [
 const router = new VueRouter({
 
     routes,
-    // mode: 'history',
+
 })
 
 
@@ -96,14 +96,13 @@ Vue.use(AtComponents)
 
 //-- VueMaterial
 import VueMaterial from 'vue-material'
-// import 'vue-material/dist/vue-material.min.css'
-// import 'vue-material/dist/theme/default.css'
+import 'vue-material/dist/vue-material.min.css'
 Vue.use(VueMaterial)
 
 //-- BootstrapVue  &  BootstrapVueIcons
 import { BootstrapVue, IconsPlugin, BootstrapVueIcons } from 'bootstrap-vue'
-// import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+import 'bootstrap/dist/css/bootstrap.css'
 Vue.use(BootstrapVue)
 Vue.use(BootstrapVueIcons)
 Vue.use(IconsPlugin)
@@ -118,6 +117,7 @@ Vue.component('multiselect', Multiselect)
 
 
 //-- Import Global Components
+
 Vue.component('head-component', require('./components/header/head.vue').default);
 Vue.component('list-up-component', require('./components/header/List-up-side.vue').default);
 
@@ -128,6 +128,8 @@ Vue.component('edit-personal', require('./components/User/EditPersonal.vue').def
 Vue.component('input-component', require('./components/User/InputComponent.vue').default);
 Vue.component('callendar-component', require('./components/User/Callendar.vue').default);
 
+//-- Roles
+Vue.component('edit-roles', require('./components/User/EditRolesModal.vue').default);
 
 
 
@@ -136,6 +138,7 @@ const app = new Vue({
     el: '#app',
     router,
     store,
+    mode: 'history',
 
 });
 export default app;
