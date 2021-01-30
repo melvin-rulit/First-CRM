@@ -14,7 +14,7 @@ Route::group(['prefix' => 'v1',  'as' => 'api.', 'namespace' => 'Api\V1'], funct
 
     // User
     Route::apiResource('user', 'UserController');
-   Route::get('getDataForUserCardProfile', 'UserController@dataProfile');
+    Route::get('getDataForUserCardProfile', 'UserController@dataProfile');
     Route::post('userCardSave', 'UserController@saveCard');
     Route::post('saveRolesForUser', 'UserController@saveRole');
 
@@ -22,5 +22,10 @@ Route::group(['prefix' => 'v1',  'as' => 'api.', 'namespace' => 'Api\V1'], funct
     Route::apiResource('roles', 'RoleController');
     Route::get('getRoles', 'RoleController@getRoles');
 //    Route::post('addRole', 'RoleController@addRole');
+
+    // Weather
+    Route::get('getweather', 'WeatherController@getWeather');
+    Route::get('getcountry', 'WeatherController@getCountry');
+    Route::post('addcity', 'WeatherController@addCity');
 
     });

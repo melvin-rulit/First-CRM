@@ -24,9 +24,7 @@ rolesdata: {},
 methods:{
 
 ShowModalEditRoles(items){
-this.rolesdata = items
-    //  axios.get('api/v1/getRoles')
-    //  .then(response => {this.rolesdata = response.data});
+      this.rolesdata = items
      this.$bvModal.show('EditRoles')
 },
         closeEditRolesModal(){

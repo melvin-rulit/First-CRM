@@ -47,7 +47,7 @@ import Setings from './components/Setings/SetingsComponent.vue'
 
 const routes = [
 
-    { path: '/home', component: Base},
+    { path: '/home',  name: 'mainPage', component: Base},
     { path: '/user', component: User },
     { path: '/callendar', component: Callendar },
     { path: '/vcallendar', component: Vcallendar },
@@ -143,8 +143,3 @@ const app = new Vue({
 });
 export default app;
 
-// new Vue({
-//     render: h => h(App),
-//     store,
-//     router
-//   }).$mount('#app')

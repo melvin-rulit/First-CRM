@@ -9,7 +9,7 @@
                         <b-tab title="Филиалы"> <two @get-method="getAllRoles"></two> </b-tab>
                         <b-tab title="Доступы" ></b-tab>
                         <b-tab title="Назначения"><p>I'm the second tab</p></b-tab>
-                        <b-tab title="Общие настройки"><p>I'm the second tab</p></b-tab>
+                        <b-tab title="Общие настройки"> <five /> </b-tab>
 
                     </b-tabs>
 
@@ -24,11 +24,13 @@
 <script>
 import one from './one.vue'
 import two from './two.vue'
+import five from './five.vue'
 export default {
 
     components: {
         one,
-        two
+        two,
+        five
     }
 }
 </script>

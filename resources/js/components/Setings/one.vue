@@ -23,7 +23,7 @@
                         :items="roles"
                         :fields="fields"
                          selectable
-                        :select-mode="range"
+                        :select-mode="single"
                         @row-selected="onRowSelected"
                         
                         :no-border-collapse="noCollapse"
@@ -49,13 +49,13 @@
                         </at-popover> -->
 
 
-              <!-- <template v-slot:cell(selected)="{rowSelected}">
+              <template v-slot:cell(selected)="row">
                    <b-form-group>
                     
                         <button> <b-icon icon="pencil-square"  ></b-icon> </button>
                          <button> <b-icon  icon="trash" @click="rowSelected"></b-icon>  </button>
                     </b-form-group>
-               </template> -->
+               </template>
 
     <!-- <template v-slot:cell(selected)="{rowSelected}">
             
@@ -130,11 +130,6 @@ export default {
                 {
                     key: 'selected',
                     label: 'Редактировать',
-                },
-                 
-                {
-                    key: 'rt',
-                    label: 'ryry'
                 }
             ],
 
@@ -175,19 +170,19 @@ export default {
             this.getRoles()
         },
 
-
-          clearTableWhenExitModal() {
-            this.$refs.selectableTable.clearSelected()
-   
-       
-      },
-
-         onRowSelected(items) {
-             this.$refs.getmodal.ShowModalEditRoles(items)
-           
-             
+         rowSelected() {
+             alert("Да это модальное окно работает");
+            //  this.$refs.getmodal.ShowModalEditRoles()
+     
                
       },
+
+      deleteUser(index, id, surname){
+                this.$confirm("Удалить сотрудника " + surname + " ?").then(() => {
+                    this.users.splice(index,1);
+                    axios.delete('api/v2/users/'+ id);
+                });
+    }
     }
 
 
