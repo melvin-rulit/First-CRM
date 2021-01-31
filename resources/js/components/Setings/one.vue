@@ -22,9 +22,6 @@
                     <b-table
                         :items="roles"
                         :fields="fields"
-                         selectable
-                        :select-mode="single"
-                        @row-selected="onRowSelected"
                         
                         :no-border-collapse="noCollapse"
                         :striped="striped"
@@ -45,6 +42,11 @@
                                     <at-button size="smaller" @click="show = false">Cancel</at-button>
                                     <at-button type="primary" size="smaller" @click="show = false">Sure</at-button>
                                 </div>
+
+                                 selectable
+                        :select-mode="single"
+                        @row-selected="onRowSelected"
+
                             </template>
                         </at-popover> -->
 
@@ -52,8 +54,8 @@
               <template v-slot:cell(selected)="row">
                    <b-form-group>
                     
-                        <button> <b-icon icon="pencil-square"  ></b-icon> </button>
-                         <button> <b-icon  icon="trash" @click="rowSelected"></b-icon>  </button>
+                        <button class="pading_button"> <b-icon icon="pencil-square" @click="rowSelectedForUpdate(row.item.title)" ></b-icon> </button>
+                         <button> <b-icon  icon="trash" @click="rowSelectedForDelete(row)"></b-icon>  </button>
                     </b-form-group>
                </template>
 
@@ -68,6 +70,7 @@
        <input type="checkbox" v-model="row.rowSelected" @input="toggleSelectRow(row)"/>             
     </template> -->
 
+<!-- Выводим упорядоченный Index для полейё -->
       <template v-slot:cell(index)="data">
         {{ data.index + 1 }}
       </template>
@@ -112,7 +115,7 @@ export default {
             roles: {},
             value: '',
             user: {},
-            selected: [],
+          
             fields:[
 
                 'index',
@@ -170,18 +173,16 @@ export default {
             this.getRoles()
         },
 
-         rowSelected() {
-             alert("Да это модальное окно работает");
-            //  this.$refs.getmodal.ShowModalEditRoles()
-     
-               
+         rowSelectedForUpdate(row) {
+             this.$refs.getmodal.ShowModalEditRoles(row)      
       },
 
-      deleteUser(index, id, surname){
-                this.$confirm("Удалить сотрудника " + surname + " ?").then(() => {
-                    this.users.splice(index,1);
-                    axios.delete('api/v2/users/'+ id);
-                });
+      rowSelectedForDelete(row){
+                // this.$confirm("Удалить сотрудника " + surname + " ?").then(() => {
+                //     this.users.splice(index,1);
+                //     axios.delete('api/v2/users/'+ id);
+                // });
+                alert("Да это модальное окно работает");
     }
     }
 
@@ -200,10 +201,8 @@ export default {
     margin-top: 5%;
     margin-left: 5%;
 }
-
-/* Значки редактирования */
-.form-group{
-    margin-left: 40%;
-    margin-bottom: 0;
+.pading_button{
+    padding-left:35%;
+    border: 0px;
 }
 </style>

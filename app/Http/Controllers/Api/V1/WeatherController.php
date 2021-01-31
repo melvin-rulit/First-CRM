@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Models\Weather;
 use App\Models\User;
 use App\Models\Role;
+use Debugbar;
 
 
 
@@ -38,10 +39,10 @@ class WeatherController extends Controller
 
     public function getCountry(){
    
-        $apiToken = "6111588031d336f95df89485dbec59cdd9c2b9122f3adbfafb80f7671597da482ce9fb7d05a22fd7ac16c";
-        $city = "1";
+        $apiToken = "ba5705ba1d9874acdbf23dab7535aa9bf1c14df696ad5a73b2e6a6874d6c1e2a8dbc655396996b0274637";
+        $country = "1";
         // $lang = "ru";
-        $url = "https://api.vk.com/method/database.getCities?country_id=" . $city . "&v=5.52&access_token=" . $apiToken ."&expires";
+        $url = "https://api.vk.com/method/database.getCities?country_id=" . $country . "&v=5.52&access_token=" . $apiToken ."&expires";
 
 
         $ch2 = curl_init();
@@ -55,13 +56,32 @@ class WeatherController extends Controller
         curl_close($ch2);
     }
 
+    public function getBethdey(){
+   
+
+    $user_id = 7709408; 
+    $request_params = array(
+
+        'user_id' => '7709408', 
+         
+        'v' => '5.52', 
+        'access_token' => 'ba5705ba1d9874acdbf23dab7535aa9bf1c14df696ad5a73b2e6a6874d6c1e2a8dbc655396996b0274637' 
+
+    ); 
+    $get_params = http_build_query($request_params); 
+    $result = json_decode(file_get_contents('https://api.vk.com/method/users.get?'. $get_params)); 
+   
+    return ($result -> response[0]); ;
+
+    }
+
     public function addCity(Request $request)
     {   
         $data =  Weather::first();
 
         if($data == null) {
             Weather::create($request->all());
-            return "ok";
+            return "create";
         }
         if($request->city !== $data->city){
 

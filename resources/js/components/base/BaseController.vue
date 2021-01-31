@@ -14,18 +14,3 @@
     </div>
 </template>
 
-<script>
-import WeatherComponent from './weatherComponent.vue'
-
-export default {
-  
- components: {
-
-      WeatherComponent
-    }
-}
-</script>
-
-<style>
-
-</style>

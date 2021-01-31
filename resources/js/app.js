@@ -9,19 +9,29 @@ Vue.use(Vuex);
 const store = new Vuex.Store({
     state: {
 
-        add: false
+        add: false,
+        pets: {}
     },
 
     mutations: {
        CHANGE_ADD: (state ) => {
 state.add = !state.add;
-        }
+        },
+        SET_PETS(state, response) {
+            console.log("SET_PETS")
+            state.pets = response;
+          }  
     },
 
     actions: {
         TOOGLE_ADD({commit}) {
 commit('CHANGE_ADD')
-}
+},
+FETCH_PETS: (state) => {
+    setTimeout(function() {
+      state.commit('SET_PETS', ['t7m12qbvb/apple_9', '6pat9znxz/1448127928_kiwi'])
+    }, 1000)
+  }
     },
 
     getters: {
@@ -116,7 +126,7 @@ import Multiselect from 'vue-multiselect'
 Vue.component('multiselect', Multiselect)
 
 
-//-- Import Global Components
+//-- Head
 
 Vue.component('head-component', require('./components/header/head.vue').default);
 Vue.component('list-up-component', require('./components/header/List-up-side.vue').default);
@@ -130,6 +140,9 @@ Vue.component('callendar-component', require('./components/User/Callendar.vue').
 
 //-- Roles
 Vue.component('edit-roles', require('./components/User/EditRolesModal.vue').default);
+
+// -- Weather
+Vue.component('weather-component', require('./components/Weather/WeatherComponent.vue').default);
 
 
 
