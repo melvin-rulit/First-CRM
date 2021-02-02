@@ -20,7 +20,7 @@ state.add = !state.add;
         SET_PETS(state, response) {
             console.log("SET_PETS")
             state.pets = response;
-          }  
+          }
     },
 
     actions: {
@@ -49,7 +49,7 @@ Vue.use(VueRouter);
 import User from './components/User/MainComponent.vue'
 import Callendar from './components/Callendar/Callendar.vue'
 import Vcallendar from './components/Callendar/Vcallendar.vue'
-import Base from './components/base/BaseController.vue'
+import Base from './components/base/BaseComponent.vue'
 import Personal from './components/Personal/PersonalComponent.vue'
 import Test from './components/TestComponent.vue'
 import Setings from './components/Setings/SetingsComponent.vue'
@@ -136,14 +136,16 @@ Vue.component('add-foto', require('./components/User/AddFoto.vue').default);
 Vue.component('edit-profile', require('./components/User/EditProfile.vue').default);
 Vue.component('edit-personal', require('./components/User/EditPersonal.vue').default);
 Vue.component('input-component', require('./components/User/InputComponent.vue').default);
-Vue.component('callendar-component', require('./components/User/Callendar.vue').default);
+Vue.component('edit-roles-in-usercard', require('./components/User/EditRolesModal.vue').default);
 
-//-- Roles
-Vue.component('edit-roles', require('./components/User/EditRolesModal.vue').default);
+//-- Settings
+Vue.component('edit-roles-in-settings', require('./components/Setings/EditRolesModal.vue').default);
+Vue.component('delete-roles-in-settings', require('./components/Setings/DeleteRolesModal.vue').default);
 
 // -- Weather
 Vue.component('weather-component', require('./components/Weather/WeatherComponent.vue').default);
 
+Vue.component('callendar-component', require('./components/User/Callendar.vue').default);
 
 
 const app = new Vue({

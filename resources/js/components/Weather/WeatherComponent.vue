@@ -41,15 +41,6 @@
 <script>
     export default {
 
-        computed: {
-            hasAppointment() {
-                // return !!Object.values(this.results).every(item => item.length);
-                let name = this.$store.getters.NAME;
-
-            },
-
-
-        },
 
         mounted() {
 
@@ -66,18 +57,6 @@
         },
 
         methods: {
-
-            beforeMount() {
-                this.$store.commit('SET_PETS', {}).then(() => {
-                    console.log("fetched pets")
-                })
-
-            },
-            computed: {
-                pets() {
-                    return this.$store.state.pets
-                }
-            },
 
             getWeather() {
 

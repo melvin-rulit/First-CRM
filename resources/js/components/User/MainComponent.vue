@@ -5,7 +5,7 @@
         <div class="top">
 
                  <!-- Modal -->
-            <add-foto @get-method="hj"></add-foto>
+            <add-foto @get-method="updateDataWhenExitModal"></add-foto>
             <edit-profile @get-method="updateDataWhenExitModal" ref="getmodal"></edit-profile>
             <edit-personal @get-method="updateDataWhenExitModal" ></edit-personal>
 

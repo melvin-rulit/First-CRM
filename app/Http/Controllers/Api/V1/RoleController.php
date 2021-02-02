@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Api\V1;
 
-use App\Http\Controllers\Controller;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use App\Http\Resources\RolesResource;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Role;
-use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 
 class RoleController extends Controller
@@ -22,8 +22,29 @@ class RoleController extends Controller
     public function store(Request $request): string
     {
         Role::create($request->all());
-        return "ok";
+        return "store";
 
+    }
+
+
+    /**
+     * Обновляем должность
+     *
+     * @return string
+     */
+    public function update(Request $request, Role $role): string
+    {
+        if($request['value'] == ''){
+            return "empty value";
+        }
+        else{
+
+            $field_name = "title";
+            $role->$field_name = $request['value'];
+            $role->save();
+
+            return "update";
+        }
     }
 
     /**
@@ -31,18 +52,25 @@ class RoleController extends Controller
      *
      * @return AnonymousResourceCollection
      */
-    public function getRoles (): AnonymousResourceCollection
+    public function getRoles(): AnonymousResourceCollection
     {
 
       return RolesResource::collection(Role::all());
   }
 
+    /**
+     * Удалить должность
+     *
+     * @param Request $request
+     * @param Role $role
+     * @return string
+     * @throws \Exception
+     */
+    public function destroy(Role $role): string
+    {
 
-//    public function addRole(Request $request){
-//
-//        $role = new Role;
-//        $role->title = $request->role;
-//        $role->save();
-//
-//  }
+        $role->delete();
+        return "delete";
+
+  }
 }

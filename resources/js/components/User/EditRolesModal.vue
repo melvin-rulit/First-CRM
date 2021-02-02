@@ -5,7 +5,7 @@
         <!-- Модальное окно UserCard -->
         <b-modal id="EditRoles"  title="Отредактируйте нужные поля"  v-on:hide="closeEditRolesModal" centered ok-only ok-title="Готово">
 <p>
-    {{this.rolesdata}}
+    <!-- {{this.rolesdata}} -->
 </p>
         </b-modal>
     </div>
@@ -15,17 +15,17 @@
 <script>
 export default {
 
-data(){
-    return{
-rolesdata: {},
-    }
-},
+    data(){
+     return{
+        rolesdata: {},
+        }
+    },
 
-methods:{
+    methods:{
 
-ShowModalEditRoles(items){
-      this.rolesdata = items
-     this.$bvModal.show('EditRoles')
+        ShowModalEditRoles(items){
+            this.rolesdata = items
+            this.$bvModal.show('EditRoles')
 },
         closeEditRolesModal(){
             this.$emit('get-method')

@@ -4,7 +4,8 @@
             <div class="col-md-5">
 
                   <!-- Modal -->
-                    <edit-roles @get-method="clearTableWhenExitModal" ref="getmodal"></edit-roles>
+                    <edit-roles-in-settings @get-method="clearTableWhenExitModal" ref="getmodalupdate"></edit-roles-in-settings>
+                    <delete-roles-in-settings @get-method="clearTableWhenExitModal" ref="getmodaldelete"></delete-roles-in-settings>
 
                 <b-form-input
 
@@ -22,7 +23,7 @@
                     <b-table
                         :items="roles"
                         :fields="fields"
-                        
+
                         :no-border-collapse="noCollapse"
                         :striped="striped"
                         :bordered="bordered"
@@ -34,43 +35,17 @@
                         :fixed="true"
                     >
 
-                        <!-- <at-popover placement="top" v-model="show" @toggle="toggleShow">
-                            <at-button size="small">Delete</at-button>
-                            <template slot="content">
-                                <p>This is part of the content, sure to delete it?</p>
-                                <div style="text-align: right; margin-top: 8px;">
-                                    <at-button size="smaller" @click="show = false">Cancel</at-button>
-                                    <at-button type="primary" size="smaller" @click="show = false">Sure</at-button>
-                                </div>
-
-                                 selectable
-                        :select-mode="single"
-                        @row-selected="onRowSelected"
-
-                            </template>
-                        </at-popover> -->
-
-
               <template v-slot:cell(selected)="row">
                    <b-form-group>
-                    
-                        <button class="pading_button"> <b-icon icon="pencil-square" @click="rowSelectedForUpdate(row.item.title)" ></b-icon> </button>
-                         <button> <b-icon  icon="trash" @click="rowSelectedForDelete(row)"></b-icon>  </button>
+
+                        <button class="pading_button"> <b-icon icon="pencil-square" @click="rowSelectedForUpdate(row.item)" ></b-icon> </button>
+                        <button> <b-icon  icon="trash" @click="rowSelectedForDelete(row.item)"></b-icon>  </button>
+
                     </b-form-group>
                </template>
 
-    <!-- <template v-slot:cell(selected)="{rowSelected}">
-            
-                    <b-form-group> 
-                       <button> <b-icon  icon="pencil-square" ></b-icon> </button>
-                         <button> <b-icon  icon="trash" @click="rowSelected"></b-icon>  </button>
-                    </b-form-group>
-    </template> -->
-    <!-- <template v-slot:cell(checkbox)="row" style="border-left='5px dotted blue'">                      
-       <input type="checkbox" v-model="row.rowSelected" @input="toggleSelectRow(row)"/>             
-    </template> -->
 
-<!-- Выводим упорядоченный Index для полейё -->
+<!-- Выводим упорядоченный Index для полей -->
       <template v-slot:cell(index)="data">
         {{ data.index + 1 }}
       </template>
@@ -114,11 +89,10 @@ export default {
 
             roles: {},
             value: '',
-            user: {},
-          
+
             fields:[
 
-                'index',
+                // 'index',
 
                 // {
                 //     key: 'id',
@@ -154,15 +128,16 @@ export default {
     },
 
     mounted() {
+
         this.getRoles()
-     
+
     },
 
     methods:{
 
         getRoles(){
             axios.get('api/v1/getRoles')
-            .then(response => {this.roles = response.data.data;})
+                .then(response => {this.roles = response.data.data;})
 
         },
 
@@ -174,17 +149,22 @@ export default {
         },
 
          rowSelectedForUpdate(row) {
-             this.$refs.getmodal.ShowModalEditRoles(row)      
-      },
+            this.$refs.getmodalupdate.ShowModalEditRoles(row)
 
-      rowSelectedForDelete(row){
-                // this.$confirm("Удалить сотрудника " + surname + " ?").then(() => {
-                //     this.users.splice(index,1);
-                //     axios.delete('api/v2/users/'+ id);
-                // });
-                alert("Да это модальное окно работает");
+        },
+         rowSelectedForDelete(row) {
+            this.$refs.getmodaldelete.ShowModalDeleteRoles(row)
+
+        },
+
+        clearTableWhenExitModal(){
+            this.getRoles()
+
+        },
+
+
     }
-    }
+
 
 
 }
@@ -203,6 +183,5 @@ export default {
 }
 .pading_button{
     padding-left:35%;
-    border: 0px;
 }
 </style>

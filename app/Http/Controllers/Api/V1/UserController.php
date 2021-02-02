@@ -66,11 +66,9 @@ class UserController extends Controller
         return $user;
     }
 
-
-
-
-
     }
+
+
 
     /**
      * Сохраняем данные из карточки пользователя
@@ -92,7 +90,6 @@ class UserController extends Controller
     public function saveRole(Request $request){
 
         $user = User::find($request->user_id);
-        Debugbar::info($user);
         $user->roles()->sync($request->roles);
     }
 }

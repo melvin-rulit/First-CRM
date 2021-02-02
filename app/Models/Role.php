@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * @method static create(array $all)
+ * @method static find($id)
  */
 class Role extends Model
 {

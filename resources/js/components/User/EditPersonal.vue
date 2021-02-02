@@ -2,7 +2,7 @@
     <div>
 
         <!-- Модальное окно UserCard -->
-        <b-modal id="UserCardEditPersonal" title="Опишите себя и ваши качества"  v-on:hide="closeUserCardModal" centered ok-only title-class="red" ok-variant="button-style" ok-title="Готово">
+        <b-modal id="UserCardEditPersonal" title="Опишите себя и ваши качества"  v-on:hide="closeUserCardModal" centered ok-only ok-title="Готово">
 
 
             <label>
