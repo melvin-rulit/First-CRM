@@ -4,7 +4,6 @@
 
 This web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
 
-CRM поможет зарабатывать больше и легче, с ней вы сможете успешнее развивать свой бизнес.
 
 ### 🏠 [Homepage](https://github.com/melvin-rulit)
 

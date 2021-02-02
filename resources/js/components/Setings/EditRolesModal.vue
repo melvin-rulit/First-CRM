@@ -39,9 +39,17 @@ export default {
 
         updateNewRole(){
 
-            axios.put('api/v1/roles/' + this.roles.id, {value: this.value})
-            this.$emit('get-method')
-            this.value = ''
+            if(this.value === ''){
+                console.log("empty value")
+
+            }else{
+
+                axios.put('api/v1/roles/' + this.roles.id, {value: this.value})
+                this.$emit('get-method')
+                Vue.$toast.open({ message: 'Обновленно',type: 'success',duration: '4000', pauseOnHover: "true" });
+                this.value = ''
+            }
+
         },
 
 }

@@ -49,7 +49,7 @@
                 <!-- Personal info section -->
                 <ul class="personal-info">
 
-                    <li><label>Должность </label><span>{{ userdata.roles }}</span></li>
+                    <li><label>Доступ</label><span>{{ userdata.roles }}</span></li>
                     <li><label>Д.рождения </label><span>{{ userdata.birthday}}</span></li>
                     <li><label>Адресс </label><span>{{ userdata.adress }}</span></li>
                     <li><label>Почта </label><span>{{ userdata.email }}</span></li>
@@ -94,9 +94,9 @@ export default {
             social_links: {
               'fa-camera': 'https://www.facebook.com/fructcodecom/',
               'battle-net': 'https://www.facebook.com/fructcodecom/',
-            
+
             }
-            
+
         }
 
     },

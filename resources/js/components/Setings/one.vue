@@ -11,7 +11,7 @@
 
                     v-model="value"
                     placeholder="Добавить новую должность"
-                     v-on:keydown.enter ="addNewRole">
+                    v-on:keydown.enter ="addNewRole">
 
                 </b-form-input>
 
@@ -143,9 +143,12 @@ export default {
 
 
         addNewRole(){
+
             axios.post('api/v1/roles', {title: this.value})
             this.value = ''
             this.getRoles()
+            Vue.$toast.open({ message: 'Должность добваленна',type: 'success',duration: '4000', pauseOnHover: "true", });
+
         },
 
          rowSelectedForUpdate(row) {

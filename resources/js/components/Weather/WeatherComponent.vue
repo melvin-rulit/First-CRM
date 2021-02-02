@@ -1,10 +1,7 @@
 <template>
 
-    <div class="container">
+    <div>
 
-        <div class="row">
-
-            <div class="col-md-10">
 
                 <md-card>
                     <md-card-header>
@@ -30,9 +27,6 @@
                     </md-card-header>
                 </md-card>
 
-
-            </div>
-        </div>
 
     </div>
 
@@ -62,9 +56,6 @@
 
                 axios.get('api/v1/getweather')
                     .then(response => this.results = response.data)
-                    .then((response) => {
-                        commit('pets', response.data);
-                    })
 
             }
 
@@ -75,12 +66,4 @@
 
 </script>
 
-<style>
-    .md-card {
-        width: 320px;
-        margin: 4px;
-        display: inline-block;
-        vertical-align: top;
-    }
 
-</style>

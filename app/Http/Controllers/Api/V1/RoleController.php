@@ -34,17 +34,11 @@ class RoleController extends Controller
      */
     public function update(Request $request, Role $role): string
     {
-        if($request['value'] == ''){
-            return "empty value";
-        }
-        else{
+        $field_name = "title";
+        $role->$field_name = $request['value'];
+        $role->save();
 
-            $field_name = "title";
-            $role->$field_name = $request['value'];
-            $role->save();
-
-            return "update";
-        }
+        return "update";
     }
 
     /**

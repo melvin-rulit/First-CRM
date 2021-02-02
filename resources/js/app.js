@@ -89,6 +89,11 @@ import DatePicker from 'vue2-datepicker'
 Vue.use(DatePicker);
 // import 'vue2-datepicker/index.css'
 
+//-- ant-design-vue
+import { Button, message } from 'ant-design-vue';
+Vue.use(Button)
+
+
 //-- Buefy
 import Buefy from 'buefy'
 // import 'buefy/dist/buefy.css'
@@ -125,9 +130,13 @@ Vue.use(VueTheMask)
 import Multiselect from 'vue-multiselect'
 Vue.component('multiselect', Multiselect)
 
+//-- VueToast
+import VueToast from 'vue-toast-notification';
+import 'vue-toast-notification/dist/theme-sugar.css';
+Vue.use(VueToast);
+
 
 //-- Head
-
 Vue.component('head-component', require('./components/header/head.vue').default);
 Vue.component('list-up-component', require('./components/header/List-up-side.vue').default);
 
@@ -141,11 +150,17 @@ Vue.component('edit-roles-in-usercard', require('./components/User/EditRolesModa
 //-- Settings
 Vue.component('edit-roles-in-settings', require('./components/Setings/EditRolesModal.vue').default);
 Vue.component('delete-roles-in-settings', require('./components/Setings/DeleteRolesModal.vue').default);
+Vue.component('edit-access-in-settings', require('./components/Setings/Three/EditAccessModal.vue').default);
+Vue.component('delete-access-in-settings', require('./components/Setings/Three/DeleteAccessModal.vue').default);
 
 // -- Weather
 Vue.component('weather-component', require('./components/Weather/WeatherComponent.vue').default);
 
 Vue.component('callendar-component', require('./components/User/Callendar.vue').default);
+
+// -- Base
+Vue.component('empty-component', require('./components/base/EmptyComponent.vue').default);
+
 
 
 const app = new Vue({

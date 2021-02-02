@@ -25,7 +25,7 @@
 import one from './one.vue'
 import two from './two.vue'
 import five from './five.vue'
-import three from './three.vue'
+import three from "./Three/three.vue"
 export default {
 
     components: {

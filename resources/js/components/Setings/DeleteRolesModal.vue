@@ -4,8 +4,10 @@
 
         <!-- Модальное окно Delete-roles-in-settings -->
         <b-modal id="DeleteRoles"  title="Удалить выбранную должность?"  @ok="deleteRole($event)"  centered  ok-title="Удалить">
-            <p>
-                {{this.roles.title}}
+            <p class="center">
+<!--                <b-button variant="outline-danger">{{this.roles.title}}</b-button>-->
+<!--                <b-badge href="#" variant="danger">{{this.roles.title}}</b-badge>-->
+                <b-alert show variant="danger">{{this.roles.title}}</b-alert>
             </p>
         </b-modal>
     </div>
@@ -33,6 +35,7 @@ export default {
 
             axios.delete('api/v1/roles/' + this.roles.id);
             this.$emit('get-method')
+            Vue.$toast.open({ message: 'Должность удалена',type: 'error',duration: '4000', pauseOnHover: "true" });
         },
 
     }
@@ -42,5 +45,8 @@ export default {
 
 <style>
 
+.center{
+    text-align: center;
+}
 </style>
 

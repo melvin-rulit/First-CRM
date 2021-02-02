@@ -24,7 +24,6 @@
   <div>
 
 
-           <!-- <b-alert class=""  variant="success" show>Success Alert</b-alert> -->
 
   </div>
 
@@ -63,8 +62,8 @@ export default {
             });
         },
 
-       
-                
+
+
 
     }
 }

@@ -88,6 +88,30 @@
                     </tr>
 
                     <tr>
+                        <td>Доступ</td>
+                        <td>
+                            <div>
+
+                                <multiselect
+
+                                    v-model="accessvalue"
+                                    track-by="access"
+                                    label="access"
+                                    placeholder="Раскрыть список"
+                                    :options="access"
+                                    :searchable="false"
+                                    :option-height="104"
+                                    :show-labels="false"
+                                    @close="addAccess">
+
+                                </multiselect>
+
+                            </div>
+
+                        </td>
+                    </tr>
+
+                    <tr>
                         <td>Должность</td>
                         <td>
                                  <button type="button" v-if="!showEditRole" v-for="item in user.role" class="btn btn-outline-success mr-2 mt-2">
@@ -95,6 +119,7 @@
                                   </button>
 
                           <multiselect
+
                               v-if="showEditRole"
                               v-model="user.role"
                               label="title"
@@ -106,8 +131,7 @@
                               :option-height="104"
                               deselectLabel="Удалить"
                               selectedLabel="Выбран"
-                              select-label="Выберите"
-                             >
+                              select-label="Выберите">
 
                           </multiselect>
                             <hr class="navbar-divider my-3">
@@ -140,8 +164,10 @@ export default {
     data() {
         return {
             user: {},
-            roles: [],
+            roles: {},
             value: '',
+            access: [],
+            accessvalue: '',
             showEditRole: false,
 
 
@@ -155,6 +181,10 @@ export default {
         }
     },
 
+    mounted() {
+       this.getAccess()
+    },
+
 
     methods: {
 
@@ -162,6 +192,12 @@ export default {
             axios.get('api/v1/getRoles')
 
                 .then(response => {this.roles = response.data.data})
+        },
+
+        getAccess(){
+            axios.get('api/v1/getAccess')
+                .then(response => {this.access = response.data.data})
+
         },
 
 
@@ -183,10 +219,15 @@ export default {
             }
         },
 
-        editRole(){
-           this.showEditRole = !this.showEditRole
-          this.getRoles()
+        addAccess(){
+
+            axios.get('api/v1/')
         },
+
+        editRole(){
+                   this.showEditRole = !this.showEditRole
+                  this.getRoles()
+                },
 
         saveRole(){
             axios.post('api/v1/saveRolesForUser', {user_id: this.user.id, roles: this.newRoleArray})
@@ -207,9 +248,6 @@ export default {
     },
 }
 </script>
-
-<!--vue-multiselect-->
-<style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
 
 <style>
 

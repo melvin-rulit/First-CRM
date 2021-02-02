@@ -21,7 +21,11 @@ Route::group(['prefix' => 'v1',  'as' => 'api.', 'namespace' => 'Api\V1'], funct
     //Roles
     Route::apiResource('roles', 'RoleController');
     Route::get('getRoles', 'RoleController@getRoles');
-//    Route::post('addRole', 'RoleController@addRole');
+
+    // Access
+    Route::apiResource('access', 'AccessController');
+    Route::get('getAccess', 'AccessController@getAccess');
+
 
     // Weather
     Route::get('getweather', 'WeatherController@getWeather');
