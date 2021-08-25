@@ -4,13 +4,13 @@
 
     <div class="container">
 
-        <vc-calendar  :value="null"
-                      color="green"
-                      is-dark
-                      is-range
-                      :attributes='attributes'
-                      @dayclick="onDayClick" />
-        </div>
+        <button
+            @click="onDayClick">Calendar</button>
+        <b-calendar
+            id="ex-disabled-readonly"
+
+        ></b-calendar>
+</div>
 
 </template>
 <script>
@@ -32,19 +32,12 @@ export default {
       }));
     },
   },
-  methods: {
-    onDayClick(day) {
-      const idx = this.days.findIndex(d => d.id === day.id);
-      if (idx >= 0) {
-        this.days.splice(idx, 1);
-      } else {
-        this.days.push({
-          id: day.id,
-          date: day.date,
-        });
-      }
+    methods: {
+        onDayClick() {
+            axios.get('api/v1/export')
+                .then(response => this.results = response.data)
+        },
     },
-  },
 };
 
 

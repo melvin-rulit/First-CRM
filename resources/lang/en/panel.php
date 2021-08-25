@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'site_title' => 'CRM - Управление персоналом',
-    'site_title_up' => 'CRM - Система для удобного ведения компанией ',
-    'site_description' => 'Доступ к мониторингу вашей компании',
+    'site_title' => 'Fitonyashki CRM',
+    'site_title_up' => 'NetFace',
+    'site_description' => 'Studio of Internet Marketing',
 ];

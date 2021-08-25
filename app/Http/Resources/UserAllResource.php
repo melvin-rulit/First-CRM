@@ -22,13 +22,14 @@ class UserAllResource extends JsonResource
     public function toArray($request): array
     {
         return [
-            'id'            => $this->id,
+            'id'          => $this->id,
             'name'          => $this->name,
             'surname'       => $this->surname,
+            'phone'         => $this->phone,
+            'car'         => $this->car,
             'email'         => $this->email,
-            // 'branches'      => $this->branches,
-            'roles'         => $this->roles,
-            // 'online'        => Cache::has('user-is-online-' . $this->id),
+            'secret_id'      => $this->secret_id,
+            'coment'         => $this->coment,
         ];
     }
 }

@@ -6,7 +6,7 @@ use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use App\Http\Resources\RolesResource;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Role;
+use App\Models\Type;
 
 
 class RoleController extends Controller
@@ -21,7 +21,7 @@ class RoleController extends Controller
      */
     public function store(Request $request): string
     {
-        Role::create($request->all());
+        Type::create($request->all());
         return "store";
 
     }
@@ -32,7 +32,7 @@ class RoleController extends Controller
      *
      * @return string
      */
-    public function update(Request $request, Role $role): string
+    public function update(Request $request, Type $role): string
     {
         $field_name = "title";
         $role->$field_name = $request['value'];
@@ -49,18 +49,18 @@ class RoleController extends Controller
     public function getRoles(): AnonymousResourceCollection
     {
 
-      return RolesResource::collection(Role::all());
+      return RolesResource::collection(Type::all());
   }
 
     /**
      * Удалить должность
      *
      * @param Request $request
-     * @param Role $role
+     * @param Type $role
      * @return string
      * @throws \Exception
      */
-    public function destroy(Role $role): string
+    public function destroy(Type $role): string
     {
 
         $role->delete();

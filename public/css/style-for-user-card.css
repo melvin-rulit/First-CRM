@@ -186,7 +186,7 @@
 		color:#bc9010;
 		line-height:20px;
 	}
-	/* Personal info */
+	/* Zakazi info */
 	.personal-info {
 		float:left;
 		margin-top:30px;
@@ -672,7 +672,7 @@
 		font-size:14px;
 		line-height:14px;
 	}
-	/* Personal info */
+	/* Zakazi info */
 	.personal-info {
 		width:280px;
 		margin-right:10px;
@@ -752,7 +752,7 @@
 		font-size:14px;
 		line-height:14px;
 	}
-	/* Personal info */
+	/* Zakazi info */
 	.personal-info {
 		margin-top:0;
 		display:block;
@@ -859,7 +859,7 @@
 	.about p {
 		text-align:center;
 	}
-	/* Personal info */
+	/* Zakazi info */
 	.personal-info {
 		margin-top:0;
 		display:block;

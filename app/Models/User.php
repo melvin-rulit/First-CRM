@@ -2,34 +2,37 @@
 
 namespace App\Models;
 
-//use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Auth;
-use App\Models\Role;
-
-//use Carbon\Carbon;
+use Laravel\Passport\HasApiTokens;
 
 
-/**
- * @method static where(string $string, int $int)
- * @method static find(mixed $user_id)
- */
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable;
+    use SoftDeletes, Notifiable, HasApiTokens;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
+    public $table = 'users';
+
     protected $fillable = [
         'name',
+        'surname',
+        'phone',
+        'car',
+        'coment',
+        'birthday',
+        'facebook',
+        'instagram',
         'email',
         'password',
+        'class_id',
+        'created_at',
+        'updated_at',
+        'deleted_at',
+        'remember_token',
+        'email_verified_at',
+        'secret_id',
     ];
 
     /**
@@ -51,8 +54,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+
     public function roles(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
-        return $this->belongsToMany(Role::class);
+        return $this->belongsToMany(Type::class);
     }
 }

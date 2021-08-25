@@ -46,7 +46,7 @@
                 </div>
 
 
-                <!-- Personal info section -->
+                <!-- Zakazi info section -->
                 <ul class="personal-info">
 
                     <li><label>Доступ</label><span>{{ userdata.roles }}</span></li>
