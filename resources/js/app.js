@@ -110,7 +110,7 @@ Vue.component('head-component', require('./components/header/head.vue').default)
 Vue.component('list-up-component', require('./components/header/List-up-side.vue').default);
 Vue.component('addnewuser-component', require('./components/header/AddNewUserComponent.vue').default);
 Vue.component('showCalendar-component', require('./components/header/ShowCalendarComponent.vue').default);
-Vue.component('filter-component', require('./components/header/PersonalComponent.vue').default);
+Vue.component('filter-component', require('./components/Zakazi/PersonalComponent.vue').default);
 Vue.component('showModalEditZakazField-component', require('./components/header/EditZakazFieldComponent.vue').default);
 
 
