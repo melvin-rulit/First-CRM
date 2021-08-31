@@ -50,9 +50,9 @@
                         </div>
                     </div>
 
-<!--                    <div class="form-group row">-->
-<!--                        <textarea v-model="coment" class="form-control" rows="3" placeholder="Примечание"></textarea>-->
-<!--                    </div>-->
+                    <div class="form-group row">
+                        <textarea v-model="coment" class="form-control" rows="3" placeholder="Примечание"></textarea>
+                    </div>
 
                 </form>
             </div>
@@ -80,6 +80,7 @@ import {mapActions} from "vuex";
                 car: '',
                 login: '',
                 password: '',
+                coment: '',
 
                 users: {},
                 submitStatus: null,
@@ -126,6 +127,8 @@ import {mapActions} from "vuex";
                     phone: this.phone,
                     car: this.car,
                     email: this.login,
+                    coment: this.coment,
+                    full_name: this. surname + ' ' + this.name,
                     password: this.password,
                     secret_id: this.password,
 

@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
@@ -11,7 +10,7 @@ use Laravel\Passport\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use SoftDeletes, Notifiable, HasApiTokens;
+    use Notifiable, HasApiTokens;
 
     public $table = 'users';
 
@@ -23,7 +22,7 @@ class User extends Authenticatable
         'coment',
         'birthday',
         'facebook',
-        'instagram',
+        'full_name',
         'email',
         'password',
         'class_id',

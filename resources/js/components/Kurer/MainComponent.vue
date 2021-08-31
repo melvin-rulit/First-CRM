@@ -5,32 +5,6 @@
         <!--        <showuser-component :can="can" @get-method="fetch" ref="getmodal"></showuser-component>-->
         <!--        <userfilter-component  @get-method="returnFilterArray" ref="show_filter"></userfilter-component>-->
 
-<!--        &lt;!&ndash; Панель над фильтром &ndash;&gt;-->
-<!--        <div class="row">-->
-<!--            <div class="col-lg-12">-->
-<!--                <div class=" mb-2">-->
-
-<!--&lt;!&ndash;                    <b-tabs >&ndash;&gt;-->
-<!--&lt;!&ndash;                        <b-tab title="Заказы" active> <one /> </b-tab>&ndash;&gt;-->
-<!--&lt;!&ndash;                        <b-tab title="Курьеры"> <two @get-method="getAllRoles"></two> </b-tab>&ndash;&gt;-->
-<!--&lt;!&ndash;                        <b-tab title="Квадраты"> <three /> </b-tab>&ndash;&gt;-->
-<!--&lt;!&ndash;                    </b-tabs>&ndash;&gt;-->
-<!--&lt;!&ndash;                    <div class="card-header">&ndash;&gt;-->
-<!--                        <div class="row align-items-center">-->
-<!--                            <div class="col">-->
-<!--                            </div>-->
-<!--                            <div class="col-auto">-->
-
-
-<!--&lt;!&ndash;                                <button class="btn btn-sm btn-success mr-5" @click="addNewUser">Добавить Курьера</button>&ndash;&gt;-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--&lt;!&ndash;        </div>&ndash;&gt;-->
-
-
 
         <div class="card">
 
@@ -49,9 +23,9 @@
 <!--                        <b class="ml-3">{{ data.item.name}}</b>-->
 <!--                    </template>-->
 
-<!--                    <template #cell(surname)="data">-->
-<!--                        <b class="text-danger ml-3">{{ data.item.surname.toUpperCase() }}</b>-->
-<!--                    </template>-->
+                    <template #cell(surname)="data">
+                        <b>{{ data.item.surname}} </b> {{ data.item.name}}
+                    </template>
 
 <!--                    <template #cell(phone)="data">-->
 <!--                        <b class="text-success ml-3">{{ data.item.phone.toUpperCase() }}</b>-->
@@ -111,14 +85,16 @@ export default {
             details: 'true',
 
             fields: [
-                {
-                    key: 'name',
-                    label: 'Имя',
-                },
+
                 {
                     key: 'surname',
-                    label: 'Фамилия',
+                    label: 'Фамилия имя',
+                    variant: 'warning'
                 },
+                // {
+                //     key: 'name',
+                //     label: 'Имя',
+                // },
                 {
                     key: 'phone',
                     label: 'Номер тел',

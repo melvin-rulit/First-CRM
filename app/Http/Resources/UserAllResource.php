@@ -25,6 +25,7 @@ class UserAllResource extends JsonResource
             'id'          => $this->id,
             'name'          => $this->name,
             'surname'       => $this->surname,
+            'full_name'       => $this->full_name,
             'phone'         => $this->phone,
             'car'         => $this->car,
             'email'         => $this->email,

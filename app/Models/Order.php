@@ -17,21 +17,26 @@ class Order extends Model
     protected $fillable = [
        'id',
        'orderid',
+        'kurer',
         'nameus',
         'tel',
         'town',
         'adress',
         'racion',
         'total',
+        'status',
         'pay',
         'deliv',
         'comment',
         'datetimes',
         'date_delivery',
+        'copy_date_delivery',
         'end_Date',
         'start_edit',
+        'first_edit',
         'created_at',
         'type_id',
+        'array',
 
     ];
 

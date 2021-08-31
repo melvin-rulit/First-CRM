@@ -11,60 +11,60 @@
                 <div class="form-group row">
                     <label class="col-sm-3">Имя</label>
                     <div class="col-sm-8">
-                        <input-form
+                        <input-component
                             v-model="incominData.name"
                             name="name"
                             @edit-field="editField">
 
-                        </input-form>
+                        </input-component>
                     </div>
                 </div>
 
                 <div class="form-group row">
                     <label class="col-sm-3">Фамилия</label>
                     <div class="col-sm-8">
-                        <input-form
+                        <input-component
                             v-model="incominData.surname"
                             name="surname"
                             @edit-field="editField">
 
-                        </input-form>
+                        </input-component>
                     </div>
                 </div>
 
                 <div class="form-group row">
                     <label class="col-sm-3">Номер телефона</label>
                     <div class="col-sm-8">
-                        <input-form
+                        <input-component
                             v-model="incominData.phone"
                             name="phone"
                             @edit-field="editField">
 
-                        </input-form>
+                        </input-component>
                     </div>
                 </div>
 
                 <div class="form-group row">
                     <label class="col-sm-3">Автомобиль</label>
                     <div class="col-sm-8">
-                        <input-form
+                        <input-component
                             v-model="incominData.car"
                             name="car"
                             @edit-field="editField">
 
-                        </input-form>
+                        </input-component>
                     </div>
                 </div>
 
                 <div class="form-group row">
                     <label class="col-sm-3">Логин</label>
                     <div class="col-sm-8">
-                        <input-form
+                        <input-component
                             v-model="incominData.email"
                             name="email"
                             @edit-field="editField">
 
-                        </input-form>
+                        </input-component>
                     </div>
                 </div>
 

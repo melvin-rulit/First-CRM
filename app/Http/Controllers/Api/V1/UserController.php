@@ -36,6 +36,7 @@ class UserController extends Controller
             'phone' => $request->phone,
             'car' => $request->car,
             'email' => $request->email,
+            'full_name' => $request->full_name,
             'password' => Hash::make($request->password),
             'secret_id' => $request->secret_id,
 
@@ -44,38 +45,6 @@ class UserController extends Controller
 return 'Создан';
     }
 
-
-
-//    /**
-//     * Выводим все данные о пользователе для UserCardEditProfile
-//     *
-//     * @param User $user
-//     * @return GetUserResource
-//     */
-//    public function show(User $user): GetUserResource
-//    {
-//
-//        return new GetUserResource($user);
-//
-//    }
-
-
-
-//    /**
-//     *
-//     *
-//     * @param Request $request
-//     *
-//     */
-//    public function dataProfile()
-//    {
-//     $users = User::where('id', 1)->get();
-//
-//     foreach ($users as $user) {
-//        return $user;
-//    }
-//
-//    }
 
     public function editKurer(Request $request): string
     {
@@ -131,36 +100,6 @@ return 'Создан';
         return response()->download($file_path);
       }
 
-    public function convert()
-    {
-    //    $spreadsheet = new Spreadsheet();
-    //    $sheet = $spreadsheet->getActiveSheet();
-    //    $sheet->setCellValue('A1', 'Hello World !');
 
-    //    $writer = new Xlsx($spreadsheet);
-    //    $writer->save('hello world.xlsx');
-
-    // $file_name = 'route.txt';
-    // $file_path = public_path('files/'.$file_name);
-    // $result = response()->download($file_path);
-    // dd( $result);
-
-
-   $file_name = 'route.txt';
-    $file_path = public_path('files/'.$file_name);
-    // $file= public_path(). "/files/";  //path of your directory
-    $headers = array(
-        'Content-Type: application/txt',
-    );
-    //  return Response::download($file_path, $headers);
-    // return Response::download($file_path);
-    $response = FacadeResponse::download($file_path, 200);
-    dd( $response);
-
-    // $file = 'users.xlsx';
-    //  $result =  Excel::download(new UsersExport, $file );
-    //  $file = storage_path($file);
-
-    }
 }
 

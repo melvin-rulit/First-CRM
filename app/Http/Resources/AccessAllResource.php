@@ -17,6 +17,7 @@ class AccessAllResource extends JsonResource
         return [
             'id' => $this->id,
             'nameus' => $this->nameus,
+            'kurer' => $this->kurer,
             'orderid' => $this->orderid,
             'adress' => $this->adress,
             'tel' => $this->tel,

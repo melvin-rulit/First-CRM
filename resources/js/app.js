@@ -1,8 +1,10 @@
 require('./bootstrap');
 window.Vue = require('vue');
+
 import Vue from 'vue'
 import store from './store'
 
+//------------------------------------------------------------------------------------------------------------------------------------------------------
 
 //-- Import vue-router
 import VueRouter from 'vue-router'
@@ -10,10 +12,7 @@ Vue.use(VueRouter);
 
 //-- Import Components
 import User from './components/User/MainComponent.vue'
-import Callendar from './components/header/ShowCalendarComponent.vue'
-import Vcallendar from './components/Callendar/Vcallendar.vue'
-// import Base from './components/base/BaseComponent.vue'
-// import Zakaz from './components/header/PersonalComponent.vue'
+import Kvadrat from './components/Kvadrat/KvadratComponent.vue'
 import Zakaz from './components/Zakazi/PersonalComponent.vue'
 import Kurer from './components/Kurer/MainComponent.vue'
 import Setings from './components/Setings/SetingsComponent.vue'
@@ -23,14 +22,12 @@ const routes = [
 
     { path: '/home',  name: 'zakaz', component: Zakaz},
     { path: '/user', component: User },
-    { path: '/callendar', component: Callendar },
-    { path: '/vcallendar', component: Vcallendar },
+    { path: '/Kvadrat',  name: 'kvadrat' ,component: Kvadrat },
     { path: '/zakazi', name: 'zakaz' , component: Zakaz },
     { path: '/kurer', name: 'kurer', component: Kurer },
     { path: '/setings', component: Setings },
 
 ]
-
 
 const router = new VueRouter({
 
@@ -39,45 +36,7 @@ const router = new VueRouter({
     linkExactActiveClass: "active",
 })
 
-
-
-//-- VCalendar
-// import VCalendar from 'v-calendar';
-// // Use v-calendar & v-date-picker components
-// Vue.use(VCalendar, {
-//   componentPrefix: 'vc',  // Use <vc-calendar /> instead of <v-calendar />
-//               // ...other defaults
-// });
-
-//-- vue2-datepicker
-import DatePicker from 'vue2-datepicker'
-Vue.use(DatePicker);
-import 'vue2-datepicker/index.css'
-
-//-- ant-design-vue
-// import { Button, message } from 'ant-design-vue';
-// Vue.use(Button)
-
-
-//-- Buefy
-import Buefy from 'buefy'
-// import 'buefy/dist/buefy.css'
-Vue.use(Buefy)
-
-//-- Vuetify
-import Vuetify from 'vuetify'
-// import 'vuetify/dist/vuetify.min.css'
-Vue.use(Vuetify)
-
-//-- at-ui
-import AtComponents from 'at-ui'
-// import 'at-ui-style'
-Vue.use(AtComponents)
-
-//-- VueMaterial
-import VueMaterial from 'vue-material'
-import 'vue-material/dist/vue-material.min.css'
-Vue.use(VueMaterial)
+//------------------------------------------------------------------------------------------------------------------------------------------------------
 
 //-- BootstrapVue  &  BootstrapVueIcons
 import { BootstrapVue, IconsPlugin, BootstrapVueIcons } from 'bootstrap-vue'
@@ -91,27 +50,36 @@ Vue.use(IconsPlugin)
 import VueTheMask from 'vue-the-mask'
 Vue.use(VueTheMask)
 
-//-- multiselect
-import Multiselect from 'vue-multiselect'
-Vue.component('multiselect', Multiselect)
-
 //-- VueToast
 import VueToast from 'vue-toast-notification';
 import 'vue-toast-notification/dist/theme-sugar.css';
 Vue.use(VueToast);
 
-import DynamicSelect from 'vue-dynamic-select'
-Vue.use(DynamicSelect)
+//-- vue2-datepicker
+import DatePicker from 'vue2-datepicker'
+import 'vue2-datepicker/index.css'
+Vue.use(DatePicker)
 
+import VCalendar from 'v-calendar'
+Vue.use(VCalendar);
+
+//------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 //-- Head
 Vue.component('head-component', require('./components/header/head.vue').default);
 Vue.component('list-up-component', require('./components/header/List-up-side.vue').default);
 Vue.component('addnewuser-component', require('./components/header/AddNewUserComponent.vue').default);
-Vue.component('showCalendar-component', require('./components/header/ShowCalendarComponent.vue').default);
+Vue.component('addnewkvadrat-component', require('./components/header/ShowAddKvadratModalComponent.vue').default);
 Vue.component('filter-component', require('./components/Zakazi/PersonalComponent.vue').default);
-Vue.component('showModalEditZakazField-component', require('./components/header/EditZakazFieldComponent.vue').default);
+
+Vue.component('showModalEditZakazFieldPay-component', require('./components/header/EditZakazFieldPayComponent.vue').default);
+Vue.component('showModalEditZakazFieldDeliv-component', require('./components/header/EditZakazFieldDelivComponent.vue').default);
+Vue.component('showModalEditZakazFieldKurer-component', require('./components/header/EditZakazFieldKurerComponent.vue').default);
+Vue.component('showModalEditZakazFieldTotal-component', require('./components/header/EditZakazFieldTotalComponent.vue').default);
+
+//--CalendarPeriod
+Vue.component('showModalCalendarForPeriod-component', require('./components/header/CalendarPeriodComponent.vue').default);
 
 
 //-- Kurer
@@ -132,13 +100,14 @@ Vue.component('delete-access-in-settings', require('./components/Setings/Three/D
 
 // -- Weather
 // Vue.component('weather-component', require('./components/Weather/WeatherComponent.vue').default);
-//
+
 // Vue.component('callendar-component', require('./components/User/Callendar.vue').default);
 
 // -- Input-Form
-Vue.component('input-form', require('./components/InputComponent.vue').default);
+Vue.component('input-form', require('./components/InputFormComponent.vue').default);
+Vue.component('input-component', require('./components/InputComponent.vue').default);
 
-
+//------------------------------------------------------------------------------------------------------------------------------------------------------
 
 const app = new Vue({
     el: '#app',

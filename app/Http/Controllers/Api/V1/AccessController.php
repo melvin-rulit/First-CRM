@@ -7,100 +7,185 @@ use App\Http\Resources\AccessResource;
 use App\Http\Resources\AccessAllResource;
 use App\Models\Order;
 use Carbon\Carbon;
+use Carbon\CarbonPeriod;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use PhpParser\Node\Expr\Array_;
 
 class AccessController extends Controller
 {
 
     public function index()
     {
-        $zakazi = Order::whereDate('created_at', Carbon::now()->toDateString())->get();
+        $zakazi = Order::all();
 
-
-        $rashod_day =[];
-        $rashod_week =[];
-        $rashod_months_ =[];
-        $collection = collect();
 
         //-----------------------------------------------------------------------------------------------------------------------------
 
-        foreach ($zakazi->where('type_zakaz', '=', 1)-> where('start_edit', '!=', 1) as $value) {
+        foreach ($zakazi->where('type_zakaz', '=', 1) as $value) {
 
-            if ( Carbon::parse($value->datetimes)->format('H:i') < '20:00'){
-                $rashod_day[] = $value->date_delivery = Carbon:: parse($value->datetimes)->addDay()->toDateString();
-                $return_edit = $value->start_edit = 1;
+            if ($value->first_edit == 0 && $value->start_edit !== 1 && Carbon::parse($value->datetimes)->format('H:i') < '20:00') {
+
+                $Start_day_zakaz = $value->date_delivery = Carbon:: parse($value->datetimes)->addDay()->toDateString();
+
+                $value->copy_date_delivery = Carbon:: parse($value->datetimes)->addDay()->toDateString();
+                $End_day = $value->end_Date = Carbon::parse($Start_day_zakaz)->addDay()->toDateString();
+
+                $value->end_Date = $End_day;
+
+                $value->first_edit = 1;
                 $value->save();
-            }
 
-            else{
+            } else if ($value->first_edit == 0 && $value->start_edit !== 1 && Carbon::parse($value->datetimes)->format('H:i') >= '20:00') {
 
-                $rashod_day[] = $value->date_delivery = Carbon:: parse($value->datetimes)->addDays(2)->toDateString();
-                $return_edit = $value->start_edit = 1;
+                $Start_day = $value->date_delivery = Carbon:: parse($value->datetimes)->addDays(2)->toDateString();
+
+                $value->copy_date_delivery = Carbon:: parse($value->datetimes)->addDays(2)->toDateString();
+                $value->end_Date = Carbon::parse($Start_day)->addDay()->toDateString();
+
+                $value->first_edit = 1;
+
+                $value->save();
+
+            } else if ($value->first_edit == 1 && $value->start_edit == 1) {
+
+                $Date_delivery = Carbon::parse($value->date_delivery)->addDay()->toDateString();
+                $value->end_Date = $Date_delivery;
+
                 $value->save();
             }
 
         }
 
-                     foreach ($zakazi->where('type_zakaz', '=', 7)-> where('start_edit', '!=', 1) as $value) {
+        //-----------------------------------------------------------------------------------------------------------------------------
 
-                         if ( Carbon::parse($value->datetimes)->format('H:i') < '20:00'){
-                             $rashod_day[] = $value->date_delivery = Carbon:: parse($value->datetimes)->addDays(7)->toDateString();
-                             $return_edit = $value->start_edit = 1;
-                             $value->save();
-                         }
 
-                         else{
+        foreach ($zakazi->where('type_zakaz', '=', 7) as $value) {
 
-                             $rashod_day[] = $value->date_delivery = Carbon:: parse($value->datetimes)->addDays(8)->toDateString();
-                             $return_edit = $value->start_edit = 1;
-                             $value->save();
-                         }
+if ($value->array ){
 
-                     }
+    $incoming = json_decode($value->array, true, 100, 0);
+    array_pop($incoming);
+    $have_date_array = array_search( Carbon::now()->addDay()->toDateString(), $incoming, false);
+//    $have_date_array = array_search( '2021-09-01', $incoming, false);
 
-                     foreach ($zakazi->where('type_zakaz', '=', 9)-> where('start_edit', '!=', 1) as $value) {
+    $notification_end_day = array_slice($incoming, -3);
+    $find_for_notification = in_array( Carbon::now()->toDateString(), $notification_end_day, false);
 
-                         if ( Carbon::parse($value->datetimes)->format('H:i') < '20:00'){
-                             $rashod_day[] = $value->date_delivery = Carbon:: parse($value->datetimes)->addDays(30)->toDateString();
-                             $return_edit = $value->start_edit = 1;
-                             $value->save();
-                         }
+if ($find_for_notification ){
+    $value->status = 1;
+}
+    $value->date_delivery = $incoming[$have_date_array];
+    $value->save();
 
-                         else{
+}
 
-                             $rashod_day[] = $value->date_delivery = Carbon:: parse($value->datetimes)->addDays(31)->toDateString();
-                             $return_edit = $value->start_edit = 1;
-                             $value->save();
-                         }
+            if ($value->first_edit == 0  && $value->start_edit !== 1 &&  Carbon::parse($value->datetimes)->format('H:i') < '20:00') {
 
-                     }
+                $Start_day_zakaz = $value->date_delivery = Carbon:: parse($value->datetimes)->addDay()->toDateString();
+
+//                $value->copy_date_delivery = Carbon:: parse($value->datetimes)->addDay()->toDateString();
+
+//                $date_delivery = Carbon::parse($Start_day);
+              $end_Date =  Carbon:: parse($value->date_delivery)->addDays(7)->toDateString();
+
+//             $sum_day = $date_delivery->diffInDays(Carbon::parse($end_Date));
+
+          $dateRange = CarbonPeriod::create($Start_day_zakaz, '1 days', $end_Date);
+
+                $hol = [];
+                foreach ($dateRange as $key => $date){
+
+                     $hol[] =  $date->format('Y-m-d');
+                }
+
+                $value->array = json_encode($hol, 0, 100);
+
+                $incoming = json_decode($value->array, true, 100, 0);
+
+                $value->end_Date = $end_Date;
+                $value->first_edit = 1;
+                $value->save();
+
+            }
+
+            else if ($value->first_edit == 0  && $value->start_edit !== 1 &&  Carbon::parse($value->datetimes)->format('H:i') >= '20:00') {
+
+              $value->date_delivery = Carbon:: parse($value->datetimes)->addDays(2)->toDateString();
+
+                $value->copy_date_delivery = Carbon:: parse($value->datetimes)->addDays(2)->toDateString();
+
+                $value->first_edit = 1;
+                $value->save();
+            }
+
+            else if ($value->first_edit == 1 && $value->start_edit == 1) {
+
+                $Date_delivery = Carbon::parse($value->date_delivery)->addDay()->toDateString();
+                $value->end_Date = $Date_delivery;
+
+                $value->save();
+            }
+
+        }
 
         //-----------------------------------------------------------------------------------------------------------------------------
 
 
+        foreach ($zakazi->where('type_zakaz', '=', 9)->where('start_edit', '!=', 1) as $value) {
+
+            if (Carbon::parse($value->datetimes)->format('H:i') < '20:00') {
+                $rashod_day[] = $value->date_delivery = Carbon:: parse($value->datetimes)->addDays(30)->toDateString();
+                $value->start_edit = 1;
+                $value->save();
+            } else {
+
+                $rashod_day[] = $value->date_delivery = Carbon:: parse($value->datetimes)->addDays(31)->toDateString();
+                $value->start_edit = 1;
+                $value->save();
+            }
+
+        }
+
+        //-----------------------------------------------------------------------------------------------------------------------------
+
+       $zakazi_date = Order::whereDate('date_delivery', Carbon::now()->addDay()->toDateString())->get();
+//       $zakazi_date = Order::whereDate('date_delivery', '2021-09-01')->get();
 
 
-        return AccessResource::collection($zakazi);
-
-//            return new AccessResource($collection);
+        return AccessResource::collection($zakazi_date);
 
     }
 
-    public function edit_Date_Delivery (Request $request)
+    public function edit_Date_Delivery(Request $request)
     {
-        $zakazField = Order::where('id', '=' , $request['id'])->first();
-        $field_name = 'date_delivery';
-        $zakazField->$field_name = $request['field_value'];
-        $zakazField->updated_at = Carbon::now();
-        $zakazField->save();
+        $zakazField = Order::where('id', '=', $request['id'])->first();
 
-        return "Дата доставки изменено";
+        $date_delivery = Carbon::parse($zakazField->date_delivery);
+
+        $sum_day = $date_delivery->diffInDays(Carbon::parse($request['field_value'])->format('Y-m-d'), true);
+
+        if ($sum_day > 3) {
+
+            return "Дата больше 3 дней";
+
+        } else {
+
+            $field_name = 'date_delivery';
+            $zakazField->$field_name = Carbon::parse($request['field_value'])->format('Y-m-d');
+            $zakazField->updated_at = Carbon::now();
+            $zakazField->start_edit = 1;
+            $zakazField->save();
+
+            return "success";
+
+        }
 
     }
 
-    public function edit_End_Date (Request $request)
+    public function edit_End_Date(Request $request)
     {
-        $zakazField = Order::where('id', '=' , $request['id'])->first();
+        $zakazField = Order::where('id', '=', $request['id'])->first();
         $field_name = 'end_Date';
         $zakazField->$field_name = $request['field_value'];
         $zakazField->updated_at = Carbon::now();
@@ -130,12 +215,9 @@ class AccessController extends Controller
             'date' => Carbon::now()->toDateString()
         ]);
 
-//        return AccessAllResource::collection($users)->additional([
-//            'date' => Carbon::now()->toDateString()
-//        ]);;
     }
 
-                        //------------------------------- Удаление Заказа --------------------------------------//
+    //------------------------------- Удаление Заказа --------------------------------------//
 
     public function destroy($id)
 

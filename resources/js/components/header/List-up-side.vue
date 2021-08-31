@@ -3,20 +3,19 @@
 
     <div class="collapse navbar-collapse">
 
-<!--        <addnewuser-component @get-method="updateDataWhenExitModalAddKurer"-->
-<!--                              ref="add_user"></addnewuser-component> -->
+        <showModalCalendarForPeriod-component @get-method="" ref="showPrint"></showModalCalendarForPeriod-component>
+
+        <addnewkvadrat-component @get-method=""
+                              ref="add_kvadrat"></addnewkvadrat-component>
 
         <addnewuser-component
                               ref="add_user"></addnewuser-component>
-
-<!--        <showCalendar-component-->
-<!--                              ref="show_Calendar"></showCalendar-component>-->
 
 
         <ul class="navbar-nav mr-auto tracking-widest rol">
 
             <li>
-                <router-link to="/home" class="nav-link exact "><img src="/images/icon-header/house.png">
+                <router-link to="/home" class="nav-link exact "><img src="/images/icon-header/book.png">
                 </router-link>
             </li>
 
@@ -26,13 +25,20 @@
             </li>
 
             <li>
-                <router-link to="/vcallendar" class="nav-link text-lg "><img src="/images/icon-header/placeholder.png">
+                <router-link to="/Kvadrat" class="nav-link text-lg "><img src="/images/icon-header/placeholder.png">
                 </router-link>
             </li>
 
-            <li>
-                <router-link to="/setings" class="nav-link  "><img src="/images/icon-header/settings.png"></router-link>
-            </li>
+<!--            <li>-->
+<!--                <router-link to="/setings" class="nav-link  "><img src="/images/icon-header/settings.png"></router-link>-->
+<!--            </li>-->
+
+            <atom-spinner
+                :animation-duration="3000"
+                :size="60"
+                :color="'#ff1d5e'"
+            />
+
 
         </ul>
 
@@ -42,6 +48,22 @@
 
         <ul class="navbar-nav ml-auto">
 
+            <!--------------------------------------------------------------------------------------------------------------------------------------->
+
+            <b-sidebar id="print" title="Распечатка чека"    right  >
+                <template #default="{ hide }">
+                    <div class="px-3 py-2 card card-body">
+
+
+
+                    </div>
+
+                </template>
+
+            </b-sidebar>
+
+            <!--------------------------------------------------------------------------------------------------------------------------------------->
+
             <b-button v-if="ifThisRoute" @click="addNewUser" variant="outline-primary">
                 <h5>Добавить Курьера</h5>
             </b-button>
@@ -49,7 +71,6 @@
             <div class="mt-2" v-if="ifThisRouteZakaz"   variant="outline-primary" >
 
                 <input-form
-                    v-model="contractFrom"
                     name="birthday"
                     datePicker="true"
                     placeholder="Фильтр по дате"
@@ -62,32 +83,19 @@
 
 
 
+            <li v-if="ifThisRouteKvadrat" ><a href="#" @click.prevent="addKvadrat" class="nav-link text-lg "><img
+                src="/images/icon-header/copy.png" alt="kvadrati"></a></li>
 
 
-                <li v-if="ifThisRouteZakaz" ><a href="#" class="nav-link text-lg "><img
+<!--            <li v-if="ifThisRouteZakaz" ><a href="#" v-b-toggle.print class="nav-link text-lg "><img-->
+<!--                src="/images/icon-header/printer.png" alt="print"></a></li> -->
+
+            <li v-if="ifThisRouteZakaz" ><a href="#" @click.prevent="showPrintModal" class="nav-link text-lg "><img
                 src="/images/icon-header/printer.png" alt="print"></a></li>
 
-<!--            <b-sidebar id="sidebar-right" title="" right shadow    sidebar-class="border-right border-danger">-->
-<!--                <template #default="{ hide }">-->
-<!--                <div class="px-3 py-2 card card-body">-->
 
-<!--                                    <b-calendar-->
 
-<!--                                        id="ex-disabled-readonly"-->
-<!--                                        selected-variant="success"-->
-<!--                                        today-variant="info"-->
-<!--                                        nav-button-variant="danger"-->
-<!--                                        @context="onContext">-->
-
-<!--                                    </b-calendar>-->
-
-<!--                </div>-->
-<!--                    <b-button variant="dark" block @click="getFilter">Отфильтровать</b-button>-->
-<!--                </template>-->
-
-<!--            </b-sidebar>-->
-
-            <li><a href="#" @click.prevent="loGout()" class="nav-link text-lg "><img
+            <li><a href="#" @click.prevent="loGout" class="nav-link text-lg "><img
                 src="/images/icon-header/logout.png" alt="Logout"></a></li>
 
         </ul>
@@ -99,14 +107,19 @@
 <script>
 
 import {mapActions, mapGetters} from "vuex";
+import {AtomSpinner} from 'epic-spinners'
 
 export default {
+
+    components: {
+        AtomSpinner
+
+    },
 
     data() {
         return {
              date: '',
-            // contractFrom: '13-04-2021',
-            // contractFrom: new Date(),
+
         }
     },
 
@@ -123,6 +136,11 @@ export default {
             if (this.$route.name === 'zakaz')
                 return true;
         },
+
+        ifThisRouteKvadrat() {
+            if (this.$route.name === 'kvadrat')
+                return true;
+        },
     },
 
     methods: {
@@ -130,6 +148,10 @@ export default {
 
         addNewUser() {
             this.$refs.add_user.addNewUserModal()
+        },
+
+        addKvadrat() {
+            this.$refs.add_kvadrat.addNewKvadratModal()
         },
 
         onContext(ctx) {
@@ -143,8 +165,10 @@ export default {
                 this.$store.dispatch('FilterZakaz', {date: e})
             }
 
+        },
 
-
+        showPrintModal(index){
+            this.$refs.showPrint.showZakazCalendarModal(index)
         },
 
         clear() {

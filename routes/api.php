@@ -31,9 +31,9 @@ Route::group(['prefix' => 'v1',  'as' => 'api.', 'namespace' => 'Api\V1'], funct
     Route::post('sendEditZakazData', 'AccessController@sendEditZakazData');
 
 
-    // Weather
-//    Route::get('getweather', 'WeatherController@getWeather');
-//    Route::get('getcountry', 'WeatherController@getCountry');
+    // Kvadrat
+    Route::apiResource('getKvadrat', 'KvadratController');
+    Route::post('sendEditKurer', 'KvadratController@updateEditKurer');
 //    Route::post('addcity', 'WeatherController@addCity');
 
 

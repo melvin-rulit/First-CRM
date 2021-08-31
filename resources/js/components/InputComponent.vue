@@ -1,10 +1,10 @@
 <template>
     <span>
         <span>
-            <a class="text-success" href="#" v-if="value == '' || value == null && !keyInputForm && ifThisRouteZakaz" @click.prevent="focus">Добавить</a>
+            <a class="text-success" href="#" v-if="value == '' || value == null && !keyInputForm " @click.prevent="focus">Добавить</a>
         </span>
-
-          <span v-if="ifThisRouteZakaz" class="card-title form-control" @click="focus">{{ value }}</span>
+          <span v-if="!keyInputForm " class="card-title form-control" @click="focus">{{ value }}</span>
+<!--          <span v-if="" class="card-title">{{ value }}</span>-->
 
         <textarea
             v-if="textarea && keyInputForm"
@@ -33,87 +33,69 @@
             @blur="keyInputForm = false; $emit('edit-field', $event)">
 
         <date-picker
-            v-if="datePicker"
+            v-if="keyInputForm && datePicker"
             :lang="lang"
             ref="edit"
             :id="id"
             v-model="value"
             :editable="false"
-            :clearable="true"
-            :placeholder="placeholder"
             value-type="YYYY-MM-DD"
             format="DD.MM.YYYY"
-            @close="keyInputForm = false; $emit('edit-field', value, name ,datePicker, id)"
-            @clear="keyInputForm = false; $emit('clear')">
+            @close="keyInputForm = false; $emit('edit-field', value, name ,datePicker, id)">
         </date-picker>
     </span>
 </template>
 
 <script>
-    import {TheMask} from 'vue-the-mask'
-    export default {
-        components: {TheMask},
-        props: {
-            value: [String, Number],
-            name: {
-                type: String,
-                required: true
-            },
-            id: {
-                type: Number,
-            },
-            placeholder: {
-                type: String,
-            },
-            mask: {},
-            // Свойство вывод textarea
-            textarea: {
-                type: String,
-            },
-            // Свойство выводы даты
-            datePicker: {
-                type: String,
-            },
-            gate: {
-                // type: String,
-                default: false,
-            }
+import {TheMask} from 'vue-the-mask'
+export default {
+    components: {TheMask},
+    props: {
+        value: [String, Number],
+        name: {
+            type: String,
+            required: true
         },
-        data() {
-            return {
-                lang: {
-                    formatLocale: {
-                        firstDayOfWeek: 1,
-                        weekdaysMin: ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'],
-                        monthsShort: ['Янв', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
-                    },
-                },
-                keyInputForm: null,
-                thisValue: this.value,
-            }
+        id: {
+            type: Number,
         },
-
-        computed: {
-
-            ifThisRouteZakaz() {
-                if (this.$route.name === 'zakaz'){
-                    return false;
-                }else{
-                    return true;
-                }
-
-            },
-
-
+        placeholder: {
+            type: String,
         },
-
-        methods: {
-            focus(){
-                this.keyInputForm = true
-                setTimeout(() => {
-                    this.$refs.edit.focus();
-                }, 100);
-            },
+        mask: {},
+        // Свойство вывод textarea
+        textarea: {
+            type: String,
+        },
+        // Свойство выводы даты
+        datePicker: {
+            type: String,
+        },
+        gate: {
+            // type: String,
+            default: false,
         }
-    };
+    },
+    data() {
+        return {
+            lang: {
+                formatLocale: {
+                    firstDayOfWeek: 1,
+                    weekdaysMin: ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'],
+                    monthsShort: ['Янв', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
+                },
+            },
+            keyInputForm: null,
+            thisValue: this.value,
+        }
+    },
+    methods: {
+        focus(){
+            this.keyInputForm = true
+            setTimeout(() => {
+                this.$refs.edit.focus();
+            }, 100);
+        },
+    }
+};
 </script>
