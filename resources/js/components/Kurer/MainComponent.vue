@@ -106,7 +106,6 @@ export default {
                 {
                     key: 'email',
                     label: 'Логин',
-                    visible: false
                 },
                 {
                     key: 'secret_id',

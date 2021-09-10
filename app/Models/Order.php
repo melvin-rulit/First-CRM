@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use EloquentFilter\Filterable;
 
@@ -30,13 +29,14 @@ class Order extends Model
         'comment',
         'datetimes',
         'date_delivery',
-        'copy_date_delivery',
         'end_Date',
         'start_edit',
         'first_edit',
         'created_at',
-        'type_id',
+        'type_zakaz',
         'array',
+        'start_date_Period',
+        'end_date_Period'
 
     ];
 
@@ -45,12 +45,12 @@ class Order extends Model
         'created_at',
     ];
 
-    public function type()
-    {
-//        return $this->hasOne('App\Models\Type', Type::class);
-//        return $this->belongsTo('App\Models\Type', 'type_id');
-        return $this->hasMany('App\Models\Type', 'type_id');
-//        return $this->belongsToMany('App\Models\Type', 'type' , 'type_id');
-    }
+//    public function type()
+//    {
+////        return $this->hasOne('App\Models\Type', Type::class);
+////        return $this->belongsTo('App\Models\Type', 'type_id');
+//        return $this->hasMany('App\Models\Type', 'type_id');
+////        return $this->belongsToMany('App\Models\Type', 'type' , 'type_id');
+//    }
 
 }
