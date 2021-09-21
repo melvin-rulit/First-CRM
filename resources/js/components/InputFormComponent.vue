@@ -1,8 +1,5 @@
 <template>
     <span>
-        <span>
-            <a class="text-success" href="#" v-if="value == '' || value == null && !keyInputForm && ifThisRouteZakaz" @click.prevent="focus">Добавить</a>
-        </span>
 
           <span v-if="ifThisRouteZakaz" class="card-title form-control" @click="focus">{{ value }}</span>
 
@@ -17,7 +14,7 @@
             :placeholder="placeholder"
             value-type="YYYY-MM-DD"
             format="DD.MM.YYYY"
-            @close="keyInputForm = false; $emit('edit-field', value, name ,datePicker, id)"
+            @change="keyInputForm = false; $emit('edit-field', value, name ,datePicker, id)"
             @clear="keyInputForm = false; $emit('clear')">
         </date-picker>
     </span>

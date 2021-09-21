@@ -1,185 +1,107 @@
 <template>
 
-        <div>
+    <div>
 
-            <showModalEditZakazFieldPay-component @get-method="updateZakaz" ref="editZakazPay"></showModalEditZakazFieldPay-component>
-            <showModalEditZakazFieldDeliv-component @get-method="updateZakaz" ref="editZakazDeliv"></showModalEditZakazFieldDeliv-component>
-            <showModalEditZakazFieldKurer-component @get-method="updateZakaz" ref="editZakazKurer"></showModalEditZakazFieldKurer-component>
-<!--            <showModalEditZakazFieldRacion-component @get-method="updateZakaz" ref="editZakaz"></showModalEditZakazFieldRacion-component>-->
-            <showModalEditZakazFieldTotal-component @get-method="updateZakaz" ref="editZakazTotal"></showModalEditZakazFieldTotal-component>
+        <showModalEditZakazFieldPay-component @get-method="updateZakaz"
+                                              ref="editZakazPay"></showModalEditZakazFieldPay-component>
+        <showModalEditZakazFieldDeliv-component @get-method="updateZakaz"
+                                                ref="editZakazDeliv"></showModalEditZakazFieldDeliv-component>
+        <showModalEditZakazFieldKurer-component @get-method="updateZakaz"
+                                                ref="editZakazKurer"></showModalEditZakazFieldKurer-component>
+        <showModalEditZakazFieldRacion-component @get-method="updateZakaz"
+                                                 ref="editZakazRacion"></showModalEditZakazFieldRacion-component>
+        <showModalEditZakazFieldTotal-component @get-method="updateZakaz"
+                                                ref="editZakazTotal"></showModalEditZakazFieldTotal-component>
 
-
-            <b-sidebar id="Date_delivery" title="" right shadow    width="300px" text-variant="light" bg-variant="dark" sidebar-class="border-right border-danger">
-                <template #default="{ hide }">
-                    <div class="mt-5">
-<!--                        v-model='range'-->
-                        <v-date-picker
-                            v-model="dateRange"
-                            mode='range'
-
-                            title-position="left"
-                            :rows="2"
-                            is-range
-                            color="green"
-                            class="ml-4"
-
-                        />
-
-                        <date-picker
-                            class="ots"
-                            :lang="lang"
-                            v-model="value"
-                            value-type="format"
-                            :clearable = "false"
-                            format="DD-MM-YYYY"
-                            @input="sendEdit_Date_delivery">
-
-                        </date-picker>
+        <showModalEditZakazDataDelivery-component @get-method="updateZakaz"
+                                                  ref="editDateDelivery"></showModalEditZakazDataDelivery-component>
 
 
+        <!------------------------------------------------------------------------------------------------------------------------------------------>
 
-                        <b-alert
-                            class="ml-4"
-                            :show="dismissCountDown"
-                            dismissible
-                            variant="info"
-                            @dismissed="dismissCountDown=0"
-                            @dismiss-count-down="countDownChanged">
+        <b-table
 
-                            <p>Дата переноса заказа не может быть больше 3 дней</p>
-                            <b-progress
-                                variant="danger"
-                                :max="dismissSecs"
-                                :value="dismissCountDown"
-                                height="4px"
-                            ></b-progress>
-                        </b-alert>
-                    </div>
-
-                </template>
-
-            </b-sidebar>
-
-            <b-sidebar id="End_Date" title="" right shadow    sidebar-class="border-right border-danger">
-                <template #default="{ hide }">
-                    <div class="px-3 py-2 card card-body">
-
-                        <b-calendar
-
-                            id="ex-disabled-readonly"
-                            selected-variant="success"
-                            today-variant="info"
-                            nav-button-variant="danger"
-                            @context="onContext"
-                            @input="sendEdit_End_Date">
-
-                        </b-calendar>
-
-                    </div>
-
-                </template>
-
-            </b-sidebar>
-
-<!------------------------------------------------------------------------------------------------------------------------------------------>
-
-            <b-table
-
-                hover
-                :bordered="true"
-                :fields="fields"
-                :items="AllZakaz.data"
-                :small="true"
-                :no-border-collapse="false"
-                @row-middle-clicked="deleteField"
-                row-hovered="row"
-                head-variant="dark"
-                :tbody-tr-class="rowClass">
+            hover
+            :bordered="true"
+            :fields="fields"
+            :items="AllZakaz.data"
+            :small="true"
+            :no-border-collapse="false"
+            @row-middle-clicked="deleteField"
+            row-hovered="row"
+            head-variant="dark"
+            :tbody-tr-class="rowClass">
 
 
-<!--------------------------------------------------------------------------------------------------------------------------------------------->
+            <!--------------------------------------------------------------------------------------------------------------------------------------------->
 
-                <template v-slot:cell(orderid)="row">
-                    <b  class="pointer" @click="row.toggleDetails">{{ row.item.orderid}}</b>
-                </template>
+            <!--            <template v-slot:cell(orderid)="row">-->
+            <!--                <b  class="pointer" @click="row.toggleDetails">{{ row.item.orderid}}</b>-->
+            <!--            </template>-->
 
-                <template v-slot:cell(kurer)="row">
-                    <p class="pointer ml-2" @click="rowSelectedForEditFieldKurer(row.item)">{{ row.item.kurer }}</p>
-                </template>
+            <template v-slot:cell(orderid)="row">
+                <b-form-group>
+                    <b class="pointer"> {{ row.item.orderid }}</b>
+                </b-form-group>
+            </template>
 
-                <template v-slot:cell(total)="row">
-                    <span class="pointer" @click="rowSelectedForEditFieldTotal(row.item)">{{ row.item.total }}</span>
-                </template>
+            <template v-slot:cell(kurer)="row">
+                <p class="pointer ml-2" @click="rowSelectedForEditFieldKurer(row.item)">{{ row.item.kurer }}</p>
+            </template>
 
-                <template v-slot:cell(pay)="row">
-                    <span class="pointer" @click="rowSelectedForEditFieldPay(row.item)">{{ getPay(row.item.pay) }}</span>
-                </template>
+            <template v-slot:cell(total)="row">
+                <span class="pointer" @click="rowSelectedForEditFieldTotal(row.item)">{{ row.item.total }}</span>
+            </template>
 
-                <template v-slot:cell(deliv)="row">
-                    <span class="pointer" @click="rowSelectedForEditFieldDeliv(row.item)">{{ getDeliv(row.item.deliv) }}</span>
-                </template>
+            <template v-slot:cell(pay)="row">
+                <span class="pointer" @click="rowSelectedForEditFieldPay(row.item)">{{ getPay(row.item.pay) }}</span>
+            </template>
 
-                <template v-slot:cell(datetimes)="row">
-                    <b-form-group>
-                        <p  class="ml-2"> {{ row.item.datetimes}}</p>
-                    </b-form-group>
-                </template>
+            <template v-slot:cell(deliv)="row">
+                <span class="pointer" @click="rowSelectedForEditFieldDeliv(row.item)">{{
+                        getDeliv(row.item.deliv)
+                    }}</span>
+            </template>
 
-                <template v-slot:cell(date_delivery)="row">
-                    <b-form-group>
-                        <b v-b-toggle.Date_delivery @click="rowSelectedForDate_delivery(row.item)" class="ml-3 pointer"> {{ row.item.date_delivery}}</b>
+            <template v-slot:cell(datetimes)="row">
+                <b-form-group>
+                    <p class="ml-2"> {{ row.item.datetimes }}</p>
+                </b-form-group>
+            </template>
 
-                    </b-form-group>
+            <template v-slot:cell(date_delivery)="row">
+                <b-form-group>
+                    <b class="ml-3 pointer" @click="rowSelectedForEditDateDelivery(row.item)">
+                        {{ row.item.date_delivery }}</b>
+                </b-form-group>
+            </template>
 
-                </template>
+            <template v-slot:cell(end_Date)="row">
+                <b-form-group>
+                    <b class="ml-3">{{ row.item.end_Date }}</b>
+                </b-form-group>
+            </template>
 
-                <template v-slot:cell(end_Date)="row">
-                    <b-form-group >
+            <!---------------------------------------------------------------------------------------------------------------------------------------------->
 
-<!--                        <b  v-b-toggle.End_Date @click="rowSelectedForEnd_Date(row.item)"> {{ row.item.end_Date}}</b>-->
-                        <b class="ml-3">{{ row.item.end_Date}}</b>
-                    </b-form-group>
-                </template>
+            <!--                <template #row-details="row">-->
 
-<!---------------------------------------------------------------------------------------------------------------------------------------------->
+            <!--                    <b-row class="mb-2">-->
 
-                <template #row-details="row">
+            <!--                        <b-col sm="3" class="text-sm-right"><b>Период заказа заканчивается :</b></b-col>-->
 
-                    <b-row class="mb-2">
-
-                        <b-col sm="3" class="text-sm-right"><b>Период заказа заканчивается :</b></b-col>
-
-                        <div class="col-sm-7">
-
-
-                        </div>
-
-                    </b-row>
-
-                </template>
+            <!--                        <div class="col-sm-7">-->
 
 
-                <template #row-detailss="row">
+            <!--                        </div>-->
 
-                    <b-row class="mb-2">
+            <!--                    </b-row>-->
 
-                        <b-col sm="3" class="text-sm-right"><b>П</b></b-col>
+            <!--                </template>-->
 
-                        <div class="col-sm-7">
+        </b-table>
 
-
-                        </div>
-
-                    </b-row>
-
-                </template>
-
-
-
-
-            </b-table>
-
-        </div>
+    </div>
 
 </template>
 
@@ -192,21 +114,6 @@ export default {
     data() {
 
         return {
-            start_date: "2021-8-13",
-            end_date: "2021/8/25",
-
-            lang: {
-                formatLocale: {
-                    firstDayOfWeek: 1,
-                    weekdaysMin: ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'],
-                    monthsShort: ['Янв', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
-                },
-
-            },
-
-            dismissSecs: 6,
-            dismissCountDown: 0,
-            showDismissibleAlert: false,
 
             value: '',
             color: 'danger',
@@ -214,17 +121,15 @@ export default {
             value_Edit: '',
             valueEditField: '',
             selectedYMD: '',
+            showSidebar: false,
+
 
             fields: [
                 {
-                key: 'orderid',
-                label: 'Номер заказа',
+                    key: 'orderid',
+                    label: 'Номер заказа',
                     variant: ''
                 },
-                // {
-                //     key: 'array',
-                //     label: 'array',
-                // },
                 {
                     key: 'kvadrat_id',
                     label: '№',
@@ -278,6 +183,7 @@ export default {
                     variant: 'success'
                 },
             ],
+
         }
     },
 
@@ -331,83 +237,34 @@ export default {
             }
         },
 
-        countDownChanged(dismissCountDown) {
-            this.dismissCountDown = dismissCountDown
-            this.value = this.date_copy
-        },
-        showAlert() {
-            this.dismissCountDown = this.dismissSecs
+
+        rowSelectedForEnd_Date(index) {
+            this.valueEditField = index.id
         },
 
-        rowSelectedForDate_delivery(index){
-            this.value = index.date_delivery
-            this.date_copy = index.date_delivery
-          this.valueEditField = index.id
+        rowSelectedForEditFieldTotal(index) {
+            this.$refs.editZakazTotal.editZakazModal(index)
+        },
+        rowSelectedForEditFieldPay(index) {
+            this.$refs.editZakazPay.editZakazModal(index)
         },
 
-        rowSelectedForEnd_Date(index){
-          this.valueEditField = index.id
+        rowSelectedForEditFieldKurer(index) {
+            this.$refs.editZakazKurer.editZakazModal(index)
         },
 
-        rowSelectedForEditFieldTotal(index){
-             this.$refs.editZakazTotal.editZakazModal(index)
-        },
-        rowSelectedForEditFieldPay(index){
-             this.$refs.editZakazPay.editZakazModal(index)
+        rowSelectedForEditFieldDeliv(index) {
+            this.$refs.editZakazDeliv.editZakazModal(index)
         },
 
-        rowSelectedForEditFieldKurer(index){
-             this.$refs.editZakazKurer.editZakazModal(index)
+        rowSelectedForEditFieldRacion(index) {
+            this.$refs.editZakazRacion.editZakazModal(index)
         },
 
-        rowSelectedForEditFieldDeliv(index){
-             this.$refs.editZakazDeliv.editZakazModal(index)
+        rowSelectedForEditDateDelivery(index) {
+            this.$refs.editDateDelivery.showEditDateDeliveryModal(index)
         },
 
-
-        //------------------------------------------- Изменяем данные с календаря для  Date_delivery------------------------------------//
-
-        sendEdit_Date_delivery(){
-
-            setTimeout(() => {
-                    axios.post('api/v1/edit_Date_Delivery', {id: this.valueEditField, field_value:  this.value}).then((response) => {
-
-                        response.data == "success" ?
-                            Vue.$toast.open({
-                            message: "Дата изменена",
-                            type: 'success',
-                            duration: 2000,
-                            position: 'bottom-right'
-                        }) :   this. showAlert()
-
-                    })
-
-                this.GetAllZakaz()
-
-            },500)
-
-        },
-
-        //------------------------------------------- Изменяем данные с календаря для  End_Date------------------------------------//
-
-        sendEdit_End_Date(){
-
-
-            // setTimeout(() => {
-                    axios.post('api/v1/edit_End_Date', {id: this.valueEditField, field_value: this.value})
-
-                this.GetAllZakaz()
-
-                Vue.$toast.open({
-                    message: "Дата окончания изменена",
-                    type: 'success',
-                    duration: 2000,
-                    position: 'bottom-right'
-                });
-
-            // },500)
-
-        },
 
         //---------------------------------------------- Удаляем Заказ -------------------------------------------------------------//
 
@@ -449,21 +306,16 @@ export default {
 
         },
 
-        // updateZakaz() {
-        //
-        //     setTimeout(() => {
-        //
-        //         Vue.$toast.open({
-        //             message: "Заказ удален",
-        //             type: 'error',
-        //             duration: 2000,
-        //             position: 'bottom-right'
-        //         });
-        //
-        //     }, 500)
-        //
-        //     this.GetAllZakaz()
-        // },
+        showUserFilter() {
+            this.GetAllZakaz()
+
+        },
+
+        updateZakaz() {
+            this.GetAllZakaz()
+
+        },
+
 
     }
 }
@@ -472,8 +324,7 @@ export default {
 
 <style>
 
-.ots{
-    margin-left: 50px;
-    margin-top: 10px;
+.pointer {
+    cursor: pointer;
 }
 </style>
