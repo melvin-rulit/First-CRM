@@ -1,7 +1,7 @@
 <template>
     <div>
 
-        <!-- Модальное окно с добавлением новой роли -->
+        <!-- Модальное окно с редактированием курьера -->
         <b-modal id="editKurer" title="Редактирование выбранного Курьера" @ok="editField" @hidden="closeModal" centered
                  ok-only ok-title="Готово">
 
@@ -62,6 +62,18 @@
                         <input-component
                             v-model="incominData.email"
                             name="email"
+                            @edit-field="editField">
+
+                        </input-component>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-3">Пароль</label>
+                    <div class="col-sm-8">
+                        <input-component
+                            v-model="incominData.secret_id"
+                            name="secret_id"
                             @edit-field="editField">
 
                         </input-component>

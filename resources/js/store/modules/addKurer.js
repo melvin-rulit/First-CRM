@@ -17,7 +17,7 @@ export default {
 
         GetAllKurer({commit}){
 
-            axios.get(`api/v1/users`)
+            axios.get(`api/v1/kurer`)
                 .then((response) => {
                     commit('getKurier', response.data.data)
                 })

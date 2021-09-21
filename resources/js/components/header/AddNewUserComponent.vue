@@ -25,7 +25,7 @@
                     <div class="form-group row">
                         <label class="col-sm-3 col-form-label">Телефон</label>
                         <div class="col-sm-8">
-                            <input class="form-control" v-model="phone"  v-mask="'+380(##) ###-##-##'" placeholder="+380 (##) ## - ### - ##">
+                            <input class="form-control" v-model="phone"  v-mask="'+38 (###)-###-##-##'" placeholder="+380 (##) ## - ### - ##">
                         </div>
                     </div>
 

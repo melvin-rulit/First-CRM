@@ -6,34 +6,8 @@
 
           <span v-if="ifThisRouteZakaz" class="card-title form-control" @click="focus">{{ value }}</span>
 
-        <textarea
-            v-if="textarea && keyInputForm"
-            ref="edit"
-            class="form-control"
-            :id="id"
-            :name="name"
-            v-model="value"
-            @input="$emit('input', value)"
-            @blur="keyInputForm = false; $emit('edit-field', $event)">
-        </textarea>
-
-        <input
-            v-if="keyInputForm && !textarea && !datePicker"
-            ref="edit"
-            class="form-control"
-            size="1"
-            type="text"
-            :placeholder="placeholder"
-            :id="id"
-            :name="name"
-            v-model="value"
-            v-mask="mask"
-            @input="$emit('input', value)"
-            @keyup.enter="keyInputForm = false;$emit('edit-field', $event)"
-            @blur="keyInputForm = false; $emit('edit-field', $event)">
-
         <date-picker
-            v-if="datePicker"
+
             :lang="lang"
             ref="edit"
             :id="id"

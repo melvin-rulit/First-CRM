@@ -24,6 +24,8 @@ class AccessResource extends JsonResource
             'id' => $this->id,
             'nameus' => $this->nameus,
             'kurer' => $this->kurer ? $this->kurer : " Не задан",
+            'kurer_id' => $this->kurer_id ? $this->kurer_id : "----",
+            'kvadrat_id' => $this->kvadrat_id ? $this->kvadrat_id : "----",
             'orderid' => $this->orderid,
             'adress' => $this->adress,
             'tel' => $this->tel,
@@ -37,8 +39,6 @@ class AccessResource extends JsonResource
             'datetimes' =>  Carbon::createFromDate($this->datetimes)->format('d.m.Y'),
             'date_delivery' =>  $this->date_delivery ? Carbon::createFromDate($this->date_delivery)->format('d-m-Y') : '',
             'end_Date' =>   Carbon::createFromDate($this->end_Date)->format('d.m.Y') ,
-           'start_date_Period' =>   Carbon::createFromDate($this->start_date_Period)->format('m/d/Y') ,
-          'end_date_Period' =>   Carbon::createFromDate($this->end_date_Period)->format('m/d/Y') ,
             'array' =>   json_decode($this->array, true, 100, 0),
         ];
     }

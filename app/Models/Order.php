@@ -17,6 +17,8 @@ class Order extends Model
        'id',
        'orderid',
         'kurer',
+        'kurer_id',
+        'kvadrat_id',
         'nameus',
         'tel',
         'town',
@@ -35,9 +37,6 @@ class Order extends Model
         'created_at',
         'type_zakaz',
         'array',
-        'start_date_Period',
-        'end_date_Period'
-
     ];
 
 //    public $timestamps = false;

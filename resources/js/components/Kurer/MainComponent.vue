@@ -1,10 +1,7 @@
 <template>
     <div>
-<!--        <addnewuser-component @get-method="fetch" ref="add_user_component"></addnewuser-component>-->
-        <editkurer-component @get-method="UpdateData" ref="edit_kurer_component"></editkurer-component>
-        <!--        <showuser-component :can="can" @get-method="fetch" ref="getmodal"></showuser-component>-->
-        <!--        <userfilter-component  @get-method="returnFilterArray" ref="show_filter"></userfilter-component>-->
 
+        <editkurer-component @get-method="UpdateData" ref="edit_kurer_component"></editkurer-component>
 
         <div class="card">
 
@@ -16,7 +13,9 @@
                     :fields="fields"
                     :fixed="true"
                     :no-border-collapse="true"
+                    :tbody-tr-class="rowClass"
                     @row-clicked="getShowModal"
+                    @row-hovered = 'rowClass'
                     head-variant="dark">
 
 <!--                    <template #cell(name)="data">-->
@@ -24,7 +23,7 @@
 <!--                    </template>-->
 
                     <template #cell(surname)="data">
-                        <b>{{ data.item.surname}} </b> {{ data.item.name}}
+                        <b class="pointer">{{ data.item.surname}} </b> <span class="pointer">{{ data.item.name}}</span>
                     </template>
 
 <!--                    <template #cell(phone)="data">-->
@@ -83,12 +82,13 @@ export default {
             users: {},
             rowSelect: {},
             details: 'true',
+            isNew: true,
 
             fields: [
 
                 {
                     key: 'surname',
-                    label: 'Фамилия имя',
+                    label: 'Фамилия Имя',
                     variant: 'warning'
                 },
                 // {
@@ -144,6 +144,22 @@ export default {
             this.GetAllKurer()
         },
 
+        rowClass(item) {
+            return item ? "isNew" : "";
+            // if (item === 'row') {
+            //     return 'text-pointer'
+            // }
+        },
+        removeIsNew(item) {
+            item.isNew = false;
+            this.saveItems(this.items);
+        },
+
+        saveItems(items) {
+            this.$nextTick(() => {
+                localStorage.setItem("items", JSON.stringify(items));
+            });
+        },
     },
 }
 </script>
@@ -153,6 +169,104 @@ table {
     width:100%;
     table-layout: fixed;
 }
+.pointer {
+    cursor: pointer;
+}
 
+.table-dark.table-hover tbody tr:hover {
+    cursor: pointer;
+}
 </style>
+
+<!--<template>-->
+<!--    <div id="app">-->
+<!--        <b-button-group>-->
+<!--            <b-button @click="addFewRows">Add more rows</b-button>-->
+<!--            <b-button @click="reset">Clear data</b-button>-->
+<!--        </b-button-group>-->
+<!--        <b-table hover dark :items="items" @row-unhovered="removeIsNew" :tbody-tr-class="rowClass"></b-table>-->
+<!--    </div>-->
+<!--</template>-->
+
+<!--<script>-->
+<!--import _ from "lodash";-->
+<!--export default {-->
+<!--    name: "App",-->
+<!--    data: () => ({-->
+<!--        items: []-->
+<!--    }),-->
+<!--    mounted() {-->
+<!--        if (localStorage.getItem("items")) {-->
+<!--            this.items = JSON.parse(localStorage.getItem("items"));-->
+<!--        } else {-->
+<!--            this.reset();-->
+<!--        }-->
+<!--    },-->
+<!--    methods: {-->
+<!--        rowClass(item) {-->
+<!--            return item.isNew ? "isNew" : "";-->
+<!--        },-->
+<!--        removeIsNew(item) {-->
+<!--            item.isNew = false;-->
+<!--            this.saveItems(this.items);-->
+<!--        },-->
+<!--        addItem(item) {-->
+<!--            this.items.push(item);-->
+<!--            this.saveItems(this.items);-->
+<!--        },-->
+<!--        saveItems(items) {-->
+<!--            this.$nextTick(() => {-->
+<!--                localStorage.setItem("items", JSON.stringify(items));-->
+<!--            });-->
+<!--        },-->
+<!--        addFewRows() {-->
+<!--            _.times(this.rng(2, 6), () => this.addItem(this.generateItem()));-->
+<!--        },-->
+<!--        generateItem() {-->
+<!--            return {-->
+<!--                age: this.rng(21, 45),-->
+<!--                first_name: ["John", "Paul", "Randy", "Joe", "Jack", "Bernard"][-->
+<!--                    this.rng(0, 5)-->
+<!--                    ],-->
+<!--                last_name: [-->
+<!--                    "Cusack",-->
+<!--                    "Robertson",-->
+<!--                    "Smith",-->
+<!--                    "Stevens",-->
+<!--                    "Ballard",-->
+<!--                    "MacDonald",-->
+<!--                    "Wilson",-->
+<!--                    "Shaw"-->
+<!--                ][this.rng(0, 7)],-->
+<!--                isNew: true-->
+<!--            };-->
+<!--        },-->
+<!--        rng(min, max) {-->
+<!--            return Math.round(Math.random() * (max - min + 0.5)) + min;-->
+<!--        },-->
+<!--        reset() {-->
+<!--            this.items = _.times(4, () => this.generateItem());-->
+<!--            this.saveItems(this.items);-->
+<!--        }-->
+<!--    }-->
+<!--};-->
+<!--</script>-->
+
+<!--<style>-->
+<!--.table-dark.table-hover tbody tr.isNew {-->
+<!--    color: #BADA55;-->
+<!--    background-color: rgba(255, 255, 255, 0.123);-->
+<!--}-->
+<!--.table-dark.table-hover tbody tr:hover {-->
+<!--    cursor:pointer;-->
+<!--}-->
+<!--body,-->
+<!--html {-->
+<!--    height: 100%;-->
+<!--}-->
+<!--body {-->
+<!--    background-color: #191919;-->
+<!--}-->
+<!--</style>-->
+
 

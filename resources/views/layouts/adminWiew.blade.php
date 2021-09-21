@@ -25,9 +25,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('css/personal.css') }}" rel="stylesheet">
-
 
 <!--  анимированные переходы между компонентами */ -->
     <style type="text/css">
@@ -49,16 +47,13 @@
 
 </head>
 
-
-{{--<body class="bg-after-login">--}}
 <body>
+
 <div id="app">
 
     <head-component></head-component>
 
-
         @yield('contentAfterlogin')
-
 
 </div>
 

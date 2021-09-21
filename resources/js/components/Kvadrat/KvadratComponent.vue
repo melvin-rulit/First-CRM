@@ -108,7 +108,7 @@
 
                     addKvadrat(){
 
-                        axios.get('api/v1/getKvadrat')
+                        axios.get('api/v1/kvadrat')
                             .then(response => this.kvadrat = response.data.data)
 
                     },

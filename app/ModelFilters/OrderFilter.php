@@ -7,9 +7,14 @@ use EloquentFilter\ModelFilter;
 class OrderFilter extends ModelFilter
 {
 
-    public function PeriodDate($date): OrderFilter
+    public function FindPhone($phone): OrderFilter
     {
-        return $this-> where('tel' , '=' , $date) ->where('date_delivery',  '!=', null);
+        return $this-> where('tel' , '=' , $phone)-> where('date_delivery',  '!=', null);
+    }
+
+    public function FindData($data): OrderFilter
+    {
+        return $this-> where('array' , 'like' , '%'.$data.'%')-> where('date_delivery','!=',null);
     }
 
 }

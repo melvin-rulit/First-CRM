@@ -4,7 +4,6 @@
 }
 
 header{
-    /*background: url("/images/avatar/0016.jpg");*/
     height: 70px;
 }
 
@@ -21,15 +20,6 @@ header{
  margin-top: 5%;
 }
 
-/*li:hover img{*/
-/*    text-shadow: 1px 1px 1px ;*/
-/*    text-shadow: 1px 1px 3px lightgray, 0 0 1px black;*/
-
-
-/*    !*width: 42px;*!*/
-/*    !*height: 42px;*!*/
-/*}*/
-
 .sidebar .nav-item {
     cursor: pointer;
 }
@@ -38,12 +28,6 @@ header{
     width: 34px;
     height: 34px;
 }
-
-/*.bg-after-login{*/
-/*    background:   url(../images/intro-bg.jpg) no-repeat center;*/
-/*    height: 100%;*/
-/*}*/
-
 
 /* active links*/
 .menu {

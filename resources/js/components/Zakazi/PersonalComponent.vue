@@ -226,7 +226,7 @@ export default {
                 //     label: 'array',
                 // },
                 {
-                    key: 'network',
+                    key: 'kvadrat_id',
                     label: '№',
 
                 },
@@ -291,7 +291,7 @@ export default {
 
         dateRange: {
 
-            get () {
+            get() {
 
                 let start = this.start_date
                 let end = this.end_date
@@ -315,18 +315,18 @@ export default {
             if (item.status === 1) return 'table-danger'
         },
 
-        getPay($type){
-            if ($type === 0){
+        getPay($type) {
+            if ($type === 0) {
                 return 'Не Оплачено'
-            }else if($type === 1){
+            } else if ($type === 1) {
                 return 'Оплачено'
             }
         },
 
-        getDeliv($type){
-            if ($type === 0){
+        getDeliv($type) {
+            if ($type === 0) {
                 return 'Курьером'
-            }else if($type === 1){
+            } else if ($type === 1) {
                 return 'Самовывоз'
             }
         },
@@ -413,7 +413,7 @@ export default {
 
         deleteField(index) {
 
-            this.$bvModal.msgBoxConfirm('Вы уверены что хотите удалить Заказ ( ' + index.orderid  + ' ) ?', {
+            this.$bvModal.msgBoxConfirm('Вы уверены что хотите удалить Заказ ( ' + index.orderid + ' ) ?', {
 
                 size: 'lg',
                 buttonSize: 'md',

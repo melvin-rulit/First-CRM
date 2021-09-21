@@ -207,13 +207,21 @@ if ($find_for_notification ){
 
     }
 
-    public function zakazFilter(Request $request)
+    public function zakazFilterPhone(Request $request)
     {
-        $users = Order::filter($request->all())->get();
+        $find_zakaz = Order::filter($request->all())->get();
 
-        return AccessAllResource::collection($users)->additional([
-            'date' => Carbon::now()->toDateString()
+        return AccessAllResource::collection($find_zakaz)->additional([
+            'find' => 1
         ]);
+
+    }
+
+    public function zakazFilterData(Request $request)
+    {
+        $find_zakaz = Order::filter($request->all())->get();
+
+        return  AccessAllResource::collection($find_zakaz);
 
     }
 

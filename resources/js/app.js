@@ -20,10 +20,10 @@ import Setings from './components/Setings/SetingsComponent.vue'
 const routes = [
 
     { path: '/home',  name: 'zakaz', component: Zakaz},
-    { path: '/Kvadrat',  name: 'kvadrat' ,component: Kvadrat },
+    { path: '/kvadrat',  name: 'kvadrat' ,component: Kvadrat },
     { path: '/zakazi', name: 'zakaz' , component: Zakaz },
     { path: '/kurer', name: 'kurer', component: Kurer },
-    { path: '/setings', component: Setings },
+    // { path: '/setings', component: Setings },
 
 ]
 
@@ -80,7 +80,8 @@ Vue.component('showModalEditZakazFieldPay-component', require('./components/head
 Vue.component('showModalEditZakazFieldDeliv-component', require('./components/header/EditZakaz/EditZakazFieldDelivComponent.vue').default);
 Vue.component('showModalEditZakazFieldKurer-component', require('./components/header/EditZakaz/EditZakazFieldKurerComponent.vue').default);
 Vue.component('showModalEditZakazFieldTotal-component', require('./components/header/EditZakaz/EditZakazFieldTotalComponent.vue').default);
-Vue.component('showModalEditZakazFieldRacion-component', require('./components/header/EditZakazFieldRacionComponent.vue').default);
+Vue.component('showModalEditZakazFieldRacion-component', require('./components/header/EditZakaz/EditZakazFieldRacionComponent.vue').default);
+Vue.component('showModalEditZakazDataDelivery-component', require('./components/header/EditZakaz/EditDataDeliveryComponent.vue').default);
 
 //--CalendarPeriod
 Vue.component('showModalCalendarForPeriod-component', require('./components/header/CalendarPeriodComponent.vue').default);
@@ -91,10 +92,7 @@ Vue.component('editkurer-component', require('./components/Kurer/EditKurerCompon
 
 
 //-- Settings
-Vue.component('edit-roles-in-settings', require('./components/Setings/EditRolesModal.vue').default);
-Vue.component('delete-roles-in-settings', require('./components/Setings/DeleteRolesModal.vue').default);
-Vue.component('edit-access-in-settings', require('./components/Setings/Three/EditAccessModal.vue').default);
-Vue.component('delete-access-in-settings', require('./components/Setings/Three/DeleteAccessModal.vue').default);
+Vue.component('settings-modal', require('./components/Setings/SetingsComponent.vue').default);
 
 
 // -- Input-Form
