@@ -1,0 +1,17 @@
+
+
+html, body{
+	font-family: arial;
+}
+
+input::placeholder {color: #000; font-family: arial;}
+
+	.to_print{width: 60%; margin:auto;}
+	.to_print img{width: 100%;}
+
+	h1 {font-size: 24px; text-align: center; text-transform: uppercase; text-decoration: underline;}
+
+	.border{border: solid 2px #000; padding: 1mm; margin-top: 5mm;}
+	.name-input{font-weight: bold; width: 30%;}
+	.text {border: 1; width: 97%;}
+	.adress{width: 90%;}

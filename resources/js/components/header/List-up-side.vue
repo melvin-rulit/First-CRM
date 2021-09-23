@@ -36,18 +36,27 @@
                 </h4>
             </div>
 
-            <h4 v-if="ifFilterZakazByData" class="mt-2 ml-5">Список заказов на:
-                <b-badge variant="danger">{{ date }}</b-badge>
-            </h4>
+            <div v-if="ifThisRouteZakaz">
+                <h4 v-if="ifFilterZakazByData" class="mt-2 ml-5">Отфильтрованный список по ( Дате ) на:
+                    <b-badge variant="danger">{{ date }}</b-badge>
+                </h4>
+            </div>
 
+            <div v-if="ifThisRouteZakaz">
+                <h4 v-if="ifFilterZakazByPhone" class="mt-2 ml-5">Все что нашлось по номеру
+                    <b-badge variant="danger">{{ input_phone }}</b-badge>
+                </h4>
+            </div>
 
         </ul>
 
         <ul class="navbar-nav ml-auto">
 
-            <b-alert v-if="ifThiFieldPhoneNotFull" show variant="danger" class="mr-4">Вы ввели не полный номер
-                телефона
-            </b-alert>
+            <div v-if="ifThisRouteZakaz">
+                <b-alert v-if="ifThiFieldPhoneNotFull" show variant="danger" class="mr-4">Вы ввели не полный номер
+                    телефона
+                </b-alert>
+            </div>
 
             <!--------------------------------------------------------------------------------------------------------------------------------------->
 
@@ -61,7 +70,7 @@
             <div class="mt-2" v-if="ifThisRouteZakaz" variant="outline-primary">
 
                 <input v-if="ifThisFindPhone" v-mask="'+38 (###)-###-##-##'" class="form-control find"
-                       v-model="find_zakaz" placeholder="Найти заказ по номеру клиента"
+                       v-model="find_phone" placeholder="Найти заказ по номеру клиента"
                        @keyup.enter="findPhoneForFilter">
 
             </div>
@@ -108,13 +117,11 @@
 <script>
 
 import {mapActions, mapGetters} from "vuex";
-import {AtomSpinner} from 'epic-spinners'
 import {TheMask} from 'vue-the-mask'
 
 export default {
 
     components: {
-        AtomSpinner,
         TheMask
 
     },
@@ -122,12 +129,14 @@ export default {
     data() {
         return {
             date: '',
-            find_zakaz: '',
+            find_phone: '',
+            input_phone: '',
             ifThisFindPhone: false,
             ifFilterZakazByData: false,
             ifThiFieldPhoneNotFull: false,
             ifThisFindData: true,
             ifThisMainTableZakaz: true,
+            ifFilterZakazByPhone: false,
 
         }
     },
@@ -158,7 +167,7 @@ export default {
 
         ifThisFindZakaz() {
 
-            if (this.find_zakaz !== '') {
+            if (this.find_phone !== '') {
                 return true;
             } else {
                 return false;
@@ -167,8 +176,9 @@ export default {
         },
 
         length: function () {
-            return this.find_zakaz.length;
+            return this.find_phone.length;
         },
+
     },
 
     methods: {
@@ -183,21 +193,24 @@ export default {
             this.$refs.add_kvadrat.addNewKvadratModal()
         },
 
-        onContext(ctx) {
-            this.value = ctx.activeYMD
-        },
-
         findPhoneForFilter() {
 
             if (this.length < 19) {
 
                 this.ifThiFieldPhoneNotFull = true
+                this.ifFilterZakazByData = false
+                this.ifFilterZakazByPhone = false
+                this.ifThisMainTableZakaz = false
 
             } else {
 
                 this.ifThiFieldPhoneNotFull = false
-                this.$store.dispatch('PhoneFilterZakaz', {phone: this.find_zakaz})
+                this.ifFilterZakazByData = false
+                this.ifFilterZakazByPhone = true
                 this.ifThisMainTableZakaz = false
+                this.$store.dispatch('PhoneFilterZakaz', {phone: this.find_phone})
+                this.input_phone = this.find_phone
+
             }
 
         },
@@ -215,15 +228,16 @@ export default {
         showFindPhoneSearch() {
             this.ifThisFindPhone = true
             this.ifThisFindData = false
-            this.ifFilterZakazByData = false
         },
 
         showFindDataSearch() {
             this.ifThisFindPhone = false
+            this.ifFilterZakazByPhone = false
             this.ifThisFindData = true
             this.ifThisFindZakaz = false
             this.ifThiFieldPhoneNotFull = false
-            this.find_zakaz = ''
+            this.ifThisMainTableZakaz = true
+            this.find_phone = ''
 
             if (this.date) {
                 this.$store.dispatch('DataFilterZakaz', {data: this.date})
@@ -243,12 +257,13 @@ export default {
         },
 
         clearFindTel() {
-            this.find_zakaz = ''
+            this.find_phone = ''
             this.date = ''
             this.ifThisFindPhone = false
             this.ifThiFieldPhoneNotFull = false
             this.ifThisFindData = true
             this.ifThisMainTableZakaz = true
+            this.ifFilterZakazByPhone = false
             this.$store.dispatch('GetAllZakaz')
         },
 

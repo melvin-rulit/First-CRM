@@ -372,11 +372,9 @@ if ($zakazField->type_zakaz !== 1){
 
     public function zakazFilterPhone(Request $request)
     {
-        $find_zakaz = Order::filter($request->all())->get();
+           $find_zakaz = Order::filter($request->all())->get();
 
-        return AccessAllResource::collection($find_zakaz)->additional([
-            'find' => 1
-        ]);
+        return AccessAllResource::collection($find_zakaz);
 
     }
 

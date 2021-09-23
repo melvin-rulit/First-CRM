@@ -1,0 +1,53 @@
+@page {
+	width: 50mm;
+	margin: 10mm 2mm 10mm 2mm;
+	font-family: arial;
+	height: 300mm;
+}
+
+
+@media print {
+
+	html, body{
+		width: 50mm;
+		font-size: 10px;
+		font-family: arial;
+	}
+
+	*, *:before, *:after {
+		box-shadow: none;
+		text-shadow: none;
+	}
+
+	h1 {font-size: 16px; text-align: center; text-transform: uppercase;}
+	h2 {font-size: 14px;}
+	h3 {font-size: 12px;}
+
+	.no-print{display: none;}
+
+	.to_print{
+		width: 100%;
+		font-family: arial;
+	}
+
+
+
+}
+
+
+
+html, body{
+	font-family: arial;
+}
+
+input::placeholder {color: #000; font-family: arial;}
+
+	.to_print{	width: 120%; margin:auto;}
+	.to_print img{width: 100%;}
+
+	h1 {font-size: 12px; text-align: center; text-transform: uppercase; text-decoration: underline;}
+
+	.border{border: solid 2px #000; padding: 1mm; margin-top: 5mm;}
+	.name-input{font-weight: bold; width: 35%;}
+	.text {border: none; width: 100%;}
+	.adress{width: 100%; min-height:20mm; }
