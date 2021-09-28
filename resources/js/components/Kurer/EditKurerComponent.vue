@@ -38,6 +38,7 @@
                         <input-component
                             v-model="incominData.phone"
                             name="phone"
+                            mask="+38 (###)-###-##-##"
                             @edit-field="editField">
 
                         </input-component>
@@ -115,8 +116,12 @@
 </template>
 
 <script>
+import {TheMask} from 'vue-the-mask'
 
 export default {
+
+    components: { TheMask },
+    // mask="+38 (###)-###-##-##"
 
     data() {
         return {

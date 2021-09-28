@@ -5,7 +5,7 @@ export default {
     },
 
     getters: {
-        AllZakaz(state){
+        AllZakazFind(state){
             return state.zakaz
         },
 

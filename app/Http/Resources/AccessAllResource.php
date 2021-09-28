@@ -33,6 +33,7 @@ class AccessAllResource extends JsonResource
             'date_delivery' => '---------------',
             'end_Date' =>   Carbon::createFromDate($this->end_Date)->format('d.m.Y') ,
             'array' =>   json_decode($this->array, true, 100, 0),
+            'end_array' =>   json_decode($this->end_array, true, 100, 0),
         ];
     }
 }

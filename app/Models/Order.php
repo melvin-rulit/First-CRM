@@ -37,6 +37,7 @@ class Order extends Model
         'created_at',
         'type_zakaz',
         'array',
+        'end_array',
     ];
 
 //    public $timestamps = false;

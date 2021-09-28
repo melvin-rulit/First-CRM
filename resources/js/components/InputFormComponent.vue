@@ -14,41 +14,28 @@
             :placeholder="placeholder"
             value-type="YYYY-MM-DD"
             format="DD.MM.YYYY"
-            @change="keyInputForm = false; $emit('edit-field', value, name ,datePicker, id)"
+            @change="keyInputForm = false; $emit('edit-field', value, datePicker, id)"
             @clear="keyInputForm = false; $emit('clear')">
         </date-picker>
     </span>
 </template>
 
 <script>
-    import {TheMask} from 'vue-the-mask'
+
     export default {
-        components: {TheMask},
+
         props: {
             value: [String, Number],
-            name: {
-                type: String,
-                required: true
-            },
             id: {
                 type: Number,
             },
             placeholder: {
                 type: String,
             },
-            mask: {},
-            // Свойство вывод textarea
-            textarea: {
-                type: String,
-            },
             // Свойство выводы даты
             datePicker: {
                 type: String,
             },
-            gate: {
-                // type: String,
-                default: false,
-            }
         },
         data() {
             return {

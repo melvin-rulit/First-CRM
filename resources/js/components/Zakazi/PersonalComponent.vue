@@ -188,28 +188,11 @@ export default {
     },
 
     mounted() {
-
-        this.GetAllZakaz()
+        // this.GetAllZakaz()
     },
 
     computed: {
         ...mapGetters(['AllZakaz']),
-
-        dateRange: {
-
-            get() {
-
-                let start = this.start_date
-                let end = this.end_date
-
-                let range = {
-                    start: new Date(start),
-                    end: new Date(end),
-                }
-
-                return range
-            }
-        }
 
     },
 

@@ -51,11 +51,11 @@
 
 <div id="app">
 
-    <head-component></head-component>
-
         @yield('contentAfterlogin')
 
 </div>
+
+<script src="{{ asset('js/app.js') }}"></script>
 
 </body>
 </html>

@@ -32,7 +32,7 @@
 
             <div v-if="ifThisMainTableZakaz">
                 <h4 v-if="ifThisRouteZakaz" class="mt-2 ml-5">Список заказов на:
-                    <b-badge variant="danger">{{ AllZakaz.data['0'].date_delivery }}</b-badge>
+                    <b-badge variant="danger">{{ AllZakazFind.data['0'].date_delivery }}</b-badge>
                 </h4>
             </div>
 
@@ -53,9 +53,9 @@
         <ul class="navbar-nav ml-auto">
 
             <div v-if="ifThisRouteZakaz">
-                <b-alert v-if="ifThiFieldPhoneNotFull" show variant="danger" class="mr-4">Вы ввели не полный номер
+                <b-button v-if="ifThiFieldPhoneNotFull" show variant="danger" class="mr-4 mt-2">Вы ввели не полный номер
                     телефона
-                </b-alert>
+                </b-button>
             </div>
 
             <!--------------------------------------------------------------------------------------------------------------------------------------->
@@ -64,8 +64,10 @@
                 <h5>Добавить Курьера</h5>
             </b-button>
 
-            <li v-if="ifThisFindZakaz"><a href="#" @click.prevent="clearFindTel" class="nav-link text-sm"><img
-                src="/images/icon-header/cancel.png"></a></li>
+            <div v-if="ifThisRouteZakaz">
+                <li v-if="ifThisFindZakaz"><a href="#" @click.prevent="clearFindTel" class="nav-link text-sm"><img
+                    src="/images/icon-header/cancel.png"></a></li>
+            </div>
 
             <div class="mt-2" v-if="ifThisRouteZakaz" variant="outline-primary">
 
@@ -141,8 +143,22 @@ export default {
         }
     },
 
+    mounted() {
+        this.clearFindTel()
+    },
+
+   beforeUpdate () {
+
+        if (this.$route.path !== '/home'  ) {
+
+            this.clearFindTel()
+            this.clear()
+        }
+
+    },
+
     computed: {
-        ...mapGetters(['AllKurers', 'AllZakaz']),
+        ...mapGetters(['AllKurers', 'AllZakazFind']),
 
         ifThisRoute() {
             if (this.$route.name === 'kurer')
@@ -187,7 +203,6 @@ export default {
         addNewUser() {
             this.$refs.add_user.addNewUserModal()
         },
-
 
         addKvadrat() {
             this.$refs.add_kvadrat.addNewKvadratModal()
