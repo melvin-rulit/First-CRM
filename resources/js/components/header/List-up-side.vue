@@ -37,7 +37,7 @@
             </div>
 
             <div v-if="ifThisRouteZakaz">
-                <h4 v-if="ifFilterZakazByData" class="mt-2 ml-5">Отфильтрованный список по ( Дате ) на:
+                <h4 v-if="ifFilterZakazByData" class="mt-2 ml-5">Отфильтрованный список заказов у которых есть доставка на:
                     <b-badge variant="danger">{{ date }}</b-badge>
                 </h4>
             </div>

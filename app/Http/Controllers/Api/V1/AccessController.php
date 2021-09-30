@@ -43,12 +43,22 @@ class AccessController extends Controller
 
             } else {
 
-                if (Carbon::parse($value->end_Date)->toDateString() == Carbon::now()->toDateString()) {
+                $incoming = json_decode($value->array, true, 100, 0);
+                $make_array = array($incoming);
+                $have_date_array_for_kurer = array_search(Carbon::now()->toDateString(), $make_array, false);
 
-                    $value->date_delivery = null;
-                    $value->save();
+                if (false !== $have_date_array_for_kurer) {
+                    $value->date_delivery_kurer = $incoming[$have_date_array_for_kurer];
                 }
 
+                if (Carbon::parse($value->end_Date)->toDateString() == Carbon::now()->toDateString()) {
+
+                    $value->date_delivery_kurer = null;
+                    $value->date_delivery = null;
+                    $value->array = null;
+                }
+
+                $value->save();
             }
 
         }
@@ -120,7 +130,6 @@ class AccessController extends Controller
                 $incoming_end_array = json_decode($value->end_array, true, 100, 0);
                 $have_end_array_date = array_search(Carbon::now()->toDateString(), $incoming, false);
 
-
                 if (Carbon::parse($value->end_Date)->toDateString() == Carbon::now()->toDateString()) {
 
                     $value->date_delivery = null;
@@ -144,15 +153,15 @@ class AccessController extends Controller
                     $value->status = 0;
                 }
 
-                if ($incoming_end_array !== null) {
 
-                    if (!in_array(Carbon::now()->toDateString(), $incoming_end_array, false)) {
+                if ($incoming_end_array !== null && !in_array(Carbon::now()->toDateString(), $incoming_end_array, false)) {
 
-                        $make_array = array($incoming[$have_end_array_date]);
-                        $result = array_merge($make_array, $incoming_end_array);
-                        $value->end_array = json_encode($result, 0, 100);
+                    array_push($incoming_end_array, $incoming[$have_end_array_date]);
+                    $value->end_array = json_encode($incoming_end_array, 0, 100);
 
-                    }
+                    $make_array = array($incoming[$have_end_array_date]);
+                    $result = array_diff($incoming, $make_array);
+                    $value->array = json_encode($result, 0, 100);
 
                 } else if (false !== $have_end_array_date) {
 
@@ -225,57 +234,57 @@ class AccessController extends Controller
             } //////////////////////////////////////////////////////////////////////////////////
 
 
-            else {
-
-                $incoming = json_decode($value->array, true, 100, 0);
-                $have_date_array = array_search(Carbon::now()->addDay()->toDateString(), $incoming, false);
-
-                $notification_end_day = array_slice($incoming, -3);
-                $find_for_notification = in_array(Carbon::now()->toDateString(), $notification_end_day, false);
-
-                $incoming_end_array = json_decode($value->end_array, true, 100, 0);
-                $have_end_array_date = array_search(Carbon::now()->toDateString(), $incoming, false);
-
-                if ($incoming_end_array !== null) {
-
-                    if (!in_array(Carbon::now()->toDateString(), $incoming_end_array, false)) {
-
-                        $make_array = array($incoming[$have_end_array_date]);
-                        $result = array_merge($make_array, $incoming_end_array);
-                        $value->end_array = json_encode($result, 0, 100);
-
-                    }
-
-                } else if (false !== $have_end_array_date) {
-
-                    $value->end_array = json_encode(array($incoming[$have_end_array_date]), 0, 100);
-                    $make_array = array($incoming[$have_end_array_date]);
-                    $result = array_diff($incoming, $make_array);
-
-                    $value->array = json_encode($result, 0, 100);
-                }
-
-                if (Carbon::parse($value->end_Date)->toDateString() == Carbon::now()->toDateString()) {
-
-                    $value->date_delivery = null;
-
-                } else if ($have_date_array) {
-
-                    $value->date_delivery = $incoming[$have_date_array];
-                }
-
-                if ($find_for_notification) {
-
-                    $value->status = 1;
-
-                } else {
-
-                    $value->status = 0;
-                }
-
-                $value->save();
-
-            }
+//            else {
+//
+//                $incoming = json_decode($value->array, true, 100, 0);
+//                $have_date_array = array_search(Carbon::now()->addDay()->toDateString(), $incoming, false);
+//
+//                $notification_end_day = array_slice($incoming, -3);
+//                $find_for_notification = in_array(Carbon::now()->toDateString(), $notification_end_day, false);
+//
+//                $incoming_end_array = json_decode($value->end_array, true, 100, 0);
+//                $have_end_array_date = array_search(Carbon::now()->toDateString(), $incoming, false);
+//
+//                if ($incoming_end_array !== null) {
+//
+//                    if (!in_array(Carbon::now()->toDateString(), $incoming_end_array, false)) {
+//
+//                        $make_array = array($incoming[$have_end_array_date]);
+//                        $result = array_merge($make_array, $incoming_end_array);
+//                        $value->end_array = json_encode($result, 0, 100);
+//
+//                    }
+//
+//                } else if (false !== $have_end_array_date) {
+//
+//                    $value->end_array = json_encode(array($incoming[$have_end_array_date]), 0, 100);
+//                    $make_array = array($incoming[$have_end_array_date]);
+//                    $result = array_diff($incoming, $make_array);
+//
+//                    $value->array = json_encode($result, 0, 100);
+//                }
+//
+//                if (Carbon::parse($value->end_Date)->toDateString() == Carbon::now()->toDateString()) {
+//
+//                    $value->date_delivery = null;
+//
+//                } else if ($have_date_array) {
+//
+//                    $value->date_delivery = $incoming[$have_date_array];
+//                }
+//
+//                if ($find_for_notification) {
+//
+//                    $value->status = 1;
+//
+//                } else {
+//
+//                    $value->status = 0;
+//                }
+//
+//                $value->save();
+//
+//            }
         }
 
 
