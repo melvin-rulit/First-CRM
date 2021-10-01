@@ -5,7 +5,12 @@
         <b-modal id="editZakazPay" title="Отредактируйте поле  : Оплата" @ok="sendData"  @hidden="ClearModal" centered
                  ok-only ok-title="Готово">
 
-            <div class="card-body py-0">
+            <template #modal-title>
+
+                <h7 class="">№ заказа</h7>
+                <b>[ {{ Pay.orderid }} ]</b>
+
+            </template>
 
 
             <b-row class="card-body">
@@ -19,8 +24,6 @@
                 </b-col>
 
             </b-row>
-
-            </div>
 
 
         </b-modal>
@@ -74,19 +77,22 @@ export default {
                 axios.post('api/v1/sendEditZakazData', {
                     field_id: this.Pay.id, field_name: 'pay', field_value: this.tupePay
 
-                })
+                }) .then((response) =>{
+
+                    if (response.data === "Заказ обновлен") {
+
+                        Vue.$toast.open({
+                            message: 'Тип оплаты обновлен',
+                            type: 'success',
+                            duration: 3000,
+                            position: 'top'
+                        });
+
+                    }
+                });
 
                 this.GetAllZakaz()
 
-                setTimeout(() => {
-                    Vue.$toast.open({
-                        message: "Тип оплаты обновлен",
-                        type: 'success',
-                        duration: 2000,
-                        position: 'bottom-right'
-                    });
-
-                }, 500)
             }
 
         },

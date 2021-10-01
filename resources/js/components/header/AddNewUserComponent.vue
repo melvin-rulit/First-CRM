@@ -120,7 +120,7 @@ import {mapActions} from "vuex";
 
             saveKurer() {
 
-                axios.post('api/v1/users', {
+                axios.post('api/v1/kurer', {
 
                     name: this.name,
                     surname: this.surname,
@@ -132,13 +132,18 @@ import {mapActions} from "vuex";
                     password: this.password,
                     secret_id: this.password,
 
-                })
+                }) .then((response) =>{
 
-                Vue.$toast.open({
-                    message: 'Курьер Добавлен',
-                    type: 'success',
-                    duration: 3000,
-                    position: 'bottom-right'
+                    if (response.data === "Создан") {
+
+                        Vue.$toast.open({
+                            message: 'Курьер Добавлен',
+                            type: 'success',
+                            duration: 3000,
+                            position: 'top'
+                        });
+
+                    }
                 });
             },
 

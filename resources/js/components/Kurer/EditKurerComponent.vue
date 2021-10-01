@@ -153,7 +153,20 @@ export default {
                     field_id: this.incominData.id,
                     field_name: name,
                     field_value: e
-                })
+                }) .then((response) =>{
+
+                    if (response.data === "Данные обновлены") {
+
+                        Vue.$toast.open({
+                            message: 'Данные обновлены',
+                            type: 'success',
+                            duration: 3000,
+                            position: 'top'
+                        });
+
+                    }
+                });
+
             } else {
                 const value = e.target.value;
                 const key = e.currentTarget.getAttribute('name');
@@ -161,7 +174,19 @@ export default {
                     field_id: this.incominData.id,
                     field_name: key,
                     field_value: value
-                })
+                }) .then((response) =>{
+
+                    if (response.data === "Данные обновлены") {
+
+                        Vue.$toast.open({
+                            message: 'Данные обновлены',
+                            type: 'success',
+                            duration: 3000,
+                            position: 'top'
+                        });
+
+                    }
+                });
             }
 
             this.$emit('get-method')
@@ -187,22 +212,24 @@ export default {
 
                     if (this.boxTwo === true) {
 
-                        axios.delete('api/v1/users/' + this.incominData.id)
+                        axios.delete('api/v1/kurer/' + this.incominData.id)  .then((response) =>{
+
+                            if (response.data === "Курьер удален") {
+
+                                Vue.$toast.open({
+                                    message: 'Курьер удален',
+                                    type: 'success',
+                                    duration: 3000,
+                                    position: 'top'
+                                });
+
+                            }
+                        });
 
                         this.$bvModal.hide('editKurer')
 
                         this.$emit('get-method')
 
-                        setTimeout(() => {
-
-                            Vue.$toast.open({
-                                message: "Курьер удален",
-                                type: 'error',
-                                duration: 2000,
-                                position: 'bottom-right'
-                            });
-
-                        }, 500)
                     }
                 })
 

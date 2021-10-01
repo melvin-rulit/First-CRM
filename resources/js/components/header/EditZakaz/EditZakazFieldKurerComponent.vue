@@ -6,6 +6,13 @@
         <b-modal id="editKurer" title="Отредактируйте поле  : Курьер" @ok=""  @hidden="ClearModal" centered
                  ok-only ok-title="Готово">
 
+            <template #modal-title>
+
+                <h7 class="">№ заказа</h7>
+                <b>[ {{ Zakaz.orderid }} ]</b>
+
+            </template>
+
             <div class="card-body py-0">
 
                 <div class="form-group row">
@@ -49,11 +56,6 @@ export default {
             SelectKurer: {},
             tupeZakaz: null,
 
-            options_type: [
-                {value: 'null', text: 'Тип доставки'},
-                {value: 'Курьером', text: 'Курьер'},
-                {value: 'Самовывоз', text: 'Самовывоз'},
-            ],
         }
     },
 
@@ -78,17 +80,19 @@ export default {
             axios.post('api/v1/sendEditZakazData', {
                 field_id: this.Zakaz.id,  field_name: 'kurer', field_value: this.SelectKurer.surname
 
-            })
+            }) .then((response) =>{
 
-            setTimeout(() => {
-                Vue.$toast.open({
-                    message: "Курьер добавлен",
-                    type: 'success',
-                    duration: 2000,
-                    position: 'bottom-right'
-                });
+                if (response.data === "Заказ обновлен") {
 
-            }, 500)
+                    Vue.$toast.open({
+                        message: 'Курьер добавлен',
+                        type: 'success',
+                        duration: 3000,
+                        position: 'top'
+                    });
+
+                }
+            });
 
             this.GetAllZakaz()
         },

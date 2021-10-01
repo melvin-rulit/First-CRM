@@ -224,6 +224,7 @@ export default {
                 this.ifFilterZakazByPhone = true
                 this.ifThisMainTableZakaz = false
                 this.$store.dispatch('PhoneFilterZakaz', {phone: this.find_phone})
+                this.$store.dispatch('FindPhone', {phone: this.find_phone })
                 this.input_phone = this.find_phone
 
             }
@@ -235,6 +236,7 @@ export default {
 
             if (this.date) {
                 this.$store.dispatch('DataFilterZakaz', {data: this.date})
+                this.$store.dispatch('FindData', {data: this.date })
                 this.ifFilterZakazByData = true
                 this.ifThisMainTableZakaz = false
             }
@@ -267,6 +269,7 @@ export default {
 
         clear() {
             this.ifFilterZakazByData = false
+            this.$store.dispatch('FindData', {data: ''})
             this.$store.dispatch('GetAllZakaz')
             this.ifThisMainTableZakaz = true
         },
@@ -279,6 +282,7 @@ export default {
             this.ifThisFindData = true
             this.ifThisMainTableZakaz = true
             this.ifFilterZakazByPhone = false
+            this.$store.dispatch('FindPhone', {phone: ''})
             this.$store.dispatch('GetAllZakaz')
         },
 

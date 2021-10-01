@@ -6,6 +6,13 @@
         <b-modal id="editDeliv" title="Отредактируйте поле  : Доставка" @ok="sendData"  @hidden="ClearModal" centered
                  ok-only ok-title="Готово">
 
+            <template #modal-title>
+
+                <h7 class="">№ заказа</h7>
+                <b>[ {{ Zakaz.orderid }} ]</b>
+
+            </template>
+
             <div class="card-body py-0">
 
                             <b-row class="card-body">
@@ -75,19 +82,22 @@ export default {
                 axios.post('api/v1/sendEditZakazData', {
                     field_id: this.Zakaz.id, field_name: 'deliv', field_value: this.tupeZakaz
 
-                })
+                }) .then((response) =>{
+
+                    if (response.data === "Заказ обновлен") {
+
+                        Vue.$toast.open({
+                            message: 'Доставка обновлена',
+                            type: 'success',
+                            duration: 3000,
+                            position: 'top'
+                        });
+
+                    }
+                });
 
                 this.GetAllZakaz()
 
-                setTimeout(() => {
-                    Vue.$toast.open({
-                        message: "Доставка обновлена",
-                        type: 'success',
-                        duration: 2000,
-                        position: 'bottom-right'
-                    });
-
-                }, 500)
             }
             },
 

@@ -1,12 +1,22 @@
 export default {
 
     state: {
-        zakaz:[],
+        zakaz: [],
+        data: '',
+        phone: '',
     },
 
     getters: {
-        AllZakazFind(state){
+        AllZakazFind(state) {
             return state.zakaz
+        },
+
+        DataFind(state) {
+            return state.data
+        },
+
+        PhoneFind(state) {
+            return state.phone
         },
 
     },
@@ -14,26 +24,42 @@ export default {
     mutations: {
         getZakaz(state, zakazi) {
             state.zakaz = zakazi
-        }
+        },
+
+        updateData: function (state, payload) {
+            state.data = payload
+        },
+
+        updatePhone: function (state, payload) {
+            state.phone = payload
+        },
     },
 
     actions: {
 
-        PhoneFilterZakaz({commit}, {phone}){
+        PhoneFilterZakaz({commit}, {phone}) {
 
-            axios.post(`api/v1/zakazFilterPhone`, { FindPhone: phone })
+            axios.post(`api/v1/zakazFilterPhone`, {FindPhone: phone})
                 .then((response) => {
                     commit('getZakaz', response.data)
                 })
         },
 
-        DataFilterZakaz({commit}, {data}){
+        DataFilterZakaz({commit}, {data}) {
 
-            axios.post(`api/v1/zakazFilterData`, { FindData: data })
+            axios.post(`api/v1/zakazFilterData`, {FindData: data})
                 .then((response) => {
                     commit('getZakaz', response.data)
                 })
         },
+
+        FindData: function (store, payload) {
+            store.commit('updateData', payload)
+        },
+
+        FindPhone: function (store, payload) {
+            store.commit('updatePhone', payload)
+        },
+
     },
-
 }

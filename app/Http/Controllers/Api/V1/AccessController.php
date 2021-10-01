@@ -363,6 +363,8 @@ class AccessController extends Controller
 //            $zakazField->start_edit = 1;
 
             $zakazField->save();
+
+            return "Дата доставки изменена";
         }
 
     }
@@ -375,7 +377,7 @@ class AccessController extends Controller
         $updateZakaz->$field_name = $request['field_value'];
         $updateZakaz->save();
 
-        return " Заказ обновлен";
+        return "Заказ обновлен";
 
     }
 

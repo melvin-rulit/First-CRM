@@ -13,8 +13,7 @@
         <showModalEditZakazFieldTotal-component @get-method="updateZakaz"
                                                 ref="editZakazTotal"></showModalEditZakazFieldTotal-component>
 
-        <showModalEditZakazDataDelivery-component @get-method="updateZakaz"
-                                                  ref="editDateDelivery"></showModalEditZakazDataDelivery-component>
+        <showModalEditZakazDataDelivery-component ref="editDateDelivery"></showModalEditZakazDataDelivery-component>
 
 
         <!------------------------------------------------------------------------------------------------------------------------------------------>
@@ -187,10 +186,6 @@ export default {
         }
     },
 
-    mounted() {
-        // this.GetAllZakaz()
-    },
-
     computed: {
         ...mapGetters(['AllZakaz']),
 
@@ -269,18 +264,19 @@ export default {
 
                     if (this.boxTwo === true) {
 
-                        axios.delete('api/v1/zakaz/' + index.id)
+                        axios.delete('api/v1/zakaz/' + index.id) .then((response) =>{
 
-                        setTimeout(() => {
+                            if (response.data === "Заказ удален") {
 
-                            Vue.$toast.open({
-                                message: "Заказ удален",
-                                type: 'error',
-                                duration: 2000,
-                                position: 'bottom-right'
-                            });
+                                Vue.$toast.open({
+                                    message: 'Заказ удален',
+                                    type: 'success',
+                                    duration: 3000,
+                                    position: 'top'
+                                });
 
-                        }, 500)
+                            }
+                        });
 
                         this.GetAllZakaz()
 

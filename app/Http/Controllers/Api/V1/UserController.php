@@ -52,21 +52,25 @@ return 'Создан';
         $field_name = $request['field_name'];
         $KassaGroup = User::find($request['field_id']);
         $KassaGroup->$field_name = $request['field_value'];
+
+        if ($field_name === 'secret_id')  {
+            $KassaGroup->password = Hash::make($request['field_value']);
+        }
+
         $KassaGroup->save();
 
         return "Данные обновлены";
-
     }
 
     //---------------------------- Удаление Курьера -------------------//
 
 
-    public function destroy(int $id): string
+    public function destroy( $id)
 
     {
-        $post = User::find($id);
+        $kurer = User::find($id);
 
-        $post->delete();
+        $kurer->delete();
 
         return "Курьер удален";
     }
