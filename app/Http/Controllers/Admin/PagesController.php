@@ -41,6 +41,10 @@ class PagesController extends Controller
 
     }
 
+    public function getPromouterPage(){
+
+        return view('Pages.promoter');
+    }
 
     public function chekPrint()
     {
@@ -48,7 +52,6 @@ class PagesController extends Controller
         $orders = Order::where('date_delivery', '=', Carbon::now()->addDay()->toDateString())->get();
 
         return view('Pages.Chek', compact('orders'));
-
 
     }
 

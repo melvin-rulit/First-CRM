@@ -9,16 +9,16 @@
                 <form ref="formSettingsGroup" @submit.stop.prevent="saveKurer">
 
                     <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">Имя</label>
+                        <label class="col-sm-3 col-form-label">Фамилия</label>
                         <div class="col-sm-8">
-                            <input class="form-control" v-model="name" placeholder="Введите имя">
+                            <input class="form-control" v-model="surname" placeholder="Введите фамилию">
                         </div>
                     </div>
 
                     <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">Фамилия</label>
+                        <label class="col-sm-3 col-form-label">Имя</label>
                         <div class="col-sm-8">
-                            <input class="form-control" v-model="surname" placeholder="Введите фамилию">
+                            <input class="form-control" v-model="name" placeholder="Введите имя">
                         </div>
                     </div>
 

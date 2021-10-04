@@ -3,8 +3,9 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Resources\UserAllResource;
-use App\Http\Resources\GetUserResource;
+use App\Http\Resources\PromouterResource;
 use App\Http\Controllers\Controller;
+use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Response as FacadeResponse;
@@ -50,14 +51,20 @@ return 'Создан';
     {
 
         $field_name = $request['field_name'];
-        $KassaGroup = User::find($request['field_id']);
-        $KassaGroup->$field_name = $request['field_value'];
+        $Kurer = User::find($request['field_id']);
+        $Kurer->$field_name = $request['field_value'];
 
         if ($field_name === 'secret_id')  {
-            $KassaGroup->password = Hash::make($request['field_value']);
+            $Kurer->password = Hash::make($request['field_value']);
         }
 
-        $KassaGroup->save();
+        if ($field_name === 'name') {
+            $Kurer->full_name = $request['full_surname'] . ' ' . $request['field_value'];
+        }else if ($field_name === 'surname') {
+            $Kurer->full_name = $request['field_value'] . ' ' . $request['full_name'];
+        }
+
+        $Kurer->save();
 
         return "Данные обновлены";
     }
@@ -75,34 +82,12 @@ return 'Создан';
         return "Курьер удален";
     }
 
-
-    /**
-     * Сохраняем данные из карточки пользователя
-     *
-     * @param Request $request
-     * @return string
-     */
-    public function saveCard(Request $request): string
+    public function getZakazForKurer(Request $request)
     {
+        $zakazi = Order::whereDate('date_delivery_kurer',  Carbon::now()->toDateString())->where('deliv', '=', 1)->get();
 
-        $field_name = $request['field_name'];
-        $user = User::find($request['user_id']);
-        $user->$field_name = $request['field_value'];
-        $user->save();
-
-        return "ok";
+        return PromouterResource::collection($zakazi);
     }
-
-    public function saveRole(Request $request){
-
-        $user = User::find($request->user_id);
-        $user->roles()->sync($request->roles);
-    }
-
-    public function download($file_name) {
-        $file_path = public_path('files/'.$file_name);
-        return response()->download($file_path);
-      }
 
 
 }

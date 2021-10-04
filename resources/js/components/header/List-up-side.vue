@@ -32,7 +32,7 @@
 
             <div v-if="ifThisMainTableZakaz">
                 <h4 v-if="ifThisRouteZakaz" class="mt-2 ml-5">Список заказов на:
-                    <b-badge variant="danger">{{ AllZakazFind.data['0'].date_delivery }}</b-badge>
+                    <b-badge variant="danger">{{ if_empty_zakaz }}</b-badge>
                 </h4>
             </div>
 
@@ -158,7 +158,7 @@ export default {
     },
 
     computed: {
-        ...mapGetters(['AllKurers', 'AllZakazFind']),
+        ...mapGetters(['AllKurers', 'AllZakazFind', 'if_empty_zakaz']),
 
         ifThisRoute() {
             if (this.$route.name === 'kurer')

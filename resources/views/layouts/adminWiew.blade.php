@@ -51,6 +51,8 @@
 
 <div id="app">
 
+    <head-component></head-component>
+
         @yield('contentAfterlogin')
 
 </div>

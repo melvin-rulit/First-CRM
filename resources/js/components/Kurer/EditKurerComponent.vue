@@ -9,11 +9,11 @@
             <div class="card-body py-0">
 
                 <div class="form-group row">
-                    <label class="col-sm-3">Имя</label>
+                    <label class="col-sm-3">Фамилия</label>
                     <div class="col-sm-8">
                         <input-component
-                            v-model="incominData.name"
-                            name="name"
+                            v-model="incominData.surname"
+                            name="surname"
                             @edit-field="editField">
 
                         </input-component>
@@ -21,11 +21,11 @@
                 </div>
 
                 <div class="form-group row">
-                    <label class="col-sm-3">Фамилия</label>
+                    <label class="col-sm-3">Имя</label>
                     <div class="col-sm-8">
                         <input-component
-                            v-model="incominData.surname"
-                            name="surname"
+                            v-model="incominData.name"
+                            name="name"
                             @edit-field="editField">
 
                         </input-component>
@@ -121,7 +121,6 @@ import {TheMask} from 'vue-the-mask'
 export default {
 
     components: { TheMask },
-    // mask="+38 (###)-###-##-##"
 
     data() {
         return {
@@ -146,34 +145,16 @@ export default {
 
         //--------------------------------------------- Изменяем  Курьера --------------------------------------------------------//
 
-        editField(e, name, type) {
+        editField(e) {
 
-            if (type) {
-                axios.post('api/v1/sendEditKurerData', {
-                    field_id: this.incominData.id,
-                    field_name: name,
-                    field_value: e
-                }) .then((response) =>{
-
-                    if (response.data === "Данные обновлены") {
-
-                        Vue.$toast.open({
-                            message: 'Данные обновлены',
-                            type: 'success',
-                            duration: 3000,
-                            position: 'top'
-                        });
-
-                    }
-                });
-
-            } else {
                 const value = e.target.value;
                 const key = e.currentTarget.getAttribute('name');
                 axios.post('api/v1/sendEditKurerData', {
                     field_id: this.incominData.id,
                     field_name: key,
-                    field_value: value
+                    field_value: value,
+                    full_name: this.incominData.name ,
+                    full_surname: this.incominData.surname,
                 }) .then((response) =>{
 
                     if (response.data === "Данные обновлены") {
@@ -187,7 +168,7 @@ export default {
 
                     }
                 });
-            }
+
 
             this.$emit('get-method')
 

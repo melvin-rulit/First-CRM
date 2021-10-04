@@ -31,7 +31,7 @@ class AccessAllResource extends JsonResource
             'start_edit' => $this->start_edit,
             'type_zakaz' => $this->type_zakaz,
             'datetimes' =>  Carbon::createFromDate($this->datetimes)->format('d.m.Y'),
-            'date_delivery' => '- Найдено -',
+            'date_delivery' => '-----------',
             'end_Date' =>   Carbon::createFromDate($this->end_Date)->format('d.m.Y') ,
             'array' =>   json_decode($this->array, true, 100, 0),
             'end_array' =>   json_decode($this->end_array, true, 100, 0),

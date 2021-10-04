@@ -18,14 +18,14 @@ class KvadratController extends Controller
     {
         $kvadrat = Kvadrat::all();
 
-        $collection = collect();
-
-        foreach ($kvadrat as $branch) {
-
-            foreach ($branch->kurer as $base) {
-                $collection->push($base);
-            }
-        }
+//        $collection = collect();
+//
+//        foreach ($kvadrat as $branch) {
+//
+//            foreach ($branch->kurer as $base) {
+//                $collection->push($base);
+//            }
+//        }
 
         return KvadratResource::collection($kvadrat);
 //        return (KvadratResource::collection($collection->all()));
@@ -40,9 +40,10 @@ class KvadratController extends Controller
         $field_name = 'name';
 
             $data->$field_name= $request['name'];
+
             $data->save();
 
-            return "update";
+            return "Курьер изменен";
 
   }
 

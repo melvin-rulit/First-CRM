@@ -92,7 +92,7 @@
                 mounted() {
 
             this. GetAllKurer()
-            this.addKvadrat()
+            this.getKvadrat()
                 },
 
 
@@ -106,7 +106,7 @@
 
                     },
 
-                    addKvadrat(){
+                    getKvadrat(){
 
                         axios.get('api/v1/kvadrat')
                             .then(response => this.kvadrat = response.data.data)
@@ -115,17 +115,25 @@
 
                     sendEditKurer(items){
 
-                        axios.post('api/v1/sendEditKurer', {id: items , name: this.SelectKurer.name})
+                        axios.post('api/v1/sendEditKurer', {id: items , name: this.SelectKurer.surname + ' ' +  this.SelectKurer.name}) .then((response) =>{
 
-                        this. SelectKurer = ''
+                            if (response.data === "Курьер изменен") {
 
-                        this.addKvadrat()
+                                this.getKvadrat()
+                                this. SelectKurer = ''
 
-                        Vue.$toast.open({
-                            message: "Курьер изменен",
-                            type: 'success',
-                            duration: 2000,
-                            position: 'bottom-right'
+                                setTimeout(() => {
+
+                                    Vue.$toast.open({
+                                        message: 'Курьер изменен',
+                                        type: 'success',
+                                        duration: 3000,
+                                        position: 'top'
+                                    });
+
+                                },1000)
+
+                            }
                         });
 
                     },

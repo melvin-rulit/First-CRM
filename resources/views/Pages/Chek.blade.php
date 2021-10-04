@@ -24,11 +24,11 @@
 <tbody>
 <div class='to_print'>
 
-    <img src="/images/loading.svg">
-
-    <h1>счет</h1><br><br>
-
     @foreach($orders as $key => $data)
+
+        <img src="/images/loading.svg">
+
+        <h1>счет</h1>
 
         <table>
             <tr>
@@ -78,12 +78,11 @@
             </table>
             <br><br>
 
-            @endforeach
-
         </div>
 
-        <br>
-        <div style="text-align: center;"><i>Фигура она или есть ... или не надо есть</i></div>
+        <div style="text-align: center;"><i>Фигура она или есть ... или не надо есть</i></div><br><br>
+
+    @endforeach
 
 </div>
 

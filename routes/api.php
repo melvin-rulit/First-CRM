@@ -15,6 +15,7 @@ Route::group(['prefix' => 'v1',  'as' => 'api.', 'namespace' => 'Api\V1'], funct
     Route::post('sendEditKurerData', 'UserController@editKurer');
     Route::post('userCardSave', 'UserController@saveCard');
     Route::post('saveRolesForUser', 'UserController@saveRole');
+    Route::get('getZakazForKurer', 'UserController@getZakazForKurer');
 
     // Zakazi
     Route::apiResource('zakaz', 'AccessController');

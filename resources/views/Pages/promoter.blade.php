@@ -9,9 +9,13 @@
 
     <title> {{ trans('panel.site_title') }}</title>
 
-<!-- Styles -->
+    <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/personal.css') }}" rel="stylesheet">
+
+    <!-- fontawesome -->
+    <link href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" rel="stylesheet">
+
+
 
     <!--  анимированные переходы между компонентами */ -->
     <style type="text/css">
@@ -41,6 +45,8 @@
     <promouter-component></promouter-component>
 
 </div>
+
 <script src="{{ asset('js/app.js') }}"></script>
+
 </body>
 </html>
