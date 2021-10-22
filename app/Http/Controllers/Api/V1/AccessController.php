@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\AccessResource;
 use App\Http\Resources\AccessAllResource;
 use App\Models\Order;
+use App\Models\Time;
 use Carbon\Carbon;
 use Carbon\CarbonPeriod;
 use Illuminate\Http\Request;
@@ -19,47 +20,63 @@ class AccessController extends Controller
     {
         $zakazi = Order::all();
 
+        $use_date_and_time = Time::first(); // 14:00 (10.10.2021)  period  14:00 (11.10.2021)
+
         //------------------------------------------------------------------------------------------------------------------//
 
         foreach ($zakazi->where('type_zakaz', '=', 1) as $value) {
 
-            if ($value->first_edit == 0 && Carbon::parse($value->datetimes)->format('H:i') < '20:00') {
 
-                $Start_day_zakaz = $value->date_delivery = Carbon::parse($value->datetimes)->addDay()->toDateString();
+            if ($value->first_edit == 0 && Carbon::parse($value->datetimes)->format('H:i') < $use_date_and_time->time && Carbon::now()->toDateString()) {
+
+                $Start_day_zakaz = $value->date_delivery = Carbon::parse($value->datetimes)->toDateString();
                 $value->array = json_encode($Start_day_zakaz, 0, 100);
                 $value->end_Date = Carbon::parse($Start_day_zakaz)->addDay()->toDateString();
+//                $value->use_time = $use_date_and_time->time;
+//                $value->datetimes_time = Carbon::parse($value->datetimes)->format('H:i:s');
+
                 $value->first_edit = 1;
 
-                $value->save();
+            } /////////////////////////////////////////////////////////////////////////////////
 
-            } else if ($value->first_edit == 0 && Carbon::parse($value->datetimes)->format('H:i') >= '20:00') {
+            else if ($value->first_edit == 0 && Carbon::parse($value->datetimes)->format('H:i') >= $use_date_and_time->time && Carbon::now()->toDateString()) {
 
-                $Start_day_zakaz = $value->date_delivery = Carbon:: parse($value->datetimes)->addDays(2)->toDateString();
+                $Start_day_zakaz = $value->date_delivery = Carbon:: parse($value->datetimes)->addDay()->toDateString();
                 $value->array = json_encode($Start_day_zakaz, 0, 100);
                 $value->end_Date = Carbon::parse($Start_day_zakaz)->addDay()->toDateString();
+//                $value->use_time = $use_date_and_time->time;
+//                $value->datetimes_time = Carbon::parse($value->datetimes)->format('H:i:s');
+
                 $value->first_edit = 1;
 
-                $value->save();
+            } /////////////////////////////////////////////////////////////////////////////////
 
-            } else {
+            else if ($value->array !== null) {
 
                 $incoming = json_decode($value->array, true, 100, 0);
+
+//                $value->use_time = $use_date_and_time->time;
+//                $value->datetimes_time = Carbon::parse($value->datetimes)->format('H:i:s');
+
                 $make_array = array($incoming);
                 $have_date_array_for_kurer = array_search(Carbon::now()->toDateString(), $make_array, false);
 
                 if (false !== $have_date_array_for_kurer) {
-                    $value->date_delivery_kurer = $incoming[$have_date_array_for_kurer];
+                    $value->date_delivery_kurer = $make_array[$have_date_array_for_kurer];
                 }
-
-                if (Carbon::parse($value->end_Date)->toDateString() == Carbon::now()->toDateString()) {
-
-                    $value->date_delivery_kurer = null;
-                    $value->date_delivery = null;
-                    $value->array = null;
-                }
-
-                $value->save();
             }
+
+            if (Carbon::parse($value->end_Date)->toDateString() == Carbon::now()->toDateString() || Carbon::parse($value->end_Date)->toDateString() < Carbon::now()->toDateString()) {
+
+                $value->date_delivery_kurer = null;
+                $value->date_delivery = null;
+                $value->datetimes = null;
+                $value->end_Date = null;
+                $value->array = null;
+
+            }
+
+            $value->save();
 
         }
 
@@ -68,9 +85,9 @@ class AccessController extends Controller
 
         foreach ($zakazi->where('type_zakaz', '=', 7) as $value) {
 
-            if ($value->first_edit == 0 && Carbon::parse($value->datetimes)->format('H:i') < '20:00') {
+            if ($value->first_edit == 0 && Carbon::parse($value->datetimes)->format('H:i') < $use_date_and_time->time && Carbon::now()->toDateString()) {
 
-                $Start_day_zakaz = $value->date_delivery = Carbon::parse($value->datetimes)->addDay()->toDateString();
+                $Start_day_zakaz = $value->date_delivery = Carbon::parse($value->datetimes)->toDateString();
 
                 $end_Date = Carbon::parse($value->date_delivery)->addDays(7)->toDateString();
 
@@ -86,20 +103,27 @@ class AccessController extends Controller
                 array_pop($zakaz_array);
 
                 $value->array = json_encode($zakaz_array, 0, 100);
+
+                $incoming = json_decode($value->array, true, 100, 0);
+                $have_date_array_for_kurer = array_search(Carbon::now()->toDateString(), $incoming, false);
+
+                if (false !== $have_date_array_for_kurer) {
+
+                    $value->date_delivery_kurer = $incoming[$have_date_array_for_kurer];
+                }
+
                 $value->end_Date = $end_Date;
                 $value->first_edit = 1;
-
-                $value->save();
 
             } /////////////////////////////////////////////////////////////////////////////////
 
-            else if ($value->first_edit == 0 && Carbon::parse($value->datetimes)->format('H:i') >= '20:00') {
+            else if ($value->first_edit == 0 && Carbon::parse($value->datetimes)->format('H:i') >= $use_date_and_time->time && Carbon::now()->toDateString()) {
 
-                $Start_day_zakaz = $value->date_delivery = Carbon:: parse($value->datetimes)->addDays(2)->toDateString();
+                $Start_day_zakaz = $value->date_delivery = Carbon:: parse($value->datetimes)->addDay()->toDateString();
 
                 $end_Date = Carbon::parse($value->date_delivery)->addDays(7)->toDateString();
 
-                $dateRange = CarbonPeriod::create($Start_day_zakaz, '1 days', $end_Date);
+               $dateRange = CarbonPeriod::create($Start_day_zakaz, '1 days', $end_Date);
 
                 $zakaz_array = [];
 
@@ -113,15 +137,13 @@ class AccessController extends Controller
                 $value->array = json_encode($zakaz_array, 0, 100);
                 $value->end_Date = $end_Date;
                 $value->first_edit = 1;
-
-                $value->save();
 
             } ///////////////////////////////////////////////////////////////////////////////////
 
             else if ($value->array !== null) {
 
                 $incoming = json_decode($value->array, true, 100, 0);
-                $have_date_array = array_search(Carbon::now()->addDay()->toDateString(), $incoming, false);
+               $have_date_array = array_search(Carbon::now()->toDateString(), $incoming, false);
                 $have_date_array_for_kurer = array_search(Carbon::now()->toDateString(), $incoming, false);
 
                 $notification_end_day = array_slice($incoming, -3);
@@ -150,11 +172,6 @@ class AccessController extends Controller
                     $value->status = 1;
 
                 }
-//                else {
-//
-//                    $value->status = 0;
-//                }
-
 
                 if ($incoming_end_array !== null && !in_array(Carbon::now()->toDateString(), $incoming_end_array, false)) {
 
@@ -176,10 +193,9 @@ class AccessController extends Controller
                     $value->array = json_encode($result, 0, 100);
                 }
 
-                $value->save();
-
             }
 
+            $value->save();
         }
 
 
@@ -188,9 +204,9 @@ class AccessController extends Controller
 
         foreach ($zakazi->where('type_zakaz', '=', 9) as $value) {
 
-            if ($value->first_edit == 0 && Carbon::parse($value->datetimes)->format('H:i') < '20:00') {
+            if ($value->first_edit == 0 && Carbon::parse($value->datetimes)->format('H:i') < $use_date_and_time->time && Carbon::now()->toDateString()) {
 
-                $Start_day_zakaz = $value->date_delivery = Carbon:: parse($value->datetimes)->addDay()->toDateString();
+                $Start_day_zakaz = $value->date_delivery = Carbon:: parse($value->datetimes)->toDateString();
                 $end_Date = Carbon:: parse($value->date_delivery)->addDays(30)->toDateString();
 
 
@@ -213,9 +229,9 @@ class AccessController extends Controller
 
             } /////////////////////////////////////////////////////////////////////////////////
 
-            else if ($value->first_edit == 0 && Carbon::parse($value->datetimes)->format('H:i') >= '20:00') {
+            else if ($value->first_edit == 0 && Carbon::parse($value->datetimes)->format('H:i') >= $use_date_and_time->time && Carbon::now()->toDateString()) {
 
-                $Start_day_zakaz = $value->date_delivery = Carbon:: parse($value->datetimes)->addDays(2)->toDateString();
+                $Start_day_zakaz = $value->date_delivery = Carbon:: parse($value->datetimes)->addDay()->toDateString();
 
                 $end_Date = Carbon:: parse($value->date_delivery)->addDays(30)->toDateString();
 
@@ -236,14 +252,13 @@ class AccessController extends Controller
 
                 $value->save();
 
-            }
-            ////////////////////////////////////////////////////////////////////////////////
+            } ////////////////////////////////////////////////////////////////////////////////
 
 
             else if ($value->array !== null) {
 
                 $incoming = json_decode($value->array, true, 100, 0);
-                $have_date_array = array_search(Carbon::now()->addDay()->toDateString(), $incoming, false);
+                $have_date_array = array_search(Carbon::now()->toDateString(), $incoming, false);
                 $have_date_array_for_kurer = array_search(Carbon::now()->toDateString(), $incoming, false);
 
                 $notification_end_day = array_slice($incoming, -3);
@@ -272,11 +287,6 @@ class AccessController extends Controller
                     $value->status = 1;
 
                 }
-//                else {
-//
-//                    $value->status = 0;
-//                }
-
 
                 if ($incoming_end_array !== null && !in_array(Carbon::now()->toDateString(), $incoming_end_array, false)) {
 
@@ -304,7 +314,8 @@ class AccessController extends Controller
         }
 
 
-        $zakazi_date = Order::whereDate('date_delivery', Carbon::now()->addDay()->toDateString())->get();
+//      $zakazi_date = Order::whereDate('date_delivery', Carbon::now()->addDay()->toDateString())->get();
+        $zakazi_date = Order::whereDate('date_delivery', Carbon::now()->toDateString())->get();
 
         return AccessResource::collection($zakazi_date);
 

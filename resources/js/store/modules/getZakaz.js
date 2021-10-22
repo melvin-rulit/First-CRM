@@ -2,6 +2,7 @@ export default {
 
     state: {
         zakaz:[],
+        if_empty_zakaz: '',
     },
 
     getters: {
@@ -9,12 +10,19 @@ export default {
             return state.zakaz
         },
 
+        if_empty_zakaz(state){
+            return state.if_empty_zakaz
+        },
+
     },
 
     mutations: {
+
         getZakaz(state, zakazi) {
             state.zakaz = zakazi
-        }
+            state.if_empty_zakaz = zakazi.data[0].date_delivery
+        },
+
     },
 
     actions: {
@@ -26,6 +34,7 @@ export default {
                     commit('getZakaz', response.data)
                 })
         },
+
     },
 
 }

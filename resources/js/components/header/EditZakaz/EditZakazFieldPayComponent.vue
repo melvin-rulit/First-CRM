@@ -1,7 +1,6 @@
 <template>
     <div>
 
-        <!-- Модальное окно с добавлением новой роли -->
         <b-modal id="editZakazPay" title="Отредактируйте поле  : Оплата" @ok="sendData"  @hidden="ClearModal" centered
                  ok-only ok-title="Готово">
 
@@ -20,6 +19,7 @@
                     <b-form-select
                         v-model="tupePay"
                         :options="Oplata"
+                        @change="sendData"
                     ></b-form-select>
                 </b-col>
 
@@ -72,7 +72,7 @@ export default {
         },
 
         sendData() {
-            if (this.tupeZakaz !== null ) {
+            if (this.tupePay !== null ) {
 
                 axios.post('api/v1/sendEditZakazData', {
                     field_id: this.Pay.id, field_name: 'pay', field_value: this.tupePay
@@ -87,11 +87,13 @@ export default {
                             duration: 3000,
                             position: 'top'
                         });
-
+                        this.$bvModal.hide('editZakazPay')
                     }
+
+                    this.GetAllZakaz()
+
                 });
 
-                this.GetAllZakaz()
 
             }
 

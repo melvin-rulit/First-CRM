@@ -82,11 +82,29 @@ return 'Создан';
         return "Курьер удален";
     }
 
-    public function getZakazForKurer(Request $request)
+    public function getZakazForKurer (Request $request)
     {
-        $zakazi = Order::whereDate('date_delivery_kurer',  Carbon::now()->toDateString())->where('deliv', '=', 1)->get();
+        $zakazi = Order::whereDate('date_delivery_kurer',  Carbon::now()->toDateString())->where('deliv', '=', 0)->get();
 
         return PromouterResource::collection($zakazi);
+    }
+
+    public function sendSuccess (Request $request)
+    {
+        $Kurer = Order::find($request['id']);
+
+        if ($request['status'] === 1){
+
+            $Kurer->status_kurer = 0;
+
+        } else {
+
+            $Kurer->status_kurer = 1;
+        }
+
+        $Kurer->save();
+
+        return "success";
     }
 
 

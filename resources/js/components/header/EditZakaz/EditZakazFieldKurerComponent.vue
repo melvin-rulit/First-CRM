@@ -95,6 +95,7 @@ export default {
             });
 
             this.GetAllZakaz()
+            this.$bvModal.hide('editKurer')
         },
 
         ClearModal(){

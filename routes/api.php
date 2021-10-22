@@ -15,14 +15,22 @@ Route::group(['prefix' => 'v1',  'as' => 'api.', 'namespace' => 'Api\V1'], funct
     Route::post('sendEditKurerData', 'UserController@editKurer');
     Route::post('userCardSave', 'UserController@saveCard');
     Route::post('saveRolesForUser', 'UserController@saveRole');
+    Route::post('sendSuccess', 'UserController@sendSuccess');
     Route::get('getZakazForKurer', 'UserController@getZakazForKurer');
 
     // Zakazi
     Route::apiResource('zakaz', 'AccessController');
+    //-----------------------------------------------------------------------------------------------
     Route::post('zakazFilterPhone', 'AccessController@zakazFilterPhone');
     Route::post('zakazFilterData', 'AccessController@zakazFilterData');
+    //-----------------------------------------------------------------------------------------------
     Route::post('edit_Date_Delivery', 'AccessController@edit_Date_Delivery');
     Route::post('edit_End_Date', 'AccessController@edit_End_Date');
+    //-----------------------------------------------------------------------------------------------
+    Route::apiResource('Racion', 'RacionController');
+    Route::post('sendEditZakazRacion', 'RacionController@sendEditZakazRacion');
+    Route::post('get_Racion', 'AccessController@get_Racion');
+    //-----------------------------------------------------------------------------------------------
     Route::post('sendEditZakazData', 'AccessController@sendEditZakazData');
     Route::post(' edit_Date_Delivery_if_Confirm', 'AccessController@edit_Date_Delivery_if_Confirm');
 
@@ -30,6 +38,12 @@ Route::group(['prefix' => 'v1',  'as' => 'api.', 'namespace' => 'Api\V1'], funct
     Route::apiResource('kvadrat', 'KvadratController');
     Route::post('sendEditKurer', 'KvadratController@updateEditKurer');
 
-//    Route::get('getAccess', 'RoleController@getAccess');
+    // Time
+    Route::apiResource('getTime', 'TimeController');
+    Route::post('saveTime', 'TimeController@saveTime');
+
+    // Settings
+    Route::post('edit_and_send_superadmin_login_or_password', 'SettingController@editPassword');
+
 
 });

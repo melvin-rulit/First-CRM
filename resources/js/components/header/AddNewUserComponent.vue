@@ -1,9 +1,10 @@
 <template>
     <div>
 
-                                                    <!-- Модальное окно с добавлением нового Курьера -->
+        <!-- Модальное окно с добавлением нового Курьера -->
 
-        <b-modal   id="addNewUser" title="Добавьте нового Курьера" @ok="saveKurer" @hidden="closeModal" centered ok-only ok-title="Добавить">
+        <b-modal id="addNewUser" title="Добавьте нового Курьера" @ok="" @hidden="closeModal" centered ok-only
+                 ok-title="Добавить">
 
             <div class="card-body py-0">
                 <form ref="formSettingsGroup" @submit.stop.prevent="saveKurer">
@@ -25,7 +26,8 @@
                     <div class="form-group row">
                         <label class="col-sm-3 col-form-label">Телефон</label>
                         <div class="col-sm-8">
-                            <input class="form-control" v-model="phone"  v-mask="'+38 (###)-###-##-##'" placeholder="+38 (###)-###-##-##">
+                            <input class="form-control" v-model="phone" v-mask="'+38 (###)-###-##-##'"
+                                   placeholder="+38 (###)-###-##-##">
                         </div>
                     </div>
 
@@ -56,6 +58,19 @@
 
                 </form>
             </div>
+
+            <template #modal-footer="{ ok, cancel, hide }">
+
+                <b-button v-if="notLenthPhone" show variant="danger" class="mr-5">Вы ввели не полный номер
+                    телефона
+                </b-button>
+
+                <b-button size="sm" variant="success" @click="saveKurer">
+                    Готово
+                </b-button>
+
+            </template>
+
         </b-modal>
 
     </div>
@@ -65,105 +80,113 @@
 <script>
 
 import {TheMask} from 'vue-the-mask'
-import {mapActions} from "vuex";
+import {mapActions, mapGetters} from "vuex";
 
-    // import { required, minLength, email } from 'vuelidate/lib/validators';
+// import { required, minLength, email } from 'vuelidate/lib/validators';
 
-    export default {
-        components: { TheMask },
+export default {
+    components: {TheMask},
 
-        data() {
-            return {
-                name: '',
-                surname: '',
-                phone: '',
-                car: '',
-                login: '',
-                password: '',
-                coment: '',
+    data() {
+        return {
+            name: '',
+            surname: '',
+            phone: '',
+            car: '',
+            login: '',
+            password: '',
+            coment: '',
 
-                users: {},
-                submitStatus: null,
-                showErrors: false,
-                modalShow: true,
-            }
+            users: {},
+            submitStatus: null,
+            showErrors: false,
+            modalShow: true,
+            notLenthPhone: false,
+        }
+    },
+
+    // validations: {
+    //     name: {
+    //         required,
+    //         minLength: minLength(4)
+    //     },
+    //     surname: {
+    //         required,
+    //     },
+    //     phone: {
+    //         required,
+    //     },
+    //     login: {
+    //         required,
+    //         email
+    //     },
+    //     password: {
+    //         required,
+    //     }
+    // },
+
+    methods: {
+        ...mapActions(['GetAllKurer']),
+
+        addNewUserModal() {
+
+            this.$bvModal.show('addNewUser')
+
         },
 
-        // validations: {
-        //     name: {
-        //         required,
-        //         minLength: minLength(4)
-        //     },
-        //     surname: {
-        //         required,
-        //     },
-        //     phone: {
-        //         required,
-        //     },
-        //     login: {
-        //         required,
-        //         email
-        //     },
-        //     password: {
-        //         required,
-        //     }
-        // },
+        saveKurer() {
+if(this.phone.length < 19){
+    this.notLenthPhone = true
+}else {
+    axios.post('api/v1/kurer', {
 
-       methods: {
-           ...mapActions(['GetAllKurer']),
+        name: this.name,
+        surname: this.surname,
+        phone: this.phone,
+        car: this.car,
+        email: this.login,
+        coment: this.coment,
+        full_name: this.surname + ' ' + this.name,
+        password: this.password,
+        secret_id: this.password,
 
-            addNewUserModal(){
+    }).then((response) => {
 
-                this.$bvModal.show('addNewUser')
+        if (response.data === "Создан") {
 
-            },
+            Vue.$toast.open({
+                message: 'Курьер Добавлен',
+                type: 'success',
+                duration: 3000,
+                position: 'top'
+            });
+            this.$bvModal.hide('addNewUser')
+        }
+    });
+}
 
-            saveKurer() {
-
-                axios.post('api/v1/kurer', {
-
-                    name: this.name,
-                    surname: this.surname,
-                    phone: this.phone,
-                    car: this.car,
-                    email: this.login,
-                    coment: this.coment,
-                    full_name: this. surname + ' ' + this.name,
-                    password: this.password,
-                    secret_id: this.password,
-
-                }) .then((response) =>{
-
-                    if (response.data === "Создан") {
-
-                        Vue.$toast.open({
-                            message: 'Курьер Добавлен',
-                            type: 'success',
-                            duration: 3000,
-                            position: 'top'
-                        });
-
-                    }
-                });
-            },
-
-            closeModal(){
-
-                this.GetAllKurer()
-                this.name = ''
-                this.surname = ''
-                this.phone = ''
-                this.login = ''
-                this.password = ''
-                this.car = ''
-            },
         },
-    }
+
+        closeModal() {
+
+            this.GetAllKurer()
+            this.name = ''
+            this.surname = ''
+            this.phone = ''
+            this.login = ''
+            this.password = ''
+            this.car = ''
+            this.notLenthPhone = false
+
+        },
+    },
+}
 </script>
 
-<style >
-    .form-control:focus {
-        color: #12263f;
-        outline: 0;
-    }
+<style>
+
+.form-control:focus {
+    color: #12263f;
+    outline: 0;
+}
 </style>

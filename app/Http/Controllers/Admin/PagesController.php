@@ -46,6 +46,11 @@ class PagesController extends Controller
         return view('Pages.promoter');
     }
 
+    public function addRacion(){
+
+        return view('Pages.index');
+    }
+
     public function chekPrint()
     {
 

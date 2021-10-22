@@ -21,7 +21,7 @@ const routes = [
 
     { path: '/home',  name: 'zakaz', component: Zakaz},
     { path: '/kvadrat',  name: 'kvadrat' ,component: Kvadrat },
-    { path: '/zakazi', name: 'zakaz' , component: Zakaz },
+    { path: '/addRacion', name: 'addRacion' , component: addRacion },
     { path: '/kurer', name: 'kurer', component: Kurer },
     // { path: '/setings', component: Setings },
 
@@ -66,6 +66,11 @@ Vue.use(VCalendar);
 import VueSimpleAlert from "vue-simple-alert";
 Vue.use(VueSimpleAlert);
 
+//-- vue-confirm-dialog
+import VueConfirmDialog from 'vue-confirm-dialog'
+Vue.use(VueConfirmDialog)
+Vue.component('vue-confirm-dialog', VueConfirmDialog.default)
+
 //------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
@@ -82,6 +87,7 @@ Vue.component('showModalEditZakazFieldKurer-component', require('./components/he
 Vue.component('showModalEditZakazFieldTotal-component', require('./components/header/EditZakaz/EditZakazFieldTotalComponent.vue').default);
 Vue.component('showModalEditZakazFieldRacion-component', require('./components/header/EditZakaz/EditZakazFieldRacionComponent.vue').default);
 Vue.component('showModalEditZakazDataDelivery-component', require('./components/header/EditZakaz/EditDataDeliveryComponent.vue').default);
+Vue.component('showModalEditZakazFieldTel-component', require('./components/header/EditZakaz/EditPhoneComponent.vue').default);
 
 //--CalendarPeriod
 Vue.component('showModalCalendarForPeriod-component', require('./components/header/CalendarPeriodComponent.vue').default);

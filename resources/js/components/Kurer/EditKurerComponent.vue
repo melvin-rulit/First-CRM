@@ -117,6 +117,7 @@
 
 <script>
 import {TheMask} from 'vue-the-mask'
+import {mapActions} from "vuex";
 
 export default {
 
@@ -125,17 +126,11 @@ export default {
     data() {
         return {
             incominData: {},
-            options_type: [
-
-                {value: 'null', text: 'Выберите тип операции'},
-                {value: '1', text: 'Приход'},
-                {value: '0', text: 'Расход'},
-            ],
-
         }
     },
 
     methods: {
+        ...mapActions(['GetAllKurer']),
 
         editKurerModal(item) {
             this.incominData = item
@@ -149,6 +144,7 @@ export default {
 
                 const value = e.target.value;
                 const key = e.currentTarget.getAttribute('name');
+
                 axios.post('api/v1/sendEditKurerData', {
                     field_id: this.incominData.id,
                     field_name: key,
@@ -167,11 +163,10 @@ export default {
                         });
 
                     }
+
+                    this.GetAllKurer()
+
                 });
-
-
-            this.$emit('get-method')
-
         },
 
         //---------------------------------------------- Удаляем Курьера -------------------------------------------------------------//
@@ -204,12 +199,10 @@ export default {
                                     position: 'top'
                                 });
 
+                                this.$bvModal.hide('editKurer')
+                                this.GetAllKurer()
                             }
                         });
-
-                        this.$bvModal.hide('editKurer')
-
-                        this.$emit('get-method')
 
                     }
                 })
@@ -229,6 +222,7 @@ export default {
 </script>
 
 <style>
+
 .form-control:focus {
     color: #12263f;
     outline: 0;

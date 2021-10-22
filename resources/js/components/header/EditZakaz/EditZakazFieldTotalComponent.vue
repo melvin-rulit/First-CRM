@@ -1,7 +1,7 @@
 <template>
     <div>
 
-        <!-- Модальное окно с добавлением новой роли -->
+        <!-- Модальное окно с добавлением суммы -->
         <b-modal id="editTotal" title="Отредактируйте поле  : Сумма"  @hidden="ClearModal" centered
                  ok-only ok-title="Готово">
 
@@ -55,28 +55,8 @@ export default {
 
         },
 
-        editField(e, name, type) {
+        editField(e) {
 
-            if (type) {
-                axios.post('api/v1/sendEditKurerData', {
-                    field_id: this.incominData.id,
-                    field_name: name,
-                    field_value: e
-                }) .then((response) =>{
-
-                    if (response.data === "Заказ обновлен") {
-
-                        Vue.$toast.open({
-                            message: 'Сумма обновлена',
-                            type: 'success',
-                            duration: 3000,
-                            position: 'top'
-                        });
-
-                    }
-                });
-
-            } else {
                 const value = e.target.value;
                 const key = e.currentTarget.getAttribute('name');
 
@@ -95,9 +75,9 @@ export default {
                             position: 'top'
                         });
 
+                        this.$bvModal.hide('editTotal')
                     }
                 });
-            }
 
         },
 

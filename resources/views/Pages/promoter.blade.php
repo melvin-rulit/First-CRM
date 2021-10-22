@@ -41,7 +41,7 @@
 
 <div id="app">
 
-    <head-component></head-component>
+{{--    <head-component></head-component>--}}
     <promouter-component></promouter-component>
 
 </div>

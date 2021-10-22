@@ -21,6 +21,8 @@ Route::group(['prefix' => '', 'as' => 'admin.', 'namespace' => 'Admin', 'middlew
     Route::get('/kurer', 'PagesController@getKurerPage');
     Route::get('/kvadrat', 'PagesController@getKvadratPage');
     Route::get('/chekPrint', 'PagesController@chekPrint');
+    Route::get('/addRacion', 'PagesController@addRacion');
+//    Route::get('/setings', 'PagesController@setingsPage');
 
 //       Route::get('/{any}', [App\Http\Controllers\Admin\PagesController::class, 'index'])->where('any', '.*');
 //        Route::get('/', [App\Http\Controllers\Admin\PagesController::class, 'index']);

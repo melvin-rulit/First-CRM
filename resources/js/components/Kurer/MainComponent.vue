@@ -1,7 +1,7 @@
 <template>
     <div>
 
-        <editkurer-component @get-method="UpdateData" ref="edit_kurer_component"></editkurer-component>
+        <editkurer-component ref="edit_kurer_component"></editkurer-component>
 
         <div class="card">
 
@@ -13,13 +13,11 @@
                     :fields="fields"
                     :fixed="true"
                     :no-border-collapse="true"
-                    :tbody-tr-class="rowClass"
                     @row-clicked="getShowModal"
-                    @row-hovered = 'rowClass'
                     head-variant="dark">
 
                     <template #cell(surname)="data">
-                        <b class="pointer">{{ data.item.surname}} </b> <span class="pointer">{{ data.item.name}}</span>
+                        <b class="pointer">{{ data.item.surname }} </b> <span class="pointer">{{ data.item.name}}</span>
                     </template>
 
                 </b-table>
@@ -36,8 +34,6 @@ export default {
         return {
             users: {},
             rowSelect: {},
-            details: 'true',
-            isNew: true,
 
             fields: [
 
@@ -89,33 +85,12 @@ export default {
 
             this.$refs.edit_kurer_component.editKurerModal(index)
         },
-
-        UpdateData() {
-
-            this.GetAllKurer()
-        },
-
-        rowClass(item) {
-            return item ? "isNew" : "";
-            // if (item === 'row') {
-            //     return 'text-pointer'
-            // }
-        },
-        removeIsNew(item) {
-            item.isNew = false;
-            this.saveItems(this.items);
-        },
-
-        saveItems(items) {
-            this.$nextTick(() => {
-                localStorage.setItem("items", JSON.stringify(items));
-            });
-        },
     },
 }
 </script>
 
 <style scoped>
+
 table {
     width:100%;
     table-layout: fixed;
