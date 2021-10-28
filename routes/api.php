@@ -29,7 +29,6 @@ Route::group(['prefix' => 'v1',  'as' => 'api.', 'namespace' => 'Api\V1'], funct
     //-----------------------------------------------------------------------------------------------
     Route::apiResource('Racion', 'RacionController');
     Route::post('sendEditZakazRacion', 'RacionController@sendEditZakazRacion');
-    Route::post('get_Racion', 'AccessController@get_Racion');
     //-----------------------------------------------------------------------------------------------
     Route::post('sendEditZakazData', 'AccessController@sendEditZakazData');
     Route::post(' edit_Date_Delivery_if_Confirm', 'AccessController@edit_Date_Delivery_if_Confirm');
@@ -45,5 +44,15 @@ Route::group(['prefix' => 'v1',  'as' => 'api.', 'namespace' => 'Api\V1'], funct
     // Settings
     Route::post('edit_and_send_superadmin_login_or_password', 'SettingController@editPassword');
 
+    // Adress
+    Route::apiResource('getAdress', 'AdressController');
+    Route::post('sendEditZakazAdress', 'AdressController@sendEditZakazAdress');
+    Route::post('addNewAdress', 'AdressController@addNewAdress');  // (not_user)
+    Route::post('sendEditAdress', 'AdressController@sendEditAdress');  // (not_user)
+
+    // Racion (not_user)
+    Route::apiResource('racion', 'RacionController');
+    Route::post('addNewRacion', 'RacionController@addNewRacion');
+    Route::post('sendEditRacion', 'RacionController@sendEditRacion');
 
 });

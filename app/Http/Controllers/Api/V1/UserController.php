@@ -15,14 +15,9 @@ use Carbon\Carbon;
 class UserController extends Controller
 {
 
-    /**
-     * Выводим все данные о пользователе
-     *
-     *
-     */
     public function index()
     {
-  $user = User::where('id' , '!=', 1)->get();
+  $user = User::where('id' , '!=', 1)->where('id' , '!=', 9)->get();
 
         return UserAllResource::collection($user);
     }

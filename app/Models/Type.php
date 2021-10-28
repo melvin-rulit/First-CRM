@@ -16,7 +16,7 @@ class Type extends Model
     protected $fillable = [
         'id',
         'title',
-        'type_id',
+        'kvadrat_id',
         'created_at',
         'updated_at',
     ];
@@ -27,10 +27,5 @@ class Type extends Model
         'deleted_at',
     ];
 
-
-//    public function rolesUsers(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
-//    {
-//        return $this->belongsToMany(User::class);
-//    }
 }
 
