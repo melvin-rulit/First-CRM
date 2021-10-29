@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
@@ -9,7 +10,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
  * @property mixed title
  */
 
-class RolesResource extends JsonResource
+class AdressResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -21,7 +22,10 @@ class RolesResource extends JsonResource
     {
         return [
             'id' => $this->id,
-
+            'title' => $this->title,
+            'kvadrat_id' => $this->kvadrat_id,
+            'created_at' => Carbon::parse($this->created_at)->format('d.m.Y'),
+            'updated_at' => Carbon::parse($this->created_at)->format('H.m'),
         ];
     }
 }

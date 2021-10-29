@@ -22,6 +22,7 @@
                                     <b-form-select
                                         v-model="tupeZakaz"
                                         :options="options_type"
+                                        @change="sendData"
                                     ></b-form-select>
                                 </b-col>
 
@@ -93,6 +94,8 @@ export default {
                             position: 'top'
                         });
 
+                        this.$bvModal.hide('editDeliv')
+                        this.GetAllZakaz()
                     }
                 });
 
