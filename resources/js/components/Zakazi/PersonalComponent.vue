@@ -34,9 +34,9 @@
 
             <!--------------------------------------------------------------------------------------------------------------------------------------------->
 
-            <!--            <template v-slot:cell(orderid)="row">-->
-            <!--                <b  class="pointer" @click="row.toggleDetails">{{ row.item.orderid}}</b>-->
-            <!--            </template>-->
+<!--                        <template v-slot:cell(orderid)="row">-->
+<!--                            <b  class="pointer" @click="row.toggleDetails">{{ row.item.orderid}}</b>-->
+<!--                        </template>-->
 
             <template v-slot:cell(orderid)="row">
                 <b-form-group>
@@ -46,6 +46,10 @@
 
             <template v-slot:cell(kurer)="row">
                 <p class="pointer ml-2" @click="rowSelectedForEditFieldKurer(row.item)">{{ row.item.kurer }}</p>
+            </template>
+
+            <template v-slot:cell(adress)="row">
+                <p class="pointer ml-2" @click="rowSelectedForEditFieldAdress(row.item)">{{ row.item.adress }}</p>
             </template>
 
             <template v-slot:cell(total)="row">
@@ -83,20 +87,20 @@
 
             <!---------------------------------------------------------------------------------------------------------------------------------------------->
 
-            <!--                <template #row-details="row">-->
+<!--                            <template #row-details="row">-->
 
-            <!--                    <b-row class="mb-2">-->
+<!--                                <b-row class="mb-2">-->
 
-            <!--                        <b-col sm="3" class="text-sm-right"><b>Период заказа заканчивается :</b></b-col>-->
+<!--                                    <b-col sm="3" class="text-sm-right"><b>Период заказа заканчивается :</b></b-col>-->
 
-            <!--                        <div class="col-sm-7">-->
+<!--                                    <div class="col-sm-7">-->
 
 
-            <!--                        </div>-->
+<!--                                    </div>-->
 
-            <!--                    </b-row>-->
+<!--                                </b-row>-->
 
-            <!--                </template>-->
+<!--                            </template>-->
 
         </b-table>
 

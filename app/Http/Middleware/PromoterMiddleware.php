@@ -12,10 +12,16 @@ class PromoterMiddleware
     public function handle($request, Closure $next)
     {
         $op = Auth::id();
-        if ($op !== 1) {
+
+        if ($op !== 1 && $op !== 9) {
 
             return redirect()->route('promouter');
+
+        } else if ($op !== 1 && $op == 9){
+
+            return redirect('/addAdress');
         }
+
     return redirect('home');
     }
 }

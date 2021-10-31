@@ -5,13 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Comment extends Model
+class Racion extends Model
 {
-    use HasFactory;
+    public $table = 'racions';
 
     protected $fillable = [
 
-        'user_id',
-        'message',
+        'id',
+        'name',
     ];
+
+    public $timestamps = false;
 }

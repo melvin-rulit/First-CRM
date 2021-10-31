@@ -2,6 +2,10 @@
 	background:   url(../images/intro-bg.jpg) no-repeat center;
     height: 1000px;
 }
+.bg_city{
+	background:   url(../images/not_user/city.jpg) no-repeat center;
+    height: 1000px;
+}
 
 header{
     /*height: 70px;*/
