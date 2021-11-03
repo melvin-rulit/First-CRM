@@ -12,8 +12,7 @@ This web application framework with expressive, elegant syntax. We believe devel
 2) Download this repository or clone
 ```sh
 git clone https://github.com/melvin-rulit/First-Crm
-cd First-Crm
-2.5) composer install 
+cd First-Crm 
 
 Run php artisan key:generate//
 ```
