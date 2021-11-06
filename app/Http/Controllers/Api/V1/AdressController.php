@@ -26,7 +26,8 @@ class AdressController extends Controller
     public function sendEditZakazAdress (Request $request)
     {
         $updateZakaz = Order::find($request['field_id']);
-        $updateZakaz->adress = $request['field_value'];
+        $updateZakaz->adress = $request['field_value_title'];
+        $updateZakaz->kvadrat_id = $request['field_value_kvadrat_id'];
         $updateZakaz->save();
 
         return "Заказ обновлен";

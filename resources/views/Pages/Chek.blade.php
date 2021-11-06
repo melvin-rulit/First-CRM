@@ -51,7 +51,7 @@
                     <td colspan="2" class="name-input">Адрес:</td>
                 </tr>
                 <tr>
-                    <td colspan="2"><textarea class="text adress"> {{ $data->town }} {{ $data->adress }}</textarea></td>
+                    <td colspan="2"><textarea class="text adress"> {{ $data->adress }}</textarea></td>
                 </tr>
                 <br>
                 <tr>

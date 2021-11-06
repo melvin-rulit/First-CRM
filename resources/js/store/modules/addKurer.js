@@ -6,6 +6,10 @@ export default {
     getters: {
         AllKurers(state){
             return state.kurer
+        },
+
+        sumKurer(state){
+            return state.kurer.length
         }
     },
     mutations: {
