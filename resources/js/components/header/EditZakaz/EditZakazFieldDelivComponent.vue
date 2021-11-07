@@ -99,7 +99,6 @@ export default {
                     }
                 });
 
-                this.GetAllZakaz()
 
             }
             },

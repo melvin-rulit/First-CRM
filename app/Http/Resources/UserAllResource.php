@@ -27,7 +27,7 @@ class UserAllResource extends JsonResource
             'surname'       => $this->surname,
             'full_name'       => $this->full_name,
             'phone'         => $this->phone,
-            'car'         => $this->car,
+            'car'         =>  $this->car ? $this->car : "Не имеет",
             'email'         => $this->email,
             'secret_id'      => $this->secret_id,
             'coment'         => $this->coment,

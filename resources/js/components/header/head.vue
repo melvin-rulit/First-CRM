@@ -8,7 +8,6 @@
         </nav>
     </header>
 
-
 </template>
 
 

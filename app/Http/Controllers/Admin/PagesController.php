@@ -46,15 +46,31 @@ class PagesController extends Controller
         return view('Pages.promoter');
     }
 
+// ----------------------------------------------------------------------------------------------------------
+
     public function addRacion(){
 
-        return view('Pages.index');
+        return view('Pages.not_for_use');
     }
 
-    public function chekPrint()
-    {
+    public function addAdress(){
 
-        $orders = Order::where('date_delivery', '=', Carbon::now()->addDay()->toDateString())->get();
+        return view('Pages.not_for_use');
+    }
+
+// ----------------------------------------------------------------------------------------------------------
+
+    public function chekPrint(Request $request)
+    {
+        $orders = Order::where('array' , 'like' , '%'.$request['data'].'%')->get();
+
+        return view('Pages.Chek', compact('orders'));
+
+    }
+
+    public function chekPrint_Data_Now()
+    {
+       $orders = Order::where('date_delivery', '=', Carbon::now()->toDateString())->where('date_delivery', '!=', null)->get();
 
         return view('Pages.Chek', compact('orders'));
 
