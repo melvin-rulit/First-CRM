@@ -12,6 +12,10 @@
                                                  ref="editZakazRacion"></showModalEditZakazFieldRacion-component>
         <showModalEditZakazFieldTotal-component @get-method="updateZakaz"
                                                 ref="editZakazTotal"></showModalEditZakazFieldTotal-component>
+        <showModalEditZakazFieldTel-component @get-method="updateZakaz"
+                                              ref="editPhone"></showModalEditZakazFieldTel-component>
+        <showModalEditZakazFieldAdress-component @get-method="updateZakaz"
+                                                 ref="editAdress"></showModalEditZakazFieldAdress-component>
 
         <showModalEditZakazDataDelivery-component ref="editDateDelivery"></showModalEditZakazDataDelivery-component>
 
@@ -60,6 +64,14 @@
                 <span class="pointer" @click="rowSelectedForEditFieldPay(row.item)">{{ getPay(row.item.pay) }}</span>
             </template>
 
+            <template v-slot:cell(tel)="row">
+                <span class="pointer" @click="rowSelectedForEditFieldPhone(row.item)">{{ row.item.tel }}</span>
+            </template>
+
+            <template v-slot:cell(racion)="row">
+                <span class="pointer" @click="rowSelectedForEditFieldRacion(row.item)">{{ row.item.racion }}</span>
+            </template>
+
             <template v-slot:cell(deliv)="row">
                 <span class="pointer" @click="rowSelectedForEditFieldDeliv(row.item)">{{
                         getDeliv(row.item.deliv)
@@ -85,7 +97,6 @@
                 </b-form-group>
             </template>
 
-            <!---------------------------------------------------------------------------------------------------------------------------------------------->
 
 <!--                            <template #row-details="row">-->
 
@@ -101,6 +112,8 @@
 <!--                                </b-row>-->
 
 <!--                            </template>-->
+
+            <!---------------------------------------------------------------------------------------------------------------------------------------------->
 
         </b-table>
 
@@ -195,6 +208,11 @@ export default {
 
     },
 
+    mounted() {
+
+        this.autoReload()
+    },
+
     methods: {
         ...mapActions(['GetAllZakaz']),
 
@@ -219,6 +237,15 @@ export default {
             }
         },
 
+        autoReload() {
+
+            setTimeout(() => {
+                this.GetAllZakaz()
+            }, 3000)
+
+        },
+
+//-------------------------------------------------------------------------------------------------------------------
 
         rowSelectedForEnd_Date(index) {
             this.valueEditField = index.id
@@ -245,6 +272,14 @@ export default {
 
         rowSelectedForEditDateDelivery(index) {
             this.$refs.editDateDelivery.showEditDateDeliveryModal(index)
+        },
+
+        rowSelectedForEditFieldPhone(index) {
+            this.$refs.editPhone.showEditPhoneModal(index)
+        },
+
+        rowSelectedForEditFieldAdress(index) {
+            this.$refs.editAdress.showEditAdressModal(index)
         },
 
 

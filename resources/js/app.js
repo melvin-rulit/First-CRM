@@ -21,9 +21,14 @@ const routes = [
 
     { path: '/home',  name: 'zakaz', component: Zakaz},
     { path: '/kvadrat',  name: 'kvadrat' ,component: Kvadrat },
-    { path: '/addRacion', name: 'addRacion' , component: addRacion },
     { path: '/kurer', name: 'kurer', component: Kurer },
-    // { path: '/setings', component: Setings },
+    { path: '/promouter',   name: 'promouter', component: Promouter },
+    { path: '/setings', component: Setings },
+
+    //---------- inside --------------
+    { path: '/addRacion', name: 'addRacion' , component: add_and_edit_Racion },
+    { path: '/addAdress', name: 'addAdress' , component: add_and_edit_Adress },
+
 
 ]
 
@@ -71,6 +76,16 @@ import VueConfirmDialog from 'vue-confirm-dialog'
 Vue.use(VueConfirmDialog)
 Vue.component('vue-confirm-dialog', VueConfirmDialog.default)
 
+//-- Wow
+// import VueWow from 'vue-wow'
+// Vue.use(VueWow)
+import vWow from 'v-wow'
+Vue.use(vWow);
+
+// import Vuelidate from 'vuelidate'
+// Vue.use(Vuelidate)
+
+
 //------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
@@ -88,6 +103,7 @@ Vue.component('showModalEditZakazFieldTotal-component', require('./components/he
 Vue.component('showModalEditZakazFieldRacion-component', require('./components/header/EditZakaz/EditZakazFieldRacionComponent.vue').default);
 Vue.component('showModalEditZakazDataDelivery-component', require('./components/header/EditZakaz/EditDataDeliveryComponent.vue').default);
 Vue.component('showModalEditZakazFieldTel-component', require('./components/header/EditZakaz/EditPhoneComponent.vue').default);
+Vue.component('showModalEditZakazFieldAdress-component', require('./components/header/EditZakaz/EditAdressComponent.vue').default);
 
 //--CalendarPeriod
 Vue.component('showModalCalendarForPeriod-component', require('./components/header/CalendarPeriodComponent.vue').default);
@@ -102,8 +118,9 @@ Vue.component('settings-modal', require('./components/Setings/SetingsComponent.v
 
 
 // -- Input-Form
-Vue.component('input-form', require('./components/InputFormComponent.vue').default);
-Vue.component('input-component', require('./components/InputComponent.vue').default);
+Vue.component('input-form', require('./components/Inside_CRM/InputFormComponent.vue').default);
+Vue.component('input-component', require('./components/Inside_CRM/InputComponent.vue').default);
+Vue.component('prosto_input-component', require('./components/Inside_CRM/prosto_input-component.vue').default);
 
 //------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -113,3 +130,8 @@ app = new Vue({
     router,
     store,
 });
+
+// new Vue({
+//     router,
+//     render: h => h(App)
+// }).$mount('#app')
