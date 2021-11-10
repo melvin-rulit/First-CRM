@@ -37,9 +37,8 @@ class KvadratController extends Controller
     {
         $data =  Kvadrat::find( $request['id']);
 
-        $field_name = 'name';
-
-            $data->$field_name= $request['name'];
+            $data->name= $request['name'];
+            $data->id_kurer= $request['id_kurer'];
 
             $data->save();
 

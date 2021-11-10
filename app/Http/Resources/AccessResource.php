@@ -37,6 +37,8 @@ class AccessResource extends JsonResource
             'start_edit' => $this->start_edit,
             'type_zakaz' => $this->type_zakaz,
             'datetimes' =>  Carbon::createFromDate($this->datetimes)->format('d.m.Y'),
+            'datetimes_time' =>  Carbon::now()->format('H:i:s'),
+            'use_time' =>  Carbon::createFromDate($this->use_time)->format('H:i:s'),
             'date_delivery' =>  $this->date_delivery ? Carbon::createFromDate($this->date_delivery)->format('d-m-Y') : '',
             'end_Date' =>   Carbon::createFromDate($this->end_Date)->format('d.m.Y') ,
             'array' =>   json_decode($this->array, true, 100, 0),

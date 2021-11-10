@@ -115,7 +115,11 @@
 
                     sendEditKurer(items){
 
-                        axios.post('api/v1/sendEditKurer', {id: items , name: this.SelectKurer.surname + ' ' +  this.SelectKurer.name}) .then((response) =>{
+            axios.post('api/v1/sendEditKurer', {
+                id: items,
+                name: this.SelectKurer.surname + ' ' + this.SelectKurer.name,
+                id_kurer: this.SelectKurer.id
+            }).then((response) => {
 
                             if (response.data === "Курьер изменен") {
 

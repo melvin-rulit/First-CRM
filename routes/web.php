@@ -36,7 +36,7 @@ Route::get('/', 'PagesController@getHomePage')->middleware('promouter');
 //        Route::get('/', [App\Http\Controllers\Admin\PagesController::class, 'index']);
 
     Route::get('/test', function () {
-
+echo Carbon::now()->addHours(3);
     }
     );
 

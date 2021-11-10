@@ -26,24 +26,24 @@ class Order extends Model
         'racion',
         'total',
         'status',
+        'status_kurer',
         'pay',
         'deliv',
         'comment',
         'datetimes',
+        'datetimes_time',
+        'use_time',
         'date_delivery',
         'end_Date',
         'start_edit',
         'first_edit',
-        'created_at',
         'type_zakaz',
         'array',
         'end_array',
     ];
 
-//    public $timestamps = false;
-    protected $dates = [
-        'created_at',
-    ];
+    public $timestamps = false;
+
 
 //    public function type()
 //    {

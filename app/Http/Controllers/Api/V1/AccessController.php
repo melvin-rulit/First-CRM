@@ -123,7 +123,7 @@ class AccessController extends Controller
 
                 $end_Date = Carbon::parse($value->date_delivery)->addDays(7)->toDateString();
 
-               $dateRange = CarbonPeriod::create($Start_day_zakaz, '1 days', $end_Date);
+                $dateRange = CarbonPeriod::create($Start_day_zakaz, '1 days', $end_Date);
 
                 $zakaz_array = [];
 
@@ -143,7 +143,7 @@ class AccessController extends Controller
             else if ($value->array !== null) {
 
                 $incoming = json_decode($value->array, true, 100, 0);
-               $have_date_array = array_search(Carbon::now()->toDateString(), $incoming, false);
+                $have_date_array = array_search(Carbon::now()->toDateString(), $incoming, false);
                 $have_date_array_for_kurer = array_search(Carbon::now()->toDateString(), $incoming, false);
 
                 $notification_end_day = array_slice($incoming, -3);
@@ -160,11 +160,13 @@ class AccessController extends Controller
                 } else if (false !== $have_date_array) {
 
                     $value->date_delivery = $incoming[$have_date_array];
+
                 }
 
                 if (false !== $have_date_array_for_kurer) {
 
                     $value->date_delivery_kurer = $incoming[$have_date_array_for_kurer];
+                    $value->status_kurer = 0;
                 }
 
                 if ($find_for_notification) {
@@ -315,9 +317,8 @@ class AccessController extends Controller
 
 
 //      $zakazi_date = Order::whereDate('date_delivery', Carbon::now()->addDay()->toDateString())->get();
-        $zakazi_date = Order::whereDate('date_delivery', Carbon::now()->toDateString())->get();
-
-        return AccessResource::collection($zakazi_date);
+        $zakazi_date = Order::whereDate('date_delivery', Carbon::now()->addHours(2)->toDateString())->get();
+        return AccessResource::collection($zakazi_date->sortBy('kvadrat_id'));
 
 
     }
