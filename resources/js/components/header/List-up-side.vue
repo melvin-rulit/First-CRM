@@ -210,19 +210,29 @@
                     </b-card>
                 </div>
 
+            </b-sidebar>
 
-                <!--                                    <div class="">-->
-                <!--                                        <b-form-group label="Цвет" label-for="backdrop-variant">-->
-                <!--                                            <b-form-select id="backdrop-variant" v-model="variant" :options="variants"></b-form-select>-->
-                <!--                                        </b-form-group>-->
-                <!--                                    </div>-->
+            <!---------------------------------------------- Отчет  ------------------------------------------------->
+
+            <b-sidebar
+                width="400px"
+                no-header-close="false"
+                id="sidebar-otchet"
+                title="Отчет по рационам"
+                :backdrop-variant="variant"
+                backdrop
+                @hidden="action_ven_close"
+                right
+                shadow>
+
 
             </b-sidebar>
 
 
             <div v-if="ifThisMainTableZakaz">
                 <h4 v-if="ifThisRouteZakaz" class="mt-2 ml-5">Список заказов на:
-                    <b-badge variant="danger">{{ if_empty_zakaz }}</b-badge>
+                    <b-badge variant="danger" v-if="sum_Zakaz_for_kurer == 10">{{if_empty_zakaz}}</b-badge>
+                    <b-badge variant="danger" v-else>сегодня пуст</b-badge>
                 </h4>
             </div>
 

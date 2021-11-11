@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Api\V1;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\AccessResource;
 use App\Http\Resources\AccessAllResource;
+use App\Models\Kvadrat;
 use App\Models\Order;
 use App\Models\Time;
+use App\Models\Type;
 use Carbon\Carbon;
 use Carbon\CarbonPeriod;
 use Illuminate\Http\Request;
@@ -19,8 +21,9 @@ class AccessController extends Controller
     public function index()
     {
         $zakazi = Order::all();
+        $kvadrat = Kvadrat::all();
 
-        $use_date_and_time = Time::first(); // 14:00 (10.10.2021)  period  14:00 (11.10.2021)
+        $use_date_and_time = Time::first();
 
         //------------------------------------------------------------------------------------------------------------------//
 
@@ -32,8 +35,6 @@ class AccessController extends Controller
                 $Start_day_zakaz = $value->date_delivery = Carbon::parse($value->datetimes)->toDateString();
                 $value->array = json_encode($Start_day_zakaz, 0, 100);
                 $value->end_Date = Carbon::parse($Start_day_zakaz)->addDay()->toDateString();
-//                $value->use_time = $use_date_and_time->time;
-//                $value->datetimes_time = Carbon::parse($value->datetimes)->format('H:i:s');
 
                 $value->first_edit = 1;
 
@@ -44,8 +45,7 @@ class AccessController extends Controller
                 $Start_day_zakaz = $value->date_delivery = Carbon:: parse($value->datetimes)->addDay()->toDateString();
                 $value->array = json_encode($Start_day_zakaz, 0, 100);
                 $value->end_Date = Carbon::parse($Start_day_zakaz)->addDay()->toDateString();
-//                $value->use_time = $use_date_and_time->time;
-//                $value->datetimes_time = Carbon::parse($value->datetimes)->format('H:i:s');
+
 
                 $value->first_edit = 1;
 
@@ -53,10 +53,17 @@ class AccessController extends Controller
 
             else if ($value->array !== null) {
 
+                if ($value->start_edit == 0){
+
+                    foreach ($kvadrat->where('id', '=', $value->kvadrat_id) as $value_2){
+
+                        $value->kurer_id = $value_2->id_kurer;
+
+                    }
+                }
+
                 $incoming = json_decode($value->array, true, 100, 0);
 
-//                $value->use_time = $use_date_and_time->time;
-//                $value->datetimes_time = Carbon::parse($value->datetimes)->format('H:i:s');
 
                 $make_array = array($incoming);
                 $have_date_array_for_kurer = array_search(Carbon::now()->toDateString(), $make_array, false);
@@ -141,6 +148,15 @@ class AccessController extends Controller
             } ///////////////////////////////////////////////////////////////////////////////////
 
             else if ($value->array !== null) {
+
+                if ($value->start_edit == 0){
+
+                    foreach ($kvadrat->where('id', '=', $value->kvadrat_id) as $value_2){
+
+                        $value->kurer_id = $value_2->id_kurer;
+
+                    }
+                }
 
                 $incoming = json_decode($value->array, true, 100, 0);
                 $have_date_array = array_search(Carbon::now()->toDateString(), $incoming, false);
@@ -259,8 +275,17 @@ class AccessController extends Controller
 
             else if ($value->array !== null) {
 
+                if ($value->start_edit == 0){
+
+                    foreach ($kvadrat->where('id', '=', $value->kvadrat_id) as $value_2){
+
+                        $value->kurer_id = $value_2->id_kurer;
+
+                    }
+                }
+
                 $incoming = json_decode($value->array, true, 100, 0);
-                $have_date_array = array_search(Carbon::now()->toDateString(), $incoming, false);
+                $have_date_array = array_search(Carbon::now()->addHours(2)->toDateString(), $incoming, false);
                 $have_date_array_for_kurer = array_search(Carbon::now()->toDateString(), $incoming, false);
 
                 $notification_end_day = array_slice($incoming, -3);
@@ -282,6 +307,7 @@ class AccessController extends Controller
                 if (false !== $have_date_array_for_kurer) {
 
                     $value->date_delivery_kurer = $incoming[$have_date_array_for_kurer];
+                    $value->status_kurer = 0;
                 }
 
                 if ($find_for_notification) {
@@ -326,6 +352,8 @@ class AccessController extends Controller
 
     public function edit_Date_Delivery(Request $request)
     {
+//        $incoming_data = Carbon::parse($request['field_value'])->format('Y-m-d');
+
         $zakazField = Order::where('id', '=', $request['id'])->first();
 
         if ($zakazField->type_zakaz !== 1) {
@@ -403,9 +431,38 @@ class AccessController extends Controller
         $field_name = $request['field_name'];
         $updateZakaz = Order::find($request['field_id']);
         $updateZakaz->$field_name = $request['field_value'];
+
+        if ($request['field_name'] === 'kurer_id'){
+            $updateZakaz->start_edit = 1;
+        }
+
         $updateZakaz->save();
 
         return "Заказ обновлен";
+
+    }
+
+    public function sendKvadrat_ID(Request $request): string
+    {
+        $updateZakaz = Order::find($request['field_id']);
+        $updateZakaz->kvadrat_id = $request['field_value'];
+        $updateZakaz->info= $request['field_value'];
+
+        Type::create([
+            'title' => $request['send_field_adress_for_Types'],
+            'kvadrat_id' => $request['field_value'],
+        ]);
+
+        $kvadrat = Kvadrat::all();
+
+            foreach ($kvadrat->where('id', '=', $request['field_value']) as $value_2){
+
+              $updateZakaz->kurer_id = $value_2->id_kurer;
+        }
+
+        $updateZakaz->save();
+
+        return "Квадрат присвоен заказу";
 
     }
 
@@ -423,6 +480,15 @@ class AccessController extends Controller
 
         return AccessAllResource::collection($find_zakaz);
 
+    }
+
+    public function send_Status_Zakaz(Request $request)
+    {
+        $updateZakaz = Order::find($request['field_id']);
+        $updateZakaz->status_zakaz = $request['field_value'];
+        $updateZakaz->save();
+
+        return "Статус присвоен";
     }
 
     //------------------------------- Удаление Заказа --------------------------------------//

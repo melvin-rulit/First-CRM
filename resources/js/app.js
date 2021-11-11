@@ -14,7 +14,13 @@ Vue.use(VueRouter);
 import Kvadrat from './components/Kvadrat/KvadratComponent.vue'
 import Zakaz from './components/Zakazi/PersonalComponent.vue'
 import Kurer from './components/Kurer/MainComponent.vue'
+import Promouter  from './components/Kurer/PromouterComponent.vue'
 import Setings from './components/Setings/SetingsComponent.vue'
+
+//----------- inside -------------
+import add_and_edit_Racion  from './components/Inside_CRM/add_OR_edit_Racion_and_AdressComponent.vue'
+import add_and_edit_Adress  from './components/Inside_CRM/add_OR_edit_Racion_and_AdressComponent.vue'
+
 
 
 const routes = [
@@ -76,16 +82,6 @@ import VueConfirmDialog from 'vue-confirm-dialog'
 Vue.use(VueConfirmDialog)
 Vue.component('vue-confirm-dialog', VueConfirmDialog.default)
 
-//-- Wow
-// import VueWow from 'vue-wow'
-// Vue.use(VueWow)
-import vWow from 'v-wow'
-Vue.use(vWow);
-
-// import Vuelidate from 'vuelidate'
-// Vue.use(Vuelidate)
-
-
 //------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
@@ -93,9 +89,9 @@ Vue.use(vWow);
 Vue.component('head-component', require('./components/header/head.vue').default);
 Vue.component('list-up-component', require('./components/header/List-up-side.vue').default);
 Vue.component('addnewuser-component', require('./components/header/AddNewUserComponent.vue').default);
-Vue.component('addnewkvadrat-component', require('./components/header/ShowAddKvadratModalComponent.vue').default);
 Vue.component('filter-component', require('./components/Zakazi/PersonalComponent.vue').default);
 
+Vue.component('showEditStatus_ZakazModalModal-component', require('./components/header/EditZakaz/EditZakazFieldStatus_ZakazComponent.vue').default);
 Vue.component('showModalEditZakazFieldPay-component', require('./components/header/EditZakaz/EditZakazFieldPayComponent.vue').default);
 Vue.component('showModalEditZakazFieldDeliv-component', require('./components/header/EditZakaz/EditZakazFieldDelivComponent.vue').default);
 Vue.component('showModalEditZakazFieldKurer-component', require('./components/header/EditZakaz/EditZakazFieldKurerComponent.vue').default);
@@ -105,12 +101,12 @@ Vue.component('showModalEditZakazDataDelivery-component', require('./components/
 Vue.component('showModalEditZakazFieldTel-component', require('./components/header/EditZakaz/EditPhoneComponent.vue').default);
 Vue.component('showModalEditZakazFieldAdress-component', require('./components/header/EditZakaz/EditAdressComponent.vue').default);
 
-//--CalendarPeriod
-Vue.component('showModalCalendarForPeriod-component', require('./components/header/CalendarPeriodComponent.vue').default);
-
 
 //-- Kurer
 Vue.component('editkurer-component', require('./components/Kurer/EditKurerComponent.vue').default);
+
+//-- Promotuer
+Vue.component('promouter-component', require('./components/Kurer/PromouterComponent.vue').default);
 
 
 //-- Settings

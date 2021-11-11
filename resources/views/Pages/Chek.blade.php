@@ -39,7 +39,13 @@
 
         <div>
 
-            <table class="border" width="100%">
+            @if ($data->status_zakaz == 1)
+                <table class="border_error" width="100%">
+            @else
+                <table class="border" width="100%">
+            @endif
+
+
                 <tr>
                     <td class="name-input">Клиент:</td>
                     <td><input type="text" name="" value=" {{ $data->nameus }}" placeholder="" class="text"></td>
