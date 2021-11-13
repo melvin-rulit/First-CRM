@@ -9,6 +9,10 @@ export default {
             return state.zakaz_for_kurer
         },
 
+        sumZakaz_for_kurer(state){
+            return state.zakaz_for_kurer.length
+        }
+
     },
 
     mutations: {

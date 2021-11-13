@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response as FacadeResponse;
 use App\Models\User;
 use Carbon\Carbon;
@@ -79,9 +80,10 @@ return 'Создан';
 
     public function getZakazForKurer (Request $request)
     {
-        $zakazi = Order::whereDate('date_delivery_kurer',  Carbon::now()->toDateString())->where('deliv', '=', 0)->get();
 
-        return PromouterResource::collection($zakazi);
+  $zakazi = Order::whereDate('date_delivery_kurer',  Carbon::now()->toDateString())->where('deliv', '=', 0)->where('kurer_id', '=', Auth::id())->where('kvadrat_id', '!=', null)->get();
+
+     return PromouterResource::collection($zakazi->sortBy('kvadrat_id'));
     }
 
     public function sendSuccess (Request $request)

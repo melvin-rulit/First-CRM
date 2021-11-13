@@ -173,7 +173,12 @@ export default {
 
         deleteField() {
 
+            const modalTimeoutSeconds = 7;
+            const modalId = 'confirm-modal'
+            let modalSetTimeout = null;
+
             this.$bvModal.msgBoxConfirm('Вы уверены что хотите удалить Курьера ( ' + this.incominData.surname + ' ' + this.incominData.name  + ' ) ?', {
+                id: modalId,
                 size: 'lg',
                 buttonSize: 'md',
                 okVariant: 'danger',
@@ -207,6 +212,9 @@ export default {
                     }
                 })
 
+            modalSetTimeout = setTimeout(() => {
+                this.$bvModal.hide(modalId)
+            }, modalTimeoutSeconds * 1000)
         },
 
 

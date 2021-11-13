@@ -33,6 +33,22 @@
             </div>
 
         </b-modal>
+
+
+        <b-modal id="editTel_error" title="Внимание!!!" @hidden="" centered
+                 ok-only ok-title="Понятно">
+
+            <template #modal-title>
+
+                <h7 class="">№ заказа</h7>
+                <b>[ {{ Zakaz.orderid }} ]</b>
+
+            </template>
+
+            <b-alert show variant="danger">Прежде чем установить "Курьера" - присвойте этому заказу " № Квадрата"</b-alert>
+            <b-alert show variant="primary">Будет автоматически присвоен "Курьер" с соответствием квадрату и после этого можете поменять "Курьера"</b-alert>
+        </b-modal>
+
     </div>
 
 </template>
@@ -72,13 +88,19 @@ export default {
             this. GetAllKurer()
             this. Zakaz = item
             this. SelectKurer = ''
-            this. $bvModal.show('editKurer')
+
+            if (this.Zakaz.kvadrat_id == "😎"){
+                this.$bvModal.show('editTel_error')
+            }
+            else {
+                this. $bvModal.show('editKurer')
+            }
         },
 
         sendSelectKurer(){
 
             axios.post('api/v1/sendEditZakazData', {
-                field_id: this.Zakaz.id,  field_name: 'kurer', field_value: this.SelectKurer.surname
+                field_id: this.Zakaz.id,  field_name: 'kurer_id', field_value: this.SelectKurer.id
 
             }) .then((response) =>{
 

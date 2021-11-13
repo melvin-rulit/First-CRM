@@ -18,18 +18,7 @@ class KvadratController extends Controller
     {
         $kvadrat = Kvadrat::all();
 
-//        $collection = collect();
-//
-//        foreach ($kvadrat as $branch) {
-//
-//            foreach ($branch->kurer as $base) {
-//                $collection->push($base);
-//            }
-//        }
-
         return KvadratResource::collection($kvadrat);
-//        return (KvadratResource::collection($collection->all()));
-//        return  KvadratResource($collection->all());
     }
 
 
@@ -46,5 +35,42 @@ class KvadratController extends Controller
 
   }
 
+  public function sendSlugba_Info(Request $request)
+    {
+        $edit_info = Kvadrat::find( $request['field_id']);
+
+        $edit_info->info= $request['field_value'];
+
+        $edit_info->save();
+
+            return "Служебная информация обновлена";
+
+  }
+
+  public function send_new_kvadrat(Request $request)
+    {
+       Kvadrat::create([
+            'id' => $request->field_value,
+            'id_kurer' => null,
+            'sum_zakaz' => null,
+            'name' => null,
+        ]);
+
+      return "Квадрат добавлен";
+
+  }
+
+    //---------------------------- Удаление Квадрата -------------------//
+
+
+    public function destroy( $id)
+
+    {
+        $kurer = Kvadrat::find($id);
+
+        $kurer->delete();
+
+        return "Квадрат удален";
+    }
 
 }

@@ -8,6 +8,7 @@ import getZakazForKurer from './modules/getZakazForKurer'
 import zakazFind from './modules/zakazFind'
 import getRacion from './modules/getRacion'
 import Time from './modules/get_and_post_Time'
+import getKvadrat  from './modules/getKvadrat'
 import Adress from './modules/adress'
 
 Vue.use(Vuex);
@@ -20,6 +21,7 @@ export default new Vuex.Store({
         zakazFind,
         getZakazForKurer,
         getRacion,
+        getKvadrat,
         Time,
         Adress
     }
