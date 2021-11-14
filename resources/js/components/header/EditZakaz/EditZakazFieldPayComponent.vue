@@ -1,8 +1,8 @@
 <template>
     <div>
 
-        <b-modal id="editZakazPay" title="Отредактируйте поле  : Оплата" @ok="sendData"  @hidden="ClearModal" centered
-                 ok-only ok-title="Готово">
+        <b-modal id="editZakazPay" title="Отредактируйте поле  : Оплата" @ok="sendData" @hidden="ClearModal" centered
+                 ok-only ok-title="Отмена">
 
             <template #modal-title>
 

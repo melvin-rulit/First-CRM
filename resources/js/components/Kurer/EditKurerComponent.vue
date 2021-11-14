@@ -189,11 +189,10 @@ export default {
                 centered: true
             })
                 .then(value => {
-                    this.boxTwo = value
 
-                    if (this.boxTwo === true) {
+                    if (value === true) {
 
-                        axios.delete('api/v1/kurer/' + this.incominData.id)  .then((response) =>{
+                        axios.delete('api/v1/kurer/' + this.incominData.id).then((response) => {
 
                             if (response.data === "Курьер удален") {
 

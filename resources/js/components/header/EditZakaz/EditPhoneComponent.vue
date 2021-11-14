@@ -1,9 +1,9 @@
 <template>
     <div>
 
-        <!-- Модальное окно с добавлением новой роли -->
-        <b-modal id="editTel" title="Отредактируйте поле  : Сумма" @hidden="ClearModal" centered
-                 ok-only ok-title="Готово">
+
+        <b-modal id="editTel" title="" @ok="" @hidden="ClearModal" centered
+                 ok-only ok-title="Отмена">
 
             <template #modal-title>
 
@@ -41,7 +41,7 @@
                         size="md"
                         class="float-right"
                         @click="ClearModal">
-                        Готово
+                        Отмена
                     </b-button>
                 </div>
             </template>

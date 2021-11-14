@@ -3,8 +3,8 @@
 
         <!-- Модальное окно с редактированием курьера -->
 
-        <b-modal id="editKurer" title="Отредактируйте поле  : Курьер" @ok=""  @hidden="ClearModal" centered
-                 ok-only ok-title="Готово">
+        <b-modal id="editKurer" title="Отредактируйте поле  : Курьер" @ok="" @hidden="ClearModal" centered
+                 ok-only ok-title="Отмена">
 
             <template #modal-title>
 
@@ -85,15 +85,14 @@ export default {
         ...mapActions(['GetAllKurer', 'GetAllZakaz']),
 
         editZakazModal(item) {
-            this. GetAllKurer()
-            this. Zakaz = item
-            this. SelectKurer = ''
+            this.GetAllKurer()
+            this.Zakaz = item
+            this.SelectKurer = ''
 
             if (this.Zakaz.kvadrat_id == "😎"){
                 this.$bvModal.show('editTel_error')
-            }
-            else {
-                this. $bvModal.show('editKurer')
+            } else {
+                this.$bvModal.show('editKurer')
             }
         },
 

@@ -3,8 +3,8 @@
 
         <!-- Модальное окно с редактированием рациона -->
 
-        <b-modal id="editRacion" title="Отредактируйте поле  : Рацион" @ok=""  @hidden="ClearModal" centered
-                 ok-only ok-title="Готово">
+        <b-modal id="editRacion" title="Отредактируйте поле  : Рацион" @ok="" @hidden="ClearModal" centered
+                 ok-only ok-title="Отмена">
 
             <template #modal-title>
 

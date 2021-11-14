@@ -3,8 +3,8 @@
 
         <!-- Модальное окно с редактированием типа доставки -->
 
-        <b-modal id="editDeliv" title="Отредактируйте поле  : Доставка" @ok="sendData"  @hidden="ClearModal" centered
-                 ok-only ok-title="Готово">
+        <b-modal id="editDeliv" title="Отредактируйте поле  : Доставка" @ok="sendData" @hidden="ClearModal" centered
+                 ok-only ok-title="Отмена">
 
             <template #modal-title>
 
@@ -15,7 +15,7 @@
 
             <div class="card-body py-0">
 
-                            <b-row class="card-body">
+                <b-row class="card-body">
 
                                 <b-col cols="3">Доставка</b-col>
                                 <b-col>

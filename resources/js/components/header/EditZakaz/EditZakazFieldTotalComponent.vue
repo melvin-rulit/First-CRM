@@ -2,13 +2,13 @@
     <div>
 
         <!-- Модальное окно с добавлением суммы -->
-        <b-modal id="editTotal" title="Отредактируйте поле  : Сумма"  @hidden="ClearModal" centered
-                 ok-only ok-title="Готово">
+        <b-modal id="editTotal" title="Отредактируйте поле  : Сумма" @hidden="ClearModal" centered
+                 ok-only ok-title="Отмена">
 
             <template #modal-title>
 
-                    <h7 class="">№ заказа</h7>
-                    <b>[ {{ Total.orderid }} ]</b>
+                <h7 class="">№ заказа</h7>
+                <b>[ {{ Total.orderid }} ]</b>
 
             </template>
 

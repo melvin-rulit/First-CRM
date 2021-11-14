@@ -17,8 +17,8 @@
 {{--    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">--}}
 
 
-    <!-- fontawesome -->
-{{--    <link href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" rel="stylesheet">--}}
+<!-- fontawesome -->
+    <link href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" rel="stylesheet">
 
     <!-- multiselect -->
 {{--    <link rel="stylesheet" href="https://unpkg.com/vue-multiselect@2.1.0/dist/vue-multiselect.min.css">--}}
@@ -50,8 +50,6 @@
 <body>
 
 <div id="app">
-
-    <head-component></head-component>
 
         @yield('contentAfterlogin')
 
