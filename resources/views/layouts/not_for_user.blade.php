@@ -9,41 +9,8 @@
 
     <title> {{ trans('panel.site_title') }}</title>
 
-    <!-- Fonts -->
-{{--    <link rel="dns-prefetch" href="//fonts.gstatic.com">--}}
-{{--    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">--}}
-
-<!-- tailwindCss -->
-{{--    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">--}}
-
-
-<!-- fontawesome -->
-{{--    <link href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" rel="stylesheet">--}}
-
-<!-- multiselect -->
-{{--    <link rel="stylesheet" href="https://unpkg.com/vue-multiselect@2.1.0/dist/vue-multiselect.min.css">--}}
-
-<!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/personal.css') }}" rel="stylesheet">
-
-    <!--  анимированные переходы между компонентами */ -->
-    <style type="text/css">
-
-        .component-fade-enter-active,
-        .component-fade-leave-active {
-            transition: opacity .3s ease;
-        }
-
-        .component-fade-enter,
-        .component-fade-leave-to
-
-            /* .component-fade-leave-active до версии 2.1.8 */
-        {
-            opacity: 0;
-        }
-
-    </style>
 
 </head>
 

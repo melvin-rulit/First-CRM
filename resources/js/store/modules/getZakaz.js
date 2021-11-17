@@ -6,13 +6,17 @@ export default {
     },
 
     getters: {
-        AllZakaz(state){
+        AllZakaz(state) {
             return state.zakaz
         },
 
-        if_empty_zakaz(state){
+        if_empty_zakaz(state) {
             return state.if_empty_zakaz
         },
+
+        sum_Zakaz_for_kurer(state) {
+            return state.if_empty_zakaz.length
+        }
 
     },
 

@@ -16,25 +16,26 @@ class AccessAllResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'nameus' => $this->nameus,
-            'kurer' => $this->kurer ? $this->kurer : " Не задан",
-            'kurer_id' => $this->kurer_id ? $this->kurer_id : "----",
-            'kvadrat_id' => $this->kvadrat_id ? $this->kvadrat_id : "----",
             'orderid' => $this->orderid,
+            'kvadrat_id' => $this->kvadrat_id ? $this->kvadrat_id : "+",
+            'info' => $this->kvadrat_info ? $this->kvadrat_info->info : "",
+            'nameus' => $this->nameus,
+            "kurer" => $this->user ? $this->user->surname : 'Не задан',
             'adress' => $this->adress,
             'tel' => $this->tel,
-            'status' => $this->status,
-            'racion' => $this->racion,
             'deliv' => $this->deliv,
+            'racion' => $this->racion,
             'total' => $this->total,
             'pay' => $this->pay,
+            'datetimes' => Carbon::createFromDate($this->datetimes)->format('d.m.Y'),
+            'date_delivery' => '✍️ редак-ть',
+            'end_Date' => Carbon::createFromDate($this->end_Date)->format('d.m.Y'),
+
+            'status' => $this->status,
             'start_edit' => $this->start_edit,
             'type_zakaz' => $this->type_zakaz,
-            'datetimes' =>  Carbon::createFromDate($this->datetimes)->format('d.m.Y'),
-            'date_delivery' => '-----------',
-            'end_Date' =>   Carbon::createFromDate($this->end_Date)->format('d.m.Y') ,
-            'array' =>   json_decode($this->array, true, 100, 0),
-            'end_array' =>   json_decode($this->end_array, true, 100, 0),
+            'array' => json_decode($this->array, true, 100, 0),
+            'end_array' => json_decode($this->end_array, true, 100, 0),
         ];
     }
 }

@@ -48,15 +48,15 @@
                 <b-form-group>
 
 
-                    <h4 class="" v-if="row.item.name ==  'Добавить курьера'">
+                    <h5 class="ml-5 mt-2" v-if="row.item.name ==  'Добавить курьера'">
                         <b-badge class="pointer" variant="success
 " @click="row.toggleDetails"> {{ row.item.name }}
                         </b-badge>
-                    </h4>
+                    </h5>
 
-                    <h4 class="" v-else>
-                        <b class="pointer" @click="row.toggleDetails"> {{ row.item.name }}</b>
-                    </h4>
+                    <h5 class="mt-2 ml-5" v-else>
+                        <span class="pointer" @click="row.toggleDetails"> {{ row.item.name }}</span>
+                    </h5>
 
                 </b-form-group>
             </template>
@@ -114,10 +114,10 @@ export default {
                     key: 'info',
                     label: 'Служебное название',
                 },
-                {
-                    key: 'sum_zakaz',
-                    label: 'Заказов на сегодня',
-                },
+                // {
+                //     key: 'sum_zakaz',
+                //     label: 'Заказов на сегодня',
+                // },
                 {
                     key: 'name',
                     label: 'Курьер',
