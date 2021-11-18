@@ -14,9 +14,9 @@ class KvadratResource extends JsonResource
         return [
             'id' => $this->id,
             'id_kurer' => $this->id_kurer,
+            'info' => $this->info ? $this->info : '',
             'sum_zakaz' => $this->sum_zakaz,
-            'name' => $this->name,
-//            'kurer' => $this->kurer ,
+            'name' => $this->name ? $this->name : 'Добавить курьера',
 
         ];
 

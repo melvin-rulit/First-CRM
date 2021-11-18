@@ -57,7 +57,10 @@
             </template>
 
             <template v-slot:cell(total)="row">
-                <span class="pointer" @click="rowSelectedForEditFieldTotal(row.item)">{{ row.item.total }}</span>
+                <b-alert show variant="secondary" class="pointer" @click="rowSelectedForEditFieldTotal(row.item)">
+                    {{ row.item.total }}
+                </b-alert>
+                <!--                <span class="pointer" @click="rowSelectedForEditFieldTotal(row.item)">{{ row.item.total }}</span>-->
             </template>
 
             <template v-slot:cell(pay)="row">
@@ -196,7 +199,7 @@ export default {
                 {
                     key: 'end_Date',
                     label: 'Окончание',
-                    variant: 'success'
+                    variant: 'warning'
                 },
             ],
 

@@ -209,7 +209,7 @@ export default {
             const modalId = 'confirm-modal';
             let modalSetTimeout = null;
 
-            this.$bvModal.msgBoxConfirm('Вы уверены что хотите удалить Квадрат ( ' + index.id + ' ) ?', {
+            this.$bvModal.msgBoxConfirm('Вы уверены что хотите удалить Квадрат № ( ' + index.id + ' ) ?', {
                 id: modalId,
                 size: 'lg',
                 buttonSize: 'md',

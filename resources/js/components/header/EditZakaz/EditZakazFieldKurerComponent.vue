@@ -89,7 +89,8 @@ export default {
             this.Zakaz = item
             this.SelectKurer = ''
 
-            if (this.Zakaz.kvadrat_id == "😎"){
+            // if (this.Zakaz.kvadrat_id == "😎"){
+            if (this.Zakaz.kvadrat_id == "+") {
                 this.$bvModal.show('editTel_error')
             } else {
                 this.$bvModal.show('editKurer')

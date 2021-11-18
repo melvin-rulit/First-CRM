@@ -11,6 +11,7 @@ class RacionResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
+            'itog_otchet' => $this->itog_otchet,
         ];
     }
 }
