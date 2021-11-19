@@ -30,7 +30,7 @@ class AccessController extends Controller
         foreach ($zakazi->where('type_zakaz', '=', 1) as $value) {
 
 
-            if ($value->first_edit == 0 && Carbon::parse($value->datetimes)->format('H:i') < $use_date_and_time->time && Carbon::now()->toDateString()) {
+            if ($value->first_edit == 0 && Carbon::parse($value->datetimes)->format('H:i') < $use_date_and_time->time) {
 
                 $Start_day_zakaz = $value->date_delivery = Carbon::parse($value->datetimes)->toDateString();
                 $value->array = json_encode($Start_day_zakaz, 0, 100);
@@ -40,7 +40,7 @@ class AccessController extends Controller
 
             } /////////////////////////////////////////////////////////////////////////////////
 
-            else if ($value->first_edit == 0 && Carbon::parse($value->datetimes)->format('H:i') >= $use_date_and_time->time && Carbon::now()->toDateString()) {
+            else if ($value->first_edit == 0 && Carbon::parse($value->datetimes)->format('H:i') >= $use_date_and_time->time) {
 
                 $Start_day_zakaz = $value->date_delivery = Carbon:: parse($value->datetimes)->addDay()->toDateString();
                 $value->array = json_encode($Start_day_zakaz, 0, 100);
@@ -53,9 +53,9 @@ class AccessController extends Controller
 
             else if ($value->array !== null) {
 
-                if ($value->start_edit == 0){
+                if ($value->start_edit == 0) {
 
-                    foreach ($kvadrat->where('id', '=', $value->kvadrat_id) as $value_2){
+                    foreach ($kvadrat->where('id', '=', $value->kvadrat_id) as $value_2) {
 
                         $value->kurer_id = $value_2->id_kurer;
 
@@ -92,7 +92,7 @@ class AccessController extends Controller
 
         foreach ($zakazi->where('type_zakaz', '=', 7) as $value) {
 
-            if ($value->first_edit == 0 && Carbon::parse($value->datetimes)->format('H:i') < $use_date_and_time->time && Carbon::now()->toDateString()) {
+            if ($value->first_edit == 0 && Carbon::parse($value->datetimes)->format('H:i') < $use_date_and_time->time) {
 
                 $Start_day_zakaz = $value->date_delivery = Carbon::parse($value->datetimes)->toDateString();
 
@@ -124,7 +124,7 @@ class AccessController extends Controller
 
             } /////////////////////////////////////////////////////////////////////////////////
 
-            else if ($value->first_edit == 0 && Carbon::parse($value->datetimes)->format('H:i') >= $use_date_and_time->time && Carbon::now()->toDateString()) {
+            else if ($value->first_edit == 0 && Carbon::parse($value->datetimes)->format('H:i') >= $use_date_and_time->time) {
 
                 $Start_day_zakaz = $value->date_delivery = Carbon:: parse($value->datetimes)->addDay()->toDateString();
 
@@ -149,9 +149,9 @@ class AccessController extends Controller
 
             else if ($value->array !== null) {
 
-                if ($value->start_edit == 0){
+                if ($value->start_edit == 0) {
 
-                    foreach ($kvadrat->where('id', '=', $value->kvadrat_id) as $value_2){
+                    foreach ($kvadrat->where('id', '=', $value->kvadrat_id) as $value_2) {
 
                         $value->kurer_id = $value_2->id_kurer;
 
@@ -222,7 +222,7 @@ class AccessController extends Controller
 
         foreach ($zakazi->where('type_zakaz', '=', 9) as $value) {
 
-            if ($value->first_edit == 0 && Carbon::parse($value->datetimes)->format('H:i') < $use_date_and_time->time && Carbon::now()->toDateString()) {
+            if ($value->first_edit == 0 && Carbon::parse($value->datetimes)->format('H:i') < $use_date_and_time->time) {
 
                 $Start_day_zakaz = $value->date_delivery = Carbon:: parse($value->datetimes)->toDateString();
                 $end_Date = Carbon:: parse($value->date_delivery)->addDays(30)->toDateString();
@@ -247,7 +247,7 @@ class AccessController extends Controller
 
             } /////////////////////////////////////////////////////////////////////////////////
 
-            else if ($value->first_edit == 0 && Carbon::parse($value->datetimes)->format('H:i') >= $use_date_and_time->time && Carbon::now()->toDateString()) {
+            else if ($value->first_edit == 0 && Carbon::parse($value->datetimes)->format('H:i') >= $use_date_and_time->time) {
 
                 $Start_day_zakaz = $value->date_delivery = Carbon:: parse($value->datetimes)->addDay()->toDateString();
 
@@ -275,9 +275,9 @@ class AccessController extends Controller
 
             else if ($value->array !== null) {
 
-                if ($value->start_edit == 0){
+                if ($value->start_edit == 0) {
 
-                    foreach ($kvadrat->where('id', '=', $value->kvadrat_id) as $value_2){
+                    foreach ($kvadrat->where('id', '=', $value->kvadrat_id) as $value_2) {
 
                         $value->kurer_id = $value_2->id_kurer;
 
@@ -342,7 +342,6 @@ class AccessController extends Controller
         }
 
 
-//      $zakazi_date = Order::whereDate('date_delivery', Carbon::now()->addDay()->toDateString())->get();
         $zakazi_date = Order::whereDate('date_delivery', Carbon::now()->addHours(2)->toDateString())->get();
         return AccessResource::collection($zakazi_date->sortBy('kvadrat_id'));
 
@@ -352,7 +351,15 @@ class AccessController extends Controller
 
     public function edit_Date_Delivery(Request $request)
     {
-//        $incoming_data = Carbon::parse($request['field_value'])->format('Y-m-d');
+        if (Carbon::parse($request['field_value'])->format('Y-m-d') <= Carbon::parse($request['selectData'])->format('Y-m-d')) {
+            return '<=';
+        }
+        return Carbon::parse($request['selectData'])->addDay()->format('d-m-Y');
+    }
+
+
+    public function edit_Date_Delivery_if_Confirm(Request $request)
+    {
 
         $zakazField = Order::where('id', '=', $request['id'])->first();
 
@@ -362,52 +369,24 @@ class AccessController extends Controller
             $incoming = json_decode($data, true, 100, 0);
             $array_key_last = array_key_last($incoming);
 
-            $date_can = Carbon:: parse($incoming[$array_key_last])->addDays(2)->toDateString();
+            $have = array_search($request['field_value'], $incoming, false);
 
-            if (Carbon::parse($request['field_value'])->format('Y-m-d') <= $incoming[$array_key_last]) {
-                return '<=';
-            } else if (Carbon::parse($request['field_value'])->format('Y-m-d') >= $date_can) {
-                return '>=';
-            }
-
-            return Carbon::parse($request['field_value'])->format('d-m-Y');
-
-        } else {
-
-            if (Carbon::parse($request['field_value'])->format('Y-m-d') <= Carbon:: parse($zakazField->date_delivery)->toDateString()) {
-                return '<=';
-            }
-            return Carbon::parse($request['field_value'])->format('d-m-Y');
-        }
-
-    }
-
-
-    public function edit_Date_Delivery_if_Confirm(Request $request)
-    {
-        $zakazField = Order::where('id', '=', $request['id'])->first();
-
-        if ($zakazField->type_zakaz !== 1) {
-
-            $data = $zakazField->array;
-            $incoming = json_decode($data, true, 100, 0);
-
-            $have = array_search(Carbon:: parse($request['data'])->toDateString(), $incoming, false);
+            array_push($incoming, Carbon::parse($incoming[$array_key_last])->addDay()->toDateString());
 
             unset($incoming[$have]);
-            array_push($incoming, Carbon::parse($request['field_value'])->format('Y-m-d'));
 
-            $zakazField->end_Date = Carbon::parse($request['field_value'])->addDay()->toDateString();
+            $array_key_last_for_end_date = array_key_last($incoming);
 
-            $firs_date_in_array = array_key_first($incoming);
-            $zakazField->date_delivery = $incoming[$firs_date_in_array];
+            $zakazField->end_Date = Carbon::parse($incoming[$array_key_last_for_end_date])->addDay()->toDateString();
+//            $firs_date_in_array = array_key_first($incoming);
+//
+//            $zakazField->date_delivery = $incoming[$firs_date_in_array];
 
-//            $zakazField->start_edit = 1;
             $zakazField->array = json_encode($incoming, 0, 100);
 
             $zakazField->save();
 
-            return "Дата доставки изменена";
+            return Carbon::parse($incoming[$array_key_last_for_end_date])->format('d-m-Y');
 
         } else {
 
@@ -415,8 +394,6 @@ class AccessController extends Controller
 
             $zakazField->date_delivery = Carbon::parse($request['field_value'])->toDateString();
             $zakazField->end_Date = Carbon::parse($request['field_value'])->addDay()->toDateString();
-
-//            $zakazField->start_edit = 1;
 
             $zakazField->save();
 
@@ -432,7 +409,7 @@ class AccessController extends Controller
         $updateZakaz = Order::find($request['field_id']);
         $updateZakaz->$field_name = $request['field_value'];
 
-        if ($request['field_name'] === 'kurer_id'){
+        if ($request['field_name'] === 'kurer_id') {
             $updateZakaz->start_edit = 1;
         }
 
@@ -446,7 +423,7 @@ class AccessController extends Controller
     {
         $updateZakaz = Order::find($request['field_id']);
         $updateZakaz->kvadrat_id = $request['field_value'];
-        $updateZakaz->info= $request['field_value'];
+        $updateZakaz->info = $request['field_value'];
 
         Type::create([
             'title' => $request['send_field_adress_for_Types'],
@@ -455,9 +432,9 @@ class AccessController extends Controller
 
         $kvadrat = Kvadrat::all();
 
-            foreach ($kvadrat->where('id', '=', $request['field_value']) as $value_2){
+        foreach ($kvadrat->where('id', '=', $request['field_value']) as $value_2) {
 
-              $updateZakaz->kurer_id = $value_2->id_kurer;
+            $updateZakaz->kurer_id = $value_2->id_kurer;
         }
 
         $updateZakaz->save();

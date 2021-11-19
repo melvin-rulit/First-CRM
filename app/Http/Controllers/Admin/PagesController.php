@@ -58,7 +58,7 @@ class PagesController extends Controller
         return view('Pages.not_for_use');
     }
 
-// ----------------------------------------------------------------------------------------------------------
+// ----------------------------------------------- Chek -----------------------------------------------------------
 
     public function chekPrint(Request $request)
     {
@@ -70,7 +70,7 @@ class PagesController extends Controller
 
     public function chekPrint_Data_Now()
     {
-       $orders = Order::where('date_delivery', '=', Carbon::now()->toDateString())->where('date_delivery', '!=', null)->get();
+        $orders = Order::where('date_delivery', '=', Carbon::now()->toDateString())->where('date_delivery', '!=', null)->get();
 
         return view('Pages.Chek', compact('orders'));
 

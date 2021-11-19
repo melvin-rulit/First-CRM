@@ -19,6 +19,25 @@ class RacionController extends Controller
         return RacionResource::collection($racion);
     }
 
+    public function get_Otchet_For_Racion(Request $request)
+    {
+
+        $racion_count = Racion::all()->count();
+
+        for ($i = 1; $i <= $racion_count; $i++) {
+
+            $find_racion = Order::all()->where('racion_id', $i);
+
+            Racion::where('id', $i)->update([
+                'itog_otchet' => $find_racion->count(),
+            ]);
+
+        }
+
+        return "Логика подсчета сработала";
+
+    }
+
     public function sendEditZakazRacion(Request $request): string
     {
         $find_racion = Order::find($request['field_id']);
