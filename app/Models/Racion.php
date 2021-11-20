@@ -13,7 +13,21 @@ class Racion extends Model
 
         'id',
         'name',
+        'itog_otchet',
     ];
 
     public $timestamps = false;
+
+//        public function orders()
+//    {
+//        return $this->hasMany('App\Models\Order', 'racion');
+//    }
+
+    public function countOrders()
+    {
+        return $this->hasMany('App\Models\Order', 'racion')->count();
+//            return $this->hasOne('App\Models\Order', 'racion');
+
+    }
+
 }

@@ -10,6 +10,7 @@ class Kvadrat extends Model
     protected $fillable = [
         'id',
         'id_kurer',
+        'info',
         'sum_zakaz',
         'name'
     ];
@@ -21,7 +22,4 @@ class Kvadrat extends Model
         return $this->belongsTo('App\Models\User', 'id_kurer');
     }
 
-//    public function kurer() {
-//        return $this->hasMany(User::class);
-//    }
 }
