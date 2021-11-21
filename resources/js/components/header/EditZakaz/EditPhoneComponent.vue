@@ -114,6 +114,7 @@ export default {
                         });
 
                         this.GetAllZakaz()
+                        this.$emit('get-method')
                         this.ClearModal()
                     }
                 });

@@ -96,6 +96,7 @@ export default {
 
                         this.$bvModal.hide('editDeliv')
                         this.GetAllZakaz()
+                        this.$emit('get-method')
                     }
                 });
 

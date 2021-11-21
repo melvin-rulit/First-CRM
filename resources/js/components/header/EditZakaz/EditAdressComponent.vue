@@ -24,7 +24,7 @@
                             v-model="SelectAdress"
                             placeholder="Выберите адресс из списка"
                             option-text="title"
-                            @input = "sendSelectAdress" />
+                            @input="sendSelectAdress"/>
 
                     </div>
 
@@ -69,12 +69,14 @@ export default {
             this. $bvModal.show('editAdress')
         },
 
-        sendSelectAdress(){
+        sendSelectAdress() {
 
             axios.post('api/v1/sendEditZakazAdress', {
-                field_id: this.Adress.id,  field_value_title: this.SelectAdress.title, field_value_kvadrat_id: this.SelectAdress.kvadrat_id
+                field_id: this.Adress.id,
+                field_value_title: this.SelectAdress.title,
+                field_value_kvadrat_id: this.SelectAdress.kvadrat_id
 
-            }) .then((response) =>{
+            }).then((response) => {
 
                 if (response.data === "Заказ обновлен") {
 
@@ -89,6 +91,7 @@ export default {
             });
 
             this.GetAllZakaz()
+            this.$emit('get-method')
             this.$bvModal.hide('editAdress')
         },
 

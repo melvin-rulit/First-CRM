@@ -327,6 +327,7 @@ export default {
                                 this.$store.dispatch('PhoneFilterZakaz', {phone: this.PhoneFind.phone})
                             } else {
                                 this.GetAllZakaz()
+                                this.$emit('get-method')
                             }
 
                         }
@@ -391,6 +392,7 @@ export default {
                                             this.$store.dispatch('PhoneFilterZakaz', {phone: this.PhoneFind.phone})
                                         } else {
                                             this.GetAllZakaz()
+                                            this.$emit('get-method')
                                         }
                                     }
 
