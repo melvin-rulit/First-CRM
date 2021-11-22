@@ -76,6 +76,7 @@ export default {
             })
             this.$bvModal.hide('add_status_zakaz')
             this.GetAllZakaz()
+            this.$emit('get-method')
         },
 
         Status_Deactive(index) {
@@ -86,6 +87,7 @@ export default {
             })
             this.$bvModal.hide('add_status_zakaz')
             this.GetAllZakaz()
+            this.$emit('get-method')
         },
 
     }

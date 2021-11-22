@@ -75,6 +75,7 @@ export default {
                             position: 'top'
                         });
 
+                        this.$emit('get-method')
                         this.$bvModal.hide('editTotal')
                     }
                 });

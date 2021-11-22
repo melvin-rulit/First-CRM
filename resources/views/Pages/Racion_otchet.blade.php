@@ -10,42 +10,50 @@
     <title> {{ trans('panel.site_title') }}</title>
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-
-    <!-- fontawesome -->
-    <link href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" rel="stylesheet">
+    <link href="{{ asset('css/dskprint.css') }}" rel="stylesheet" media="all">
+    <link href="{{ asset('css/print.css') }}" rel="stylesheet" media="print">
 
 
-    <!--  анимированные переходы между компонентами */ -->
     <style type="text/css">
 
-        .component-fade-enter-active,
-        .component-fade-leave-active {
-            transition: opacity .3s ease;
-        }
-
-        .component-fade-enter,
-        .component-fade-leave-to
-
-            /* .component-fade-leave-active до версии 2.1.8 */
-        {
-            opacity: 0;
-        }
 
     </style>
 
 </head>
 
-<body>
+<tbody>
+<div class='to_print'>
 
-<h1>work</h1>
-{{--@foreach($otchet as $key => $data)--}}
-{{--    --}}{{--        @dd($data[1])--}}
-{{--    <h1>   {{ $data}}</h1>--}}
-{{--@endforeach--}}
+    <img src="/images/loading.svg">
+
+    @foreach($racion_otchet as $key => $data)
 
 
-<script src="{{ asset('js/app.js') }}"></script>
+        {{--        <table>--}}
+        {{--            <tr>--}}
+        {{--                <td> {{ $data->name }} -  <span class="name-input_racion_otchet"> {{ $data->itog_otchet }} </span> </td>--}}
+        {{--                <br><br>--}}
+        {{--                <td></td>--}}
+        {{--            </tr>--}}
+        {{--        </table>--}}
 
-</body>
+        <table width="100%" cellspacing="0" cellpadding="5" id="maket">
+            <tr>
+                <td width="300" valign="top">{{ $data->name }}</td>
+                <td valign="top" id="rightcol">{{ $data->itog_otchet }}</td>
+            </tr>
+        </table>
+
+    @endforeach
+
+</div>
+
+
+<div class="no-print">
+
+    <a href="#" onClick="window.print()">Распечатать</a><br><br>
+    <a href="/home">Вернуться в CRM </a>
+</div>
+
+</tbody>
 </html>
