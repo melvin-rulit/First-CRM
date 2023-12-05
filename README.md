@@ -38,8 +38,6 @@ npm run watch
 ## Author
 
 👤 **Melvin**
-
-* Website: https://vk.com/kostia7alania
 * Github: [Melvin-rulit](https://github.com/melvin-rulit)
 
 
@@ -52,12 +50,6 @@ npm run watch
 | Logo | 
 | ------------ | 
 |<img src="https://github.com/melvin-rulit/First-Crm/blob/master/public/images/loading.svg">|
-
-
-### 📝 License
-
-Copyright © 2020 [Basically, feel free to use and re-use any way you want..]
-
 
 ***
 <div align=center>
